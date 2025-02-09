@@ -25,6 +25,7 @@
     "@vueuse/core": "^12.5.0",
     "@vueuse/nuxt": "12.5.0",
     "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.1",
     "katex": "^0.16.21",
     "markdown-it": "^14.1.0",
     "markdown-it-texmath": "^1.0.0",
