@@ -22,6 +22,15 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['./core/types', './layers/**/types'],
   },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.BASE_URL,
+      apiBaseUrl: process.env.BASE_URL + '/api',
+    },
+  },
+  future: {
+    compatibilityVersion: 4,
+  },
   css: ['~/core/assets/css/main.css'],
   icon: {
     provider: 'iconify',
