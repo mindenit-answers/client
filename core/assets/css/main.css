@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import '@mindenit/ui/index.css';
+
+#__nuxt {
+  @apply flex flex-col w-full h-dvh;
+}
+
+html {
+  @apply dark:bg-fiord-950
+}
+
+.katex-html {
+  @apply hidden;
+}
+
+.katex {
+  @apply selection:bg-royal-blue-200 selection:dark:bg-royal-blue-900;
+}
