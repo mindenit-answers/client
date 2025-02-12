@@ -4,13 +4,13 @@ interface Props {
   showTestInfo?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   showTestInfo: false,
 })
 </script>
 
 <template>
-  <Text v-if="props.showTestInfo" size="subtitle">
-    <NuxtLink :to="`/test/${props.testId}`"> Перейти до тесту </NuxtLink>
+  <Text v-if="showTestInfo" size="subtitle">
+    <NuxtLink :to="`/test/${testId}`"> Перейти до тесту </NuxtLink>
   </Text>
 </template>

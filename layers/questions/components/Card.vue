@@ -39,7 +39,7 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
       v-if="questionData.id"
       :id="props.question.id"
       :is-verified="questionData.isVerified"
-      :on-share-click="copyQuestionLink"
+      @share="copyQuestionLink"
     />
 
     <QuestionContent :title="titleParsed" :answer="answerParsed" />
