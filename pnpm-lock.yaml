@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@mindenit/answers-kit':
-        specifier: ^0.1.2
-        version: 0.1.2
+        specifier: ^0.1.3
+        version: 0.1.3
       '@mindenit/ui':
         specifier: ^0.2.1
         version: 0.2.1(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
@@ -591,8 +591,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@mindenit/answers-kit@0.1.2':
-    resolution: {integrity: sha512-ybXG7nTl/pzvmtyHiRk5IjmbdJ+e6oos/mlGk6xAWt4cXXV3dGRNhXAD9VCZE/LWyN10WiIP2G5GyDkfWDoV6Q==}
+  '@mindenit/answers-kit@0.1.3':
+    resolution: {integrity: sha512-WtwM65RRGhxwxVaSZd+yjOStgkTgEuHLh+ejRBi0649h8tqgeSrWjll+59PnGgO+qR9a9HC/FjSDNZW2ueYrLw==}
     engines: {node: '>= 20.x'}
 
   '@mindenit/ui@0.2.1':
@@ -5273,7 +5273,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@mindenit/answers-kit@0.1.2': {}
+  '@mindenit/answers-kit@0.1.3': {}
 
   '@mindenit/ui@0.2.1(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))':
     dependencies:

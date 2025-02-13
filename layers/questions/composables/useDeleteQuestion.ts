@@ -1,10 +1,9 @@
+import type { RequestHeaders } from '@mindenit/answers-kit'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 
-interface DeleteQuestionArgs {
+interface Args {
   id: number
-  headers: {
-    authorization: string
-  }
+  headers: RequestHeaders
 }
 
 export const useDeleteQuestion = () => {
@@ -12,8 +11,7 @@ export const useDeleteQuestion = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (data: DeleteQuestionArgs) =>
-      $answersKit.questions.deleteOne(data),
+    mutationFn: (data: Args) => $answersKit.questions.deleteOne(data),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
     mutationKey: ['deleteQuestion'],
   })

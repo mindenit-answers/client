@@ -1,15 +1,12 @@
+import type {
+  CreateQuestionValues,
+  RequestHeaders,
+} from '@mindenit/answers-kit'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 
-interface CreateQuestionArgs {
-  data: {
-    name: string
-    answer: string
-    isVerified: boolean
-    testId: number
-  }
-  headers: {
-    authorization: string
-  }
+interface Args {
+  data: CreateQuestionValues
+  headers: RequestHeaders
 }
 
 export const useCreateQuestion = () => {
@@ -17,8 +14,7 @@ export const useCreateQuestion = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (data: CreateQuestionArgs) =>
-      $answersKit.questions.createOne(data),
+    mutationFn: (data: Args) => $answersKit.questions.createOne(data),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
     mutationKey: ['createQuestion'],
   })
