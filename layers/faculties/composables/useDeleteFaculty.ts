@@ -12,7 +12,7 @@ export const useDeleteFaculty = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.faculties.deleteOne(data),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['faculties'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['faculties'] }),
     mutationKey: ['deleteFaculty'],
   })
 }
