@@ -1,18 +1,18 @@
 import DOMPurify from 'dompurify'
 
 export default defineNuxtPlugin(async () => {
-  let sanitize
+  const sanitize = ref()
 
   if (import.meta.server) {
     const { JSDOM } = await import('jsdom')
-    sanitize = DOMPurify(new JSDOM('').window).sanitize
+    sanitize.value = DOMPurify(new JSDOM('').window).sanitize
   } else {
-    sanitize = DOMPurify.sanitize
+    sanitize.value = DOMPurify.sanitize
   }
 
   return {
     provide: {
-      sanitizeHTML: (dirty: string) => sanitize(dirty),
+      sanitizeHTML: (dirty: string) => sanitize.value?.(dirty) ?? '',
     },
   }
 })
