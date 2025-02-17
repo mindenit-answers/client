@@ -6,13 +6,14 @@ interface Args {
   headers: RequestHeaders
 }
 
-export const useDeleteQuestion = () => {
+export const useDeleteUniversity = () => {
   const { $answersKit } = useNuxtApp()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (data: Args) => $answersKit.questions.deleteOne(data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
-    mutationKey: ['deleteQuestion'],
+    mutationFn: (data: Args) => $answersKit.universities.deleteOne(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['universities'] }),
+    mutationKey: ['deleteUniversity'],
   })
 }
