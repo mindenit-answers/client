@@ -15,7 +15,7 @@ export const useCreateUniversity = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.universities.createOne(data),
-    onSettled: () =>
+    onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ['universities'] }),
     mutationKey: ['createUniversity'],
   })

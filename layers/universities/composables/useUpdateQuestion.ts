@@ -15,7 +15,7 @@ export const useUpdateUniversity = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.universities.updateOne(data),
-    onSettled: () =>
+    onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ['universities'] }),
     mutationKey: ['updateUniversity'],
   })
