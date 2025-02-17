@@ -1,0 +1,10 @@
+dist
+.nuxt
+node_modules
+.output
+.git
+build
+LICENSE
+*.md
+public
+package-lock.json
