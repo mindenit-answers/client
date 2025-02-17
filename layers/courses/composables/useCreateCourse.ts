@@ -12,7 +12,7 @@ export const useCreateCourse = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.courses.createOne(data),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['courses'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['courses'] }),
     mutationKey: ['createCourse'],
   })
 }

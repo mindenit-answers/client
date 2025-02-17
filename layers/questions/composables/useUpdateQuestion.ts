@@ -15,7 +15,7 @@ export const useUpdateQuestion = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.questions.updateOne(data),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
     mutationKey: ['updateQuestion'],
   })
 }
