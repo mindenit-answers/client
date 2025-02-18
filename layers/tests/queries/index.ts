@@ -44,17 +44,22 @@ const testOptions = (id: number) => {
   })
 }
 
-const testQuestionsOptions = (id: number, sorting: TestsOptionsArgs) => {
+const testQuestionsOptions = (id: number, sorting?: TestsOptionsArgs) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
-    queryKey: ['testQuestions', id, sorting.sortBy.value, sorting.order.value],
+    queryKey: [
+      'testQuestions',
+      id,
+      sorting?.sortBy.value,
+      sorting?.order.value,
+    ],
     queryFn: () =>
       $answersKit.tests.findOneQuestions({
         id,
         sorting: {
-          sortBy: sorting.sortBy.value,
-          order: sorting.order.value,
+          sortBy: sorting?.sortBy.value,
+          order: sorting?.order.value,
         },
       }),
   })

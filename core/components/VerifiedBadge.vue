@@ -42,7 +42,9 @@ const badgeText = computed(() => {
     <TooltipProvider>
       <TooltipRoot>
         <TooltipTrigger class="cursor-default">
-          <Badge color="success" class="!border-christi-600 !text-christi-600"
+          <Badge
+            color="success"
+            class="!border-christi-500 !text-christi-800 bg-christi-200 dark:bg-christi-900 dark:!text-christi-200 dark:!border-christi-700"
             >Верифіковано</Badge
           >
         </TooltipTrigger>
