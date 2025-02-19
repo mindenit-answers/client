@@ -5,11 +5,16 @@ interface Props {
 }
 
 defineProps<Props>()
+
+const { $sanitizeHTML } = useNuxtApp()
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
-    <div class="flex items-center gap-2 dark:text-white" v-html="title" />
+    <div
+      class="flex items-center gap-2 dark:text-white"
+      v-html="$sanitizeHTML(title)"
+    />
 
     <div
       class="relative bg-christi-600/30 dark:bg-christi-900/50 rounded-r-lg p-2 border dark:border-christi-800 border-christi-400"
@@ -22,7 +27,7 @@ defineProps<Props>()
           name="lucide:circle-check-big"
           class="size-4 dark:text-christi-400 text-christi-600 flex-shrink-0 mt-1.5"
         />
-        <div v-html="answer" />
+        <div v-html="$sanitizeHTML(answer)" />
       </div>
     </div>
   </div>
