@@ -4,19 +4,11 @@ import type { Course, Subject, Test } from '@mindenit/answers-kit'
 interface Props {
   // TODO: Change types here after updating the @answers-kit
   test: Test & { name: string }
-  courses: Course[]
-  subjects: Subject[]
+  course: Course
+  subject: Subject
 }
 
-const props = defineProps<Props>()
-
-const course = computed(() =>
-  props.courses.find((c) => c.id === props.test.courseId)
-)
-
-const subject = computed(() =>
-  props.subjects.find((s) => s.id === props.test.subjectId)
-)
+defineProps<Props>()
 </script>
 
 <template>

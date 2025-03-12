@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { useQuery } from '@tanstack/vue-query'
 import { testOptions } from '../../queries'
+import { useRouteParams } from '@vueuse/router'
 
-const route = useRoute()
+const testId = useRouteParams('id')
 
-const { data, isLoading } = useQuery(testOptions(+route.params.id!))
+const { data, isLoading } = useQuery(testOptions(+testId))
 
 const {
   activeQuestionId,
