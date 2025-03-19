@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { useQuery } from '@tanstack/vue-query'
 import { questionsSearchOptions } from '~/layers/questions/queries'
-import { PAGE_SIZE, getPagesCount } from '~/core/utils'
+import { getPagesCount } from '~/core/utils'
+import { PAGE_SIZE } from '~/core/constants'
 
 const config = useRuntimeConfig()
 
@@ -10,11 +11,7 @@ const debouncedQuery = useDebounce(searchQuery, 500)
 const currentPage = ref(1)
 const animationComplete = ref(false)
 
-const getQueryOptions = () => ({
-  ...questionsSearchOptions(searchQuery),
-})
-
-const questions = useQuery(getQueryOptions())
+const questions = useQuery(questionsSearchOptions(searchQuery))
 
 watch(
   debouncedQuery,
