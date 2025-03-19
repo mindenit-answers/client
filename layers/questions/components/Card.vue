@@ -41,6 +41,8 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
       v-if="questionData.id"
       :id="props.question.id"
       :is-verified="questionData.isVerified"
+      :test-id="questionData.testId"
+      :show-test-info
       @share="copyQuestionLink"
     />
 
@@ -48,11 +50,6 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
       :title="titleParsed"
       :answer="answerParsed"
       :search-query="props.searchQuery"
-    />
-
-    <QuestionFooter
-      :test-id="questionData.testId"
-      :show-test-info="props.showTestInfo"
     />
   </div>
 </template>
