@@ -2,18 +2,26 @@
 interface Props {
   title: string
   answer: string
+  searchQuery?: string
 }
 
-defineProps<Props>()
-
+const props = withDefaults(defineProps<Props>(), {
+  searchQuery: '',
+})
 const { $sanitizeHTML } = useNuxtApp()
+const { highlightText } = useHighlight()
+
+const highlightedTitle = computed(() => {
+  if (!props.searchQuery) return props.title
+  return highlightText(props.title, props.searchQuery)
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
     <div
       class="flex items-center gap-2 dark:text-white"
-      v-html="$sanitizeHTML(title)"
+      v-html="$sanitizeHTML(highlightedTitle)"
     />
 
     <div

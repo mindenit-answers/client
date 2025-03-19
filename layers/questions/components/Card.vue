@@ -4,6 +4,7 @@ import type { Question } from '@mindenit/answers-kit'
 interface Props {
   question: Omit<Question, 'publishedAt' | 'createdAt' | 'updatedAt'>
   showTestInfo?: boolean
+  searchQuery?: string
 }
 
 const { shareUrl } = useShareQuestion()
@@ -12,6 +13,7 @@ const config = useRuntimeConfig()
 
 const props = withDefaults(defineProps<Props>(), {
   showTestInfo: false,
+  searchQuery: '',
 })
 
 const questionData = shallowRef(props.question)
@@ -42,7 +44,11 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
       @share="copyQuestionLink"
     />
 
-    <QuestionContent :title="titleParsed" :answer="answerParsed" />
+    <QuestionContent
+      :title="titleParsed"
+      :answer="answerParsed"
+      :search-query="props.searchQuery"
+    />
 
     <QuestionFooter
       :test-id="questionData.testId"

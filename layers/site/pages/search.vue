@@ -136,6 +136,7 @@ const paginatedQuestions = computed(() => {
         :key="question.id"
         :question="question"
         :show-test-info="true"
+        :search-query="debouncedQuery"
       />
     </div>
     <div
