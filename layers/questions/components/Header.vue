@@ -12,6 +12,7 @@ interface Emits {
 
 withDefaults(defineProps<Props>(), {
   showTestInfo: false,
+  testId: 0,
 })
 
 defineEmits<Emits>()

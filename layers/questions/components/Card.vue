@@ -18,7 +18,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const questionData = shallowRef(props.question)
 
-const titleParsed = computed(() => markdown.render(props.question.name))
+const titleParsed = computed(() => {
+  const title = props.question.name.replace(/\n/g, '<br>')
+  return markdown.render(title)
+})
+
 const answerParsed = computed(() => {
   const answer = props.question.answer.replace(/\n/g, '<br>')
   return markdown.render(answer)

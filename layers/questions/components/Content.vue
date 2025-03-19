@@ -20,7 +20,7 @@ const highlightedTitle = computed(() => {
 <template>
   <div class="flex flex-col gap-2">
     <div
-      class="flex items-center gap-2 dark:text-white"
+      class="flex items-center gap-2 dark:text-white overflow-scroll"
       v-html="$sanitizeHTML(highlightedTitle)"
     />
 
