@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { highlightText } from '~/core/utils'
+
 interface Props {
   title: string
   answer: string
@@ -9,7 +11,6 @@ const props = withDefaults(defineProps<Props>(), {
   searchQuery: '',
 })
 const { $sanitizeHTML } = useNuxtApp()
-const { highlightText } = useHighlight()
 
 const highlightedTitle = computed(() => {
   if (!props.searchQuery) return props.title
