@@ -21,12 +21,13 @@ const questionsOptions = (args: QuestionsOptionsArgs) => {
   })
 }
 
-const questionsSearchOptions = (query: string) => {
+const questionsSearchOptions = (queryRef: Ref<string>) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
-    queryKey: ['questions', 'search', query],
-    queryFn: () => $answersKit.questions.findManySearch({ query }),
+    queryKey: ['questions', 'search', queryRef.value],
+    queryFn: () =>
+      $answersKit.questions.findManySearch({ query: queryRef.value.trim() }),
   })
 }
 

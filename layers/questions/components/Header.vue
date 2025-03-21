@@ -2,13 +2,19 @@
 interface Props {
   id: number
   isVerified: boolean
+  showTestInfo?: boolean
+  testId?: number
 }
 
 interface Emits {
   share: []
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  showTestInfo: false,
+  testId: 0,
+})
+
 defineEmits<Emits>()
 </script>
 
@@ -22,19 +28,38 @@ defineEmits<Emits>()
       >
       <VerifiedBadge v-if="isVerified" type="question" />
     </div>
-    <TooltipProvider>
-      <TooltipRoot>
-        <TooltipTrigger as-child>
-          <IconButton
-            icon="lucide:share-2"
-            size="sm"
-            variant="ghost"
-            class="cursor-pointer"
-            @click="$emit('share')"
-          />
-        </TooltipTrigger>
-        <TooltipContent>Поділитись</TooltipContent>
-      </TooltipRoot>
-    </TooltipProvider>
+
+    <div class="inline-flex gap-1">
+      <TooltipProvider>
+        <TooltipRoot>
+          <TooltipTrigger as-child>
+            <NuxtLink v-if="showTestInfo" :to="`/test/${testId}`" class="flex">
+              <IconButton
+                icon="lucide:link"
+                size="sm"
+                class="cursor-pointer"
+                as="div"
+              />
+            </NuxtLink>
+          </TooltipTrigger>
+          <TooltipContent>Перейти до тесту</TooltipContent>
+        </TooltipRoot>
+      </TooltipProvider>
+
+      <TooltipProvider>
+        <TooltipRoot>
+          <TooltipTrigger as-child>
+            <IconButton
+              icon="lucide:share-2"
+              size="sm"
+              variant="ghost"
+              class="cursor-pointer"
+              @click="$emit('share')"
+            />
+          </TooltipTrigger>
+          <TooltipContent>Поділитись</TooltipContent>
+        </TooltipRoot>
+      </TooltipProvider>
+    </div>
   </div>
 </template>
