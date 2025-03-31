@@ -1,19 +1,28 @@
 <script lang="ts" setup>
+import { highlightText } from '~/core/utils'
+
 interface Props {
   title: string
   answer: string
+  searchQuery?: string
 }
 
-defineProps<Props>()
-
+const props = withDefaults(defineProps<Props>(), {
+  searchQuery: '',
+})
 const { $sanitizeHTML } = useNuxtApp()
+
+const highlightedTitle = computed(() => {
+  if (!props.searchQuery) return props.title
+  return highlightText(props.title, props.searchQuery)
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
     <div
-      class="flex items-center gap-2 dark:text-white"
-      v-html="$sanitizeHTML(title)"
+      class="flex items-center gap-2 dark:text-white overflow-scroll"
+      v-html="$sanitizeHTML(highlightedTitle)"
     />
 
     <div

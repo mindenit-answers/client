@@ -27,7 +27,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: process.env.BASE_URL,
-      apiBaseUrl: process.env.BASE_URL + '/api',
+      apiBaseUrl: process.env.API_BASE_URL,
+      supportUrl: 'https://t.me/mindenit_support',
+      jarUrl: 'https://send.monobank.ua/jar/2GW9aAQNXE',
     },
   },
   future: {
