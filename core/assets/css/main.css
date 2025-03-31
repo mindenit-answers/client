@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import '@mindenit/ui/index.css';
 
+@theme {
+  --font-display: "Afacad", "sans-serif";
+}
+
 #__nuxt {
   @apply flex flex-col w-full h-dvh;
 }
