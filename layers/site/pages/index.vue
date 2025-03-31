@@ -22,6 +22,8 @@ const advanteges = ref([
       'Обговорюйте та діліться досвідом з іншими студентами для кращої підготовки.',
   },
 ])
+
+const isDarkMode = computed(() => useColorMode().value === 'dark')
 </script>
 
 <template>
@@ -40,9 +42,13 @@ const advanteges = ref([
             >
               Mindenit Answers
             </Heading>
-            <Heading size="medium">
+            <Heading
+              size="medium"
+              class="dark:text-white"
+              :class="{ 'dark-text-glow': isDarkMode }"
+            >
               <span
-                class="text-3xl max-md:text-xl max-md:inline-block max-md:text-nowrap"
+                class="text-3xl max-md:text-xl max-md:inline-block max-md:text-nowrap text-royal-blue-500 dark:text-white"
               >
                 Від студентів –
                 <span
@@ -140,5 +146,13 @@ const advanteges = ref([
 .custom-underline::after {
   content: '';
   background-image: url('/underline.svg');
+}
+
+.dark-text-glow {
+  text-shadow: 0 0 24px rgba(65, 105, 225), 0 0 12px rgba(65, 105, 225);
+}
+
+.dark-underline-glow::after {
+  box-shadow: 0 0 12px rgba(65, 105, 225);
 }
 </style>
