@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     'nuxt-gtag',
     '@nuxt/eslint',
+    'motion-v/nuxt',
+    '@nuxt/fonts',
   ],
   vite: {
     plugins: [tailwindcss()],
