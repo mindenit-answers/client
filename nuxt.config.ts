@@ -20,6 +20,12 @@ export default defineNuxtConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      sourcemap: false,
+    },
+    css: {
+      devSourcemap: true,
+    },
   },
   imports: {
     dirs: ['./core/types', './layers/**/types'],

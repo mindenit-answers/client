@@ -12,7 +12,7 @@ interface Args {
   headers: RequestHeaders
 }
 
-export const useCreateTest = () => {
+export const useCreateTestQuestions = () => {
   const { $answersKit } = useNuxtApp()
   const queryClient = useQueryClient()
 
