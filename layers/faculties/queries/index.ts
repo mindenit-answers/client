@@ -30,4 +30,13 @@ const facultiesOptions = (args: FacultiesOptionsArgs) => {
   })
 }
 
-export { facultiesOptions, facultyOptions }
+const facultySubjectsOptions = (id: number) => {
+  const { $answersKit } = useNuxtApp()
+
+  return queryOptions({
+    queryKey: ['facultySubjects', id],
+    queryFn: () => $answersKit.faculties.findOneSubjects(id),
+  })
+}
+
+export { facultiesOptions, facultyOptions, facultySubjectsOptions }
