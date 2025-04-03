@@ -4,8 +4,7 @@ import { testOptions } from '../../queries'
 import { useRouteParams } from '@vueuse/router'
 
 const testId = useRouteParams('id')
-
-const { data, isLoading } = useQuery(testOptions(+testId))
+const { data, isLoading } = useQuery(testOptions(+testId.value))
 
 const {
   activeQuestionId,
@@ -78,13 +77,5 @@ watch(
       </main>
     </div>
   </div>
-  <div
-    v-else
-    class="flex items-center justify-center min-h-screen"
-    role="status"
-  >
-    <div
-      class="animate-spin rounded-full h-12 w-12 border-4 border-royal-blue-500 border-t-transparent"
-    ></div>
-  </div>
+  <TheSpinner v-else />
 </template>

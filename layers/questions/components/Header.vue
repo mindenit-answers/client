@@ -21,12 +21,15 @@ defineEmits<Emits>()
 <template>
   <div class="flex items-center gap-2 justify-between">
     <div class="inline-flex items-center gap-2">
-      <Text
-        size="subtitle"
-        class="dark:bg-fiord-800 bg-fiord-100 p-1.5 rounded-lg"
-        >#{{ id }}</Text
+      <Badge
+        class="flex items-center text-sm py-1 px-3 rounded-full"
+        variant="solid"
+        color="default"
       >
-      <VerifiedBadge v-if="isVerified" type="question" />
+        ID:
+        {{ id }}
+      </Badge>
+      <VerifiedBadge v-if="isVerified" type="question" mobile-badge />
     </div>
 
     <div class="inline-flex gap-1">

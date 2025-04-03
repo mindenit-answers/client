@@ -30,12 +30,12 @@ const universitiesOptions = (args: UniversitiesOptionsArgs) => {
   })
 }
 
-const universityFacultiesOptions = (id: number) => {
+const universityFacultiesOptions = (id: Ref<number>) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
-    queryKey: ['universityFaculties', id],
-    queryFn: () => $answersKit.universities.findOneFaculties({ id }),
+    queryKey: ['universityFaculties', id.value],
+    queryFn: () => $answersKit.universities.findOneFaculties({ id: id.value }),
   })
 }
 

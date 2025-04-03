@@ -88,37 +88,20 @@ const paginatedQuestions = computed(() => {
       </div>
     </div>
 
-    <div v-if="showNoResults" class="flex flex-col items-center gap-4 max-w-lg">
-      <div
-        class="p-6 bg-fiord-100/30 dark:bg-fiord-800/30 border border-fiord-300 dark:border-fiord-700 rounded-lg text-fiord-700 dark:text-fiord-300 text-center w-full"
-      >
-        <div class="text-5xl mb-4">🔍</div>
-        <div class="font-bold text-lg mb-2">Нічого не знайдено</div>
-        <div>
-          Спробуйте змінити пошуковий запит або використати більш загальні
-          слова.
-        </div>
-      </div>
-    </div>
+    <StatusCard
+      v-if="showNoResults"
+      type="not-found"
+      message="Спробуйте змінити пошуковий запит або використати більш загальні
+          слова."
+    />
 
-    <div
+    <StatusCard
       v-if="hasError"
-      class="flex flex-col items-center gap-4 w-full max-w-lg"
-    >
-      <div
-        class="p-6 bg-amaranth-100 dark:bg-amaranth-950 border border-amaranth-300 dark:border-amaranth-700 rounded-lg text-fiord-700 dark:text-fiord-300 text-center w-full"
-      >
-        <div class="text-5xl mb-4">⚠️</div>
-        <div class="font-bold text-lg mb-2">Сталася помилка</div>
-        <div>
-          Не вдалося завантажити результати пошуку. Спробуйте пізніше або
-          напишіть нам про це.
-        </div>
-        <Button class="mt-2" as="a" :href="config.public.supportUrl"
-          ><Icon name="ph:telegram-logo" size="16px" /> Чат підтримки</Button
-        >
-      </div>
-    </div>
+      type="not-found"
+      message="Не вдалося завантажити результати пошуку. Спробуйте пізніше або напишіть
+        нам про це."
+      show-support
+    />
 
     <div
       v-if="hasResults"
