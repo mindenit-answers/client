@@ -2,9 +2,10 @@
 import { useQuery } from '@tanstack/vue-query'
 import { testOptions } from '../../queries'
 import { useRouteParams } from '@vueuse/router'
+import { showError } from '#app'
 
 const testId = useRouteParams('id')
-const { data, isLoading } = useQuery(testOptions(+testId.value))
+const { data, isLoading, isError, error } = useQuery(testOptions(+testId.value))
 
 const {
   activeQuestionId,
@@ -25,6 +26,18 @@ watch(
   useWindowScroll().y,
   () => data.value?.questions && updateActiveQuestion(data.value.questions)
 )
+
+watch([isError, error], () => {
+  console.log('isError', isError.value)
+  console.log(error.value)
+  if (isError.value === true) {
+    showError({
+      statusCode: 404,
+      message:
+        'Тест за вказаним ID не знайдено. Спробуйте ще раз або перевірте правильність введеного ID.',
+    })
+  }
+})
 </script>
 
 <template>
