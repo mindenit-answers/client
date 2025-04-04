@@ -5,7 +5,9 @@ import { useRouteParams } from '@vueuse/router'
 import { showError } from '#app'
 
 const testId = useRouteParams('id')
-const { data, isLoading, isError, error } = useQuery(testOptions(+testId.value))
+const { data, isLoading, isError, error } = useQuery(
+  testOptions(+testId!.value!)
+)
 
 const {
   activeQuestionId,
@@ -48,7 +50,7 @@ watch([isError, error], () => {
       class="flex flex-col items-center max-w-7xl mx-auto gap-2 text-center"
     >
       <Heading size="medium">
-        {{ data.name }}
+        {{ data!.name }}
       </Heading>
       <VerifiedBadge v-if="data?.isVerified" type="test" mobile-badge />
       <div class="flex gap-4 justify-center">

@@ -3,8 +3,9 @@ import {
   universitiesOptions,
   universityFacultiesOptions,
 } from '@/layers/universities/queries'
+import type { SortingOptions } from '@mindenit/answers-kit'
 import { useQuery } from '@tanstack/vue-query'
-import { useTestsFilters } from '~/core/composables/useTestsFilters'
+import { sortByFields, sortOrders, availableYears } from '~/core/constants'
 import { coursesOptions } from '~/layers/courses/queries'
 import { facultySubjectsOptions } from '~/layers/faculties/queries'
 import { testsOptions } from '~/layers/tests/queries'
@@ -14,19 +15,33 @@ const router = useRouter()
 
 const params = useUrlSearchParams('history')
 
-const {
-  sortOrders,
-  sortByFields,
-  availableYears,
-  searchQuery,
-  selectedSortBy,
-  selectedOrder,
-  selectedYear,
-  courseId,
-  areFiltersApplied,
-  resetFilters,
-  applyFiltersToTests,
-} = useTestsFilters()
+const searchQuery = ref('')
+const selectedSortBy = ref<SortingOptions<'year'>['sortBy']>('id')
+const selectedOrder = ref<SortingOptions['order']>('desc')
+const selectedYear = ref<number | null>(null)
+const courseId = ref<number | null>(null)
+
+const selectedUniversity = ref(Number(params.university) || 0)
+const selectedFaculty = ref(Number(params.faculty) || 0)
+const selectedSubject = ref(Number(params.subject) || 0)
+
+const areFiltersApplied = computed(() => {
+  return (
+    searchQuery.value !== '' ||
+    selectedSortBy.value !== 'id' ||
+    selectedOrder.value !== 'desc' ||
+    selectedYear.value !== null ||
+    courseId.value !== null
+  )
+})
+
+const resetFilters = () => {
+  searchQuery.value = ''
+  selectedSortBy.value = 'id'
+  selectedOrder.value = 'desc'
+  selectedYear.value = null
+  courseId.value = null
+}
 
 const currentStep = computed(() => {
   if (selectedSubject.value > 0) return 3
@@ -35,15 +50,8 @@ const currentStep = computed(() => {
   return 0
 })
 
-const selectedUniversity = ref(Number(params.university) || 0)
-const selectedFaculty = ref(Number(params.faculty) || 0)
-const selectedSubject = ref(Number(params.subject) || 0)
-
 const { data: universities, isLoading: isLoadingUniversities } = useQuery(
-  universitiesOptions({
-    order: ref('desc'),
-    sortBy: ref('id'),
-  })
+  universitiesOptions()
 )
 
 const {
@@ -65,26 +73,28 @@ const {
 })
 
 const {
-  data: testsData,
+  data: tests,
   isLoading: isLoadingTests,
   refetch: refetchTests,
-} = useQuery(
-  testsOptions({
+} = useQuery({
+  ...testsOptions({
     options: {
-      subjectId: selectedSubject.value,
+      subjectId: selectedSubject,
+      name: searchQuery,
+      year: selectedYear as Ref<number>,
+      courseId: courseId as Ref<number>,
     },
-  })
-)
-
-const tests = computed(() => {
-  if (!testsData.value?.data) return { data: [] }
-
-  const filteredTests = applyFiltersToTests(testsData.value.data)
-  return { data: filteredTests }
+    sorting: {
+      sortBy: selectedSortBy,
+      order: selectedOrder,
+    },
+  }),
+  enabled: selectedSubject.value > 0,
 })
 
 const { data: courses } = useQuery({
   ...coursesOptions(),
+  enabled: selectedSubject.value > 0,
 })
 
 const isLoading = computed(() => {
@@ -126,26 +136,24 @@ function selectUniversity(id: number) {
   selectedFaculty.value = 0
   selectedSubject.value = 0
   updateQueryParams()
-  console.log('new university', selectedUniversity.value)
 }
 
 function selectFaculty(id: number) {
   selectedFaculty.value = id
   selectedSubject.value = 0
   updateQueryParams()
-  console.log('new faculty', selectedFaculty.value)
 }
 
 function selectSubject(id: number) {
   selectedSubject.value = id
   updateQueryParams()
-  console.log('new subject', selectedSubject.value)
 }
 
 function goBack() {
   if (currentStep.value > 0) {
     if (currentStep.value === 3) {
       selectedSubject.value = 0
+      resetFilters()
     } else if (currentStep.value === 2) {
       selectedFaculty.value = 0
     } else if (currentStep.value === 1) {
@@ -203,6 +211,16 @@ watch(
     }
   },
   { immediate: true }
+)
+
+watch(
+  [searchQuery, selectedOrder, selectedSortBy, selectedYear, courseId],
+  () => {
+    if (selectedSubject.value > 0) {
+      updateQueryParams()
+      refetchTests()
+    }
+  }
 )
 
 onMounted(() => {
@@ -373,7 +391,7 @@ onMounted(() => {
       </div>
       <button
         v-if="areFiltersApplied"
-        class="inline-flex text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm"
+        class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer"
         @click="resetFilters"
       >
         <Icon class="size-5" name="lucide:circle-x" />
@@ -384,7 +402,7 @@ onMounted(() => {
         <TestCard
           v-for="test in tests?.data"
           :key="test.id"
-          :test="test"
+          :test
           :courses="courses || []"
         />
       </div>

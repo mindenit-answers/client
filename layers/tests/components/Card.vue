@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { Course, TestData } from '@mindenit/answers-kit'
+import type { Course, Test } from '@mindenit/answers-kit'
 import { Badge } from '@mindenit/ui'
 
 const props = defineProps<{
-  test: TestData
+  test: Test
   courses: Course[]
 }>()
 

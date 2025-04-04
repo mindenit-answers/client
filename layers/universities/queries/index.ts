@@ -15,16 +15,16 @@ const universityOptions = (id: number) => {
   })
 }
 
-const universitiesOptions = (args: UniversitiesOptionsArgs) => {
+const universitiesOptions = (args?: UniversitiesOptionsArgs) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
-    queryKey: ['universities', args.sortBy.value, args.order.value],
+    queryKey: ['universities', args?.sortBy.value, args?.order.value],
     queryFn: () =>
       $answersKit.universities.findMany({
         sorting: {
-          order: args.order.value,
-          sortBy: args.sortBy.value,
+          order: args?.order.value,
+          sortBy: args?.sortBy.value,
         },
       }),
   })
