@@ -53,12 +53,10 @@ watch([isError, error], () => {
         {{ data!.name }}
       </Heading>
       <VerifiedBadge v-if="data?.isVerified" type="test" mobile-badge />
-      <div class="flex gap-4 justify-center">
-        <Text size="subtitle">{{ data?.questions.length }} питань</Text>
-        <Text size="subtitle"
-          >{{ verifiedQuestions }} верифікованих питань</Text
-        >
-      </div>
+      <Text size="subtitle">
+        {{ verifiedQuestions }} / {{ data?.questions.length }} верифікованих
+        питань</Text
+      >
     </header>
 
     <SearchField
@@ -74,7 +72,7 @@ watch([isError, error], () => {
       />
 
       <main class="flex-1 min-w-0">
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
           <QuestionCard
             v-for="(question, index) in filteredQuestions"
             :key="question.id"

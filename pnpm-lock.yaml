@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.4
         version: 0.1.4
       '@mindenit/ui':
-        specifier: ^0.2.1
-        version: 0.2.1(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
+        specifier: ^0.2.2
+        version: 0.2.2(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       '@nuxt/eslint':
         specifier: 1.0.1
         version: 1.0.1(@vue/compiler-sfc@3.5.13)(eslint@9.20.0(jiti@2.4.2))(magicast@0.3.5)(typescript@5.7.3)(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))
@@ -809,8 +809,8 @@ packages:
     resolution: {integrity: sha512-4mZ/86W1dFLcJXtvVe6es02mldcMulV4DtdL4aa8IpDZN1qU9JfxptywUuavjJeNuFZn++bGcXro3OAVbJRjdg==}
     engines: {node: '>= 20.x'}
 
-  '@mindenit/ui@0.2.1':
-    resolution: {integrity: sha512-wm/oE0nZ4m+V9HbSx2wWj24FfBfHXzhP06tnqw3NkUbFr03qYIPyeiHUcoQdm1DOqKa1WjUWs8VNRbH8y2gh0g==}
+  '@mindenit/ui@0.2.2':
+    resolution: {integrity: sha512-sNF+cl0ZXfrpeOpHE7R3XwIyBOSp9cidqpLUGUgRqHLRUYXM9KLxWwQr//Dn2cSLuMOLuy/8Zr4+/2HZBBnQlQ==}
     peerDependencies:
       '@internationalized/date': ^3.7.0
       vee-validate: '>=4.x.x'
@@ -6017,7 +6017,7 @@ snapshots:
 
   '@mindenit/answers-kit@0.1.4': {}
 
-  '@mindenit/ui@0.2.1(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))':
+  '@mindenit/ui@0.2.2(@internationalized/date@3.7.0)(typescript@5.7.3)(vee-validate@4.15.0(vue@3.5.13(typescript@5.7.3)))(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.38.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@internationalized/date': 3.7.0
       '@tailwindcss/cli': 4.0.5
@@ -10540,7 +10540,7 @@ snapshots:
       '@internationalized/number': 3.6.0
       '@tanstack/vue-virtual': 3.13.0(vue@3.5.13(typescript@5.7.3))
       '@vueuse/core': 12.5.0(typescript@5.7.3)
-      '@vueuse/shared': 12.5.0(typescript@5.7.3)
+      '@vueuse/shared': 12.7.0(typescript@5.7.3)
       aria-hidden: 1.2.4
       defu: 6.1.4
       ohash: 1.1.4
