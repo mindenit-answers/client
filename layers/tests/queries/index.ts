@@ -1,20 +1,27 @@
 import type { SortingOptions } from '@mindenit/answers-kit'
 import { queryOptions } from '@tanstack/vue-query'
 
-interface TestsOptionsArgs {
+interface Sorting {
   order: Ref<SortingOptions['order']>
+}
+
+interface TestsOptionsArgs extends Sorting {
+  sortBy: Ref<SortingOptions<'year'>['sortBy']>
+}
+
+interface TestQuestionsOptionsArgs extends Sorting {
   sortBy: Ref<SortingOptions['sortBy']>
 }
 
 interface TestsSearchOptionsArgs {
   options?: {
-    offset: number
-    limit: number
-    name: string
-    isVerified: boolean
-    subjectId: number
-    courseId: number
-    year: number
+    offset?: Ref<number>
+    limit?: Ref<number>
+    name?: Ref<string>
+    isVerified?: Ref<boolean>
+    subjectId?: Ref<number>
+    courseId?: Ref<number>
+    year?: Ref<number>
   }
   sorting?: TestsOptionsArgs
 }
@@ -23,10 +30,26 @@ const testsOptions = (args: TestsSearchOptionsArgs) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
-    queryKey: ['tests', args.sorting?.sortBy.value, args.sorting?.order.value],
+    queryKey: [
+      'tests',
+      args.options?.subjectId?.value,
+      args.options?.name?.value,
+      args.options?.year?.value,
+      args.options?.courseId?.value,
+      args.sorting?.sortBy.value,
+      args.sorting?.order.value,
+    ],
     queryFn: () =>
       $answersKit.tests.findMany({
-        options: args.options,
+        options: {
+          offset: args.options?.offset?.value,
+          limit: args.options?.limit?.value,
+          name: args.options?.name?.value,
+          isVerified: args.options?.isVerified?.value,
+          subjectId: args.options?.subjectId?.value,
+          courseId: args.options?.courseId?.value,
+          year: args.options?.year?.value,
+        },
         sorting: {
           sortBy: args.sorting?.sortBy.value,
           order: args.sorting?.order.value,
@@ -44,7 +67,10 @@ const testOptions = (id: number) => {
   })
 }
 
-const testQuestionsOptions = (id: number, sorting?: TestsOptionsArgs) => {
+const testQuestionsOptions = (
+  id: number,
+  sorting?: TestQuestionsOptionsArgs
+) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({

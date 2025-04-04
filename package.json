@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node .output/server/index.mjs",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -10,8 +11,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@mindenit/answers-kit": "^0.1.3",
-    "@mindenit/ui": "^0.2.1",
+    "@mindenit/answers-kit": "^0.1.4",
+    "@mindenit/ui": "^0.2.2",
     "@nuxt/eslint": "1.0.1",
     "@nuxt/fonts": "^0.11.0",
     "@nuxt/icon": "1.10.3",

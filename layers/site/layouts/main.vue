@@ -23,7 +23,7 @@ const dotsQuantity = computed(() => (isMobile.value ? 100 : 300))
     </div>
     <TheFooter class="md:pb-5 pb-20" />
     <TheBackground
-      class="absolute left-0 right-0 h-dvh -z-1"
+      class="absolute left-0 right-0 h-dvh -z-1 overflow-hidden"
       :quantity="dotsQuantity"
       :ease="100"
       :color="isDark ? '#FFF' : '#000'"

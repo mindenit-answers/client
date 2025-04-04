@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import type { Course, Subject, Test } from '@mindenit/answers-kit'
+import type { Course, Test } from '@mindenit/answers-kit'
+import { Badge } from '@mindenit/ui'
 
 interface Props {
-  // TODO: Change types here after updating the @answers-kit
-  test: Test & { name: string }
-  course: Course
-  subject: Subject
+  test: Test
+  course: Course | null
 }
 
 defineProps<Props>()
@@ -14,53 +13,55 @@ defineProps<Props>()
 <template>
   <NuxtLink
     :to="`/test/${test.id}`"
-    class="block w-full duration-200 group focus:outline-none focus:ring-3 focus:ring-royal-blue-500/30 rounded-xl relative overflow-hidden border hover:bg-fiord-50 dark:hover:bg-fiord-900 border-fiord-300 dark:border-fiord-800 transition"
+    class="w-full h-full block group focus:outline-none"
     draggable="false"
   >
-    <div class="p-5">
-      <div class="flex items-start justify-between mb-4">
-        <div>
-          <div class="flex items-center gap-2">
-            <h3 class="text-lg font-semibold text-fiord-900 dark:text-white">
-              {{ test.name }}
-            </h3>
-          </div>
-        </div>
-
-        <VerifiedBadge v-if="test.isVerified" type="test" />
-      </div>
-
-      <div class="flex flex-wrap gap-4">
-        <Text size="subtitle"> ID: {{ test.id }} </Text>
-
-        <Text size="subtitle" class="flex items-center gap-2">
-          <Icon name="lucide:graduation-cap" class="size-4" />
-          Курс {{ course?.number }}
-        </Text>
-
-        <Text size="subtitle" class="flex items-center gap-2">
-          <Icon name="lucide:calendar" class="size-4" />
-          {{ test.year }}
-        </Text>
-
-        <Text size="subtitle" class="flex items-center gap-2">
-          <Icon name="lucide:book" class="size-4" />
-          {{ subject?.brief }}
-        </Text>
-      </div>
-    </div>
-
     <div
-      class="px-5 py-3 border-t flex justify-between items-center transition border-top border-inherit"
+      class="flex flex-col h-full w-full p-5 rounded-xl border border-fiord-300 dark:border-fiord-700 bg-fiord-100 dark:bg-fiord-900 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 group-focus:ring-2 group-focus:ring-royal-blue-500 group-focus:outline-none gap-2"
     >
+      <div class="flex items-center gap-4">
+        <div
+          class="flex-shrink-0 flex items-center justify-center size-12 rounded-lg transition-transform duration-300 group-hover:rotate-3 dark:text-white"
+        >
+          <Icon name="lucide:bookmark" size="28px" />
+        </div>
+        <Heading
+          size="tiny"
+          class="mb-1 group-hover:text-royal-blue-600 dark:group-hover:text-royal-blue-400 transition-colors duration-300"
+        >
+          {{ test.name }}
+        </Heading>
+      </div>
+
       <div
-        class="flex items-center gap-1 text-royal-blue-600 dark:text-royal-blue-400"
+        class="flex items-center max-sm:justify-center flex-wrap gap-2 mt-auto"
       >
-        <span class="text-sm leading-0 font-medium">Перейти до тесту</span>
-        <Icon
-          name="lucide:arrow-right"
-          class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-        />
+        <Badge
+          class="flex items-center text-sm py-1 px-3 rounded-full"
+          variant="solid"
+          color="default"
+        >
+          ID:
+          {{ test.id }}
+        </Badge>
+        <Badge
+          v-if="course"
+          class="flex items-center text-sm py-1 px-3 rounded-full"
+          variant="solid"
+          color="primary"
+        >
+          <Icon name="lucide:graduation-cap" class="mr-1" /> Курс:
+          {{ course?.number }}
+        </Badge>
+        <Badge
+          class="flex items-center text-sm py-1 px-3 rounded-full"
+          variant="solid"
+          color="primary"
+        >
+          <Icon name="lucide:calendar" class="mr-1" /> Рік:
+          {{ test.year }}
+        </Badge>
+        <VerifiedBadge v-if="test.isVerified" type="test" mobile-badge />
       </div>
     </div>
   </NuxtLink>

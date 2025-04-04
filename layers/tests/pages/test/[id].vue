@@ -2,10 +2,12 @@
 import { useQuery } from '@tanstack/vue-query'
 import { testOptions } from '../../queries'
 import { useRouteParams } from '@vueuse/router'
+import { showError } from '#app'
 
 const testId = useRouteParams('id')
-
-const { data, isLoading } = useQuery(testOptions(+testId))
+const { data, isLoading, isError, error } = useQuery(
+  testOptions(+testId!.value!)
+)
 
 const {
   activeQuestionId,
@@ -26,6 +28,18 @@ watch(
   useWindowScroll().y,
   () => data.value?.questions && updateActiveQuestion(data.value.questions)
 )
+
+watch([isError, error], () => {
+  console.log('isError', isError.value)
+  console.log(error.value)
+  if (isError.value === true) {
+    showError({
+      statusCode: 404,
+      message:
+        'Тест за вказаним ID не знайдено. Спробуйте ще раз або перевірте правильність введеного ID.',
+    })
+  }
+})
 </script>
 
 <template>
@@ -36,15 +50,13 @@ watch(
       class="flex flex-col items-center max-w-7xl mx-auto gap-2 text-center"
     >
       <Heading size="medium">
-        {{ data.name }}
+        {{ data!.name }}
       </Heading>
       <VerifiedBadge v-if="data?.isVerified" type="test" mobile-badge />
-      <div class="flex gap-4 justify-center">
-        <Text size="subtitle">{{ data?.questions.length }} питань</Text>
-        <Text size="subtitle"
-          >{{ verifiedQuestions }} верифікованих питань</Text
-        >
-      </div>
+      <Text size="subtitle">
+        {{ verifiedQuestions }} / {{ data?.questions.length }} верифікованих
+        питань</Text
+      >
     </header>
 
     <SearchField
@@ -60,7 +72,7 @@ watch(
       />
 
       <main class="flex-1 min-w-0">
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
           <QuestionCard
             v-for="(question, index) in filteredQuestions"
             :key="question.id"
@@ -78,13 +90,5 @@ watch(
       </main>
     </div>
   </div>
-  <div
-    v-else
-    class="flex items-center justify-center min-h-screen"
-    role="status"
-  >
-    <div
-      class="animate-spin rounded-full h-12 w-12 border-4 border-royal-blue-500 border-t-transparent"
-    ></div>
-  </div>
+  <TheSpinner v-else />
 </template>

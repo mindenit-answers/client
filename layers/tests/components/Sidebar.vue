@@ -16,7 +16,7 @@ defineEmits<Emits>()
 
 <template>
   <aside
-    class="md:w-60 max-md:hidden flex flex-col h-[calc(100vh-1.5rem)] transition-all bg-fiord-50 dark:bg-fiord-900 rounded-lg border-fiord-300 dark:border-fiord-700 border overflow-y-auto sticky top-2 w-full"
+    class="md:w-60 max-md:hidden flex flex-col h-[calc(100vh-1.5rem)] transition-all bg-fiord-50 dark:bg-fiord-900 rounded-xl border-fiord-300 dark:border-fiord-700 border overflow-y-auto sticky top-2 w-full"
   >
     <div class="p-4 flex flex-col gap-2">
       <button
