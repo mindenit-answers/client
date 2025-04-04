@@ -21,10 +21,16 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
+      rollupOptions: {
+        external: ['jsdom'],
+      },
       sourcemap: false,
     },
     css: {
       devSourcemap: true,
+    },
+    optimizeDeps: {
+      exclude: ['jsdom'],
     },
   },
   imports: {

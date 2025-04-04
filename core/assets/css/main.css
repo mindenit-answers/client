@@ -16,7 +16,3 @@ html {
 .katex-html {
   @apply hidden;
 }
-
-.katex {
-  @apply selection:bg-royal-blue-200 selection:dark:bg-royal-blue-900;
-}
