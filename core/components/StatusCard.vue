@@ -7,7 +7,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: '',
   showSupport: false,
 })
 
@@ -31,7 +30,7 @@ const typeConfig = {
 const currentConfig = computed(() => typeConfig[props.type])
 
 const displayTitle = computed(
-  () => props.title || currentConfig.value.defaultTitle
+  () => props.title ?? currentConfig.value.defaultTitle
 )
 </script>
 

@@ -2,14 +2,12 @@
 import type { Course, Test } from '@mindenit/answers-kit'
 import { Badge } from '@mindenit/ui'
 
-const props = defineProps<{
+interface Props {
   test: Test
-  courses: Course[]
-}>()
+  course: Course | null
+}
 
-const course = computed(() => {
-  return props.courses.find((c) => c.id === props.test.courseId)
-})
+defineProps<Props>()
 </script>
 
 <template>
@@ -47,6 +45,7 @@ const course = computed(() => {
           {{ test.id }}
         </Badge>
         <Badge
+          v-if="course"
           class="flex items-center text-sm py-1 px-3 rounded-full"
           variant="solid"
           color="primary"

@@ -3,9 +3,9 @@ import {
   universitiesOptions,
   universityFacultiesOptions,
 } from '@/layers/universities/queries'
-import type { SortingOptions } from '@mindenit/answers-kit'
+import type { Course, SortingOptions } from '@mindenit/answers-kit'
 import { useQuery } from '@tanstack/vue-query'
-import { sortByFields, sortOrders, availableYears } from '~/core/constants'
+import { SORT_BY_FIELDS, SORT_ORDERS, AVAILABLE_YEARS } from '~/core/constants'
 import { coursesOptions } from '~/layers/courses/queries'
 import { facultySubjectsOptions } from '~/layers/faculties/queries'
 import { testsOptions } from '~/layers/tests/queries'
@@ -92,10 +92,12 @@ const {
   enabled: selectedSubject.value > 0,
 })
 
-const { data: courses } = useQuery({
-  ...coursesOptions(),
-  enabled: selectedSubject.value > 0,
-})
+const { data: courses } = useQuery(coursesOptions())
+
+const getCourseById = (courseId: number): Course | null => {
+  if (!courseId || !courses.value?.length) return null
+  return courses.value.find((c) => c.id === courseId) || null
+}
 
 const isLoading = computed(() => {
   if (currentStep.value === 0) return isLoadingUniversities.value
@@ -334,7 +336,7 @@ onMounted(() => {
           />
           <SelectContent>
             <SelectItem
-              v-for="(label, value) in sortOrders"
+              v-for="(label, value) in SORT_ORDERS"
               :key="value"
               :value="value"
             >
@@ -346,7 +348,7 @@ onMounted(() => {
           <SelectTrigger class="min-w-40" placeholder="Сортувати за" />
           <SelectContent>
             <SelectItem
-              v-for="(label, value) in sortByFields"
+              v-for="(label, value) in SORT_BY_FIELDS"
               :key="value"
               :value="value"
             >
@@ -358,7 +360,7 @@ onMounted(() => {
           <SelectTrigger class="min-w-40" placeholder="Виберіть рік" />
           <SelectContent>
             <SelectItem
-              v-for="year in availableYears"
+              v-for="year in AVAILABLE_YEARS"
               :key="year"
               :value="year.toString()"
             >
@@ -403,7 +405,7 @@ onMounted(() => {
           v-for="test in tests?.data"
           :key="test.id"
           :test
-          :courses="courses || []"
+          :course="getCourseById(test.courseId)"
         />
       </div>
     </template>
