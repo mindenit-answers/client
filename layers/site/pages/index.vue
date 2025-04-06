@@ -1,4 +1,10 @@
 <script lang="ts" setup>
+useSeoMeta({
+  title: 'Головна',
+})
+
+defineOgImageComponent('Mindenit')
+
 definePageMeta({
   layout: 'main',
 })

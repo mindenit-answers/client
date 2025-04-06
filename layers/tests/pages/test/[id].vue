@@ -9,6 +9,21 @@ const { data, isLoading, isError, error } = useQuery(
   testOptions(+testId!.value!)
 )
 
+const pageTitle = computed(() => {
+  return data.value ? `Тест ${data.value.name}` : 'Тест'
+})
+
+const pageDescription = computed(() => {
+  return data.value
+    ? `Тест ${data.value.name} - відповіді на питання`
+    : 'Тест - відповіді на питання'
+})
+
+useSeoMeta({
+  title: pageTitle,
+  description: pageDescription,
+})
+
 const {
   activeQuestionId,
   registerQuestionRef,

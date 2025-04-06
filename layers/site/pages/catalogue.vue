@@ -10,6 +10,12 @@ import { coursesOptions } from '~/layers/courses/queries'
 import { facultySubjectsOptions } from '~/layers/faculties/queries'
 import { testsOptions } from '~/layers/tests/queries'
 
+useSeoMeta({
+  title: 'Каталог тестів',
+  description:
+    'Каталог тестів - знайдіть тест, який вам потрібен, за університетом, факультетом, предметом та роком. Пошук тестів за назвою. Сортування тестів за роком, назвою та курсом.',
+})
+
 const route = useRoute()
 const router = useRouter()
 
