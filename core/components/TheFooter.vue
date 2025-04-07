@@ -77,7 +77,7 @@ import { Link } from '@mindenit/ui'
                 />
               </NuxtLink>
 
-              <NuxtLink to="https://discord" target="_blank">
+              <NuxtLink to="https://discord.gg/ahKR75hU9h" target="_blank">
                 <Icon
                   name="ic:baseline-discord"
                   size="26px"

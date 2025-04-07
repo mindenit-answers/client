@@ -63,4 +63,27 @@ export default defineNuxtConfig({
   gtag: {
     id: 'G-3FX2TXSLDS',
   },
+  nuxtseo: {
+    enabled: true,
+  },
+  site: {
+    name: 'Mindenit Answers',
+    description:
+      'Платформа запитань та відповідей, керована спільнотою. Сайт створений для студентів ХНУРЕ, щоб полегшити доступ до навчальних матеріалів і обміну знаннями.',
+    defaultLocale: 'uk',
+    indexable: true,
+  },
+  seo: {
+    meta: {
+      keywords:
+        'відповіді,тести,відповідь,тест,спільнота,платформа,запитання,відповідь на запитання,онлайн тести,навчання,хнуре,харків',
+    },
+  },
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
+  },
+  robots: {
+    sitemap: '/sitemap.xml',
+    host: process.env.BASE_URL,
+  },
 })

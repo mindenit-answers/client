@@ -4,7 +4,11 @@ import { questionsSearchOptions } from '~/layers/questions/queries'
 import { getPagesCount } from '~/core/utils'
 import { PAGE_SIZE } from '~/core/constants'
 
-const config = useRuntimeConfig()
+useSeoMeta({
+  title: 'Пошук',
+  description:
+    'Пошук питань на платформі Mindenit Answers. На цій сторінці ви можете знайти питання, які вас цікавлять, та отримати на них відповіді.',
+})
 
 const searchQuery = ref('')
 const debouncedQuery = useDebounce(searchQuery, 500)
