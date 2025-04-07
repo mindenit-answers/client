@@ -1,23 +1,28 @@
-FROM node:22-slim
+ARG NODE_VERSION=20
+FROM node:${NODE_VERSION}-slim AS base
 
-WORKDIR /app
+WORKDIR /src
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+FROM base AS build
 
-COPY package.json pnpm-lock.yaml* ./
+RUN npm i -g pnpm
 
-RUN pnpm install
+COPY --link package.json pnpm-lock.yaml ./
 
-COPY . .
+RUN pnpm install --frozen-lockfile
+
+COPY --link . .
 
 RUN pnpm build
 
+FROM base
+
 ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=${PORT}
-ENV BASE_URL=${BASE_URL}
 ENV API_BASE_URL=${API_BASE_URL}
+ENV DISCORD_REPORT_URL=${DISCORD_REPORT_URL}
 
-EXPOSE ${PORT}
+COPY --from=build /src/.output /src/.output
 
-CMD ["pnpm", "start"]
+EXPOSE 3000
+
+CMD [ "node", ".output/server/index.mjs" ]
