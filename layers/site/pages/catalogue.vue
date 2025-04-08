@@ -165,7 +165,9 @@ function goBack() {
     } else if (currentStep.value === 2) {
       selectedFaculty.value = 0
     } else if (currentStep.value === 1) {
-      selectedUniversity.value = 0
+      if (universities.value?.length !== 1) {
+        selectedUniversity.value = 0
+      }
     }
     updateQueryParams()
   }
@@ -232,6 +234,9 @@ watch(
 )
 
 onMounted(() => {
+  if (universities.value?.length === 1) {
+    selectUniversity(universities.value[0]!.id)
+  }
   updateQueryParams()
 })
 </script>
