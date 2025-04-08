@@ -20,18 +20,27 @@ const props = withDefaults(defineProps<Props>(), {
 const container = ref(null)
 const childElements = ref([])
 const slots = useSlots()
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const children = ref<any>([])
+// Массив для отслеживания, был ли элемент уже анимирован
+const animatedElements = ref<boolean[]>([])
 
 onMounted(() => {
   // This will reactively capture all content provided in the default slot
   watchEffect(() => {
     children.value = slots.default ? slots.default() : []
+    animatedElements.value = Array(children.value.length).fill(false)
   })
 })
 
-function getInitial() {
+function getInitial(index: number) {
+  if (animatedElements.value[index]) {
+    return {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+    }
+  }
   return {
     opacity: 0,
     filter: `blur(${props.blur})`,
@@ -39,12 +48,18 @@ function getInitial() {
   }
 }
 
-function getAnimate() {
+function getAnimate(index: number) {
+  animatedElements.value[index] = true
+
   return {
     opacity: 1,
-    filter: `blur(0px)`,
+    filter: 'blur(0px)',
     y: 0,
   }
+}
+
+function shouldAnimate(index: number) {
+  return !animatedElements.value[index]
 }
 </script>
 
@@ -55,8 +70,8 @@ function getAnimate() {
       :key="index"
       ref="childElements"
       as="div"
-      :initial="getInitial()"
-      :in-view="getAnimate()"
+      :initial="getInitial(index)"
+      :in-view="shouldAnimate(index) ? getAnimate(index) : undefined"
       :transition="{
         duration: props.duration,
         easing: 'easeInOut',
