@@ -234,6 +234,16 @@ watch(
   }
 )
 
+watch(
+  universities,
+  (newUniversities) => {
+    if (newUniversities?.length === 1 && selectedUniversity.value === 0) {
+      selectUniversity(newUniversities[0]!.id)
+    }
+  },
+  { immediate: true }
+)
+
 onMounted(() => {
   if (universities.value?.length === 1) {
     selectUniversity(universities.value[0]!.id)
