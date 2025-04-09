@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/vue-query'
 import { questionsSearchOptions } from '~/layers/questions/queries'
 import { getPagesCount } from '~/core/utils'
 import { PAGE_SIZE } from '~/core/constants'
+import { motion } from 'motion-v'
 
 useSeoMeta({
   title: 'Пошук',
@@ -13,7 +14,6 @@ useSeoMeta({
 const searchQuery = ref('')
 const debouncedQuery = useDebounce(searchQuery, 500)
 const currentPage = ref(1)
-const animationComplete = ref(false)
 
 const questions = useQuery(questionsSearchOptions(searchQuery))
 
@@ -42,18 +42,6 @@ const showNoResults = computed(
     !questions.isFetching.value
 )
 
-watch(hasResults, (newHasResults) => {
-  if (!newHasResults) {
-    animationComplete.value = false
-  }
-})
-
-const handleAnimationEnd = () => {
-  if (hasResults.value) {
-    animationComplete.value = true
-  }
-}
-
 const totalPages = computed(() =>
   questions.data.value ? getPagesCount(questions.data.value.length) : 0
 )
@@ -70,11 +58,8 @@ const paginatedQuestions = computed(() => {
 <template>
   <div class="flex flex-col items-center min-h-[80vh] relative gap-8">
     <div
-      :class="[
-        'md:w-3/4 w-full transition-all duration-500 ease-in-out',
-        hasResults ? 'mt-0' : 'mt-[25vh]',
-      ]"
-      @transitionend="handleAnimationEnd"
+      class="md:w-3/4 w-full transition-all"
+      :class="[hasResults ? 'mt-0' : 'mt-[25vh]']"
     >
       <div
         class="backdrop-blur-sm bg-fiord-100/20 dark:bg-fiord-700/5 border border-fiord-500/10 rounded-xl p-2"
@@ -92,37 +77,43 @@ const paginatedQuestions = computed(() => {
       </div>
     </div>
 
-    <StatusCard
-      v-if="showNoResults"
-      type="not-found"
-      message="Спробуйте змінити пошуковий запит або використати більш загальні
-          слова."
-    />
-
-    <StatusCard
-      v-if="hasError"
-      type="not-found"
-      message="Не вдалося завантажити результати пошуку. Спробуйте пізніше або напишіть
-        нам про це."
-      show-support
-    />
-
-    <div
-      v-if="hasResults"
-      class="flex flex-col gap-2 md:w-1/2 w-fit"
-      :class="{
-        'opacity-0 translate-y-4': !animationComplete,
-        'opacity-100 translate-y-0 transition-all duration-500 ease-in-out': true,
-      }"
-    >
-      <QuestionCard
-        v-for="question in paginatedQuestions"
-        :key="question.id"
-        :question="question"
-        :show-test-info="true"
-        :search-query="debouncedQuery"
+    <AnimatePresence>
+      <StatusCard
+        v-if="showNoResults"
+        type="not-found"
+        message="Спробуйте змінити пошуковий запит або використати більш загальні
+      слова."
       />
-    </div>
+    </AnimatePresence>
+
+    <AnimatePresence>
+      <StatusCard
+        v-if="hasError"
+        type="not-found"
+        message="Не вдалося завантажити результати пошуку. Спробуйте пізніше або напишіть
+      нам про це."
+        show-support
+      />
+    </AnimatePresence>
+
+    <AnimatePresence>
+      <motion.div
+        v-if="hasResults"
+        class="flex flex-col gap-2 md:w-1/2 w-fit"
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :exit="{ opacity: 0, y: 20 }"
+      >
+        <QuestionCard
+          v-for="question in paginatedQuestions"
+          :key="question.id"
+          :question="question"
+          :show-test-info="true"
+          :search-query="debouncedQuery"
+        />
+      </motion.div>
+    </AnimatePresence>
+
     <div
       v-if="totalPages > 1"
       class="inline-flex w-full items-center justify-center"
