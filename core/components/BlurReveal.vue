@@ -22,7 +22,6 @@ const childElements = ref([])
 const slots = useSlots()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const children = ref<any>([])
-// Массив для отслеживания, был ли элемент уже анимирован
 const animatedElements = ref<boolean[]>([])
 
 onMounted(() => {
