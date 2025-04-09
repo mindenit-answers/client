@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useQuery } from '@tanstack/vue-query'
 import { questionsSearchOptions } from '~/layers/questions/queries'
-import { getPagesCount } from '~/core/utils'
+import { getPagesCount, getCourseById } from '~/core/utils'
 import { PAGE_SIZE } from '~/core/constants'
 import { motion } from 'motion-v'
+import { testsOptions } from '~/layers/tests/queries'
+import { coursesOptions } from '~/layers/courses/queries'
 
 useSeoMeta({
   title: 'Пошук',
@@ -16,6 +18,14 @@ const debouncedQuery = useDebounce(searchQuery, 500)
 const currentPage = ref(1)
 
 const questions = useQuery(questionsSearchOptions(searchQuery))
+const { data: tests } = useQuery(
+  testsOptions({
+    options: {
+      limit: ref(3),
+    },
+  })
+)
+const { data: courses } = useQuery(coursesOptions())
 
 watch(
   debouncedQuery,
@@ -77,18 +87,16 @@ const paginatedQuestions = computed(() => {
       </div>
     </div>
 
-    <AnimatePresence>
+    <AnimatePresence v-if="showNoResults">
       <StatusCard
-        v-if="showNoResults"
         type="not-found"
         message="Спробуйте змінити пошуковий запит або використати більш загальні
       слова."
       />
     </AnimatePresence>
 
-    <AnimatePresence>
+    <AnimatePresence v-else-if="hasError">
       <StatusCard
-        v-if="hasError"
         type="not-found"
         message="Не вдалося завантажити результати пошуку. Спробуйте пізніше або напишіть
       нам про це."
@@ -96,9 +104,27 @@ const paginatedQuestions = computed(() => {
       />
     </AnimatePresence>
 
-    <AnimatePresence>
+    <AnimatePresence v-else-if="!hasResults && !hasError && !showNoResults">
       <motion.div
-        v-if="hasResults"
+        class="flex flex-col gap-4 w-full items-center mt-8"
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :exit="{ opacity: 0, y: 20 }"
+      >
+        <Heading size="medium">Нове 🔥</Heading>
+        <div class="grid grid-cols-3 max-md:grid-cols-1 gap-2">
+          <TestCard
+            v-for="test in tests?.data"
+            :key="test.id"
+            :test
+            :course="getCourseById(courses!, test.courseId)"
+          />
+        </div>
+      </motion.div>
+    </AnimatePresence>
+
+    <AnimatePresence v-else-if="hasResults">
+      <motion.div
         class="flex flex-col gap-2 md:w-1/2 w-fit"
         :initial="{ opacity: 0, y: 20 }"
         :while-in-view="{ opacity: 1, y: 0 }"

@@ -3,12 +3,13 @@ import {
   universitiesOptions,
   universityFacultiesOptions,
 } from '@/layers/universities/queries'
-import type { Course, SortingOptions } from '@mindenit/answers-kit'
+import type { SortingOptions } from '@mindenit/answers-kit'
 import { useQuery } from '@tanstack/vue-query'
 import { SORT_BY_FIELDS, SORT_ORDERS, AVAILABLE_YEARS } from '~/core/constants'
 import { coursesOptions } from '~/layers/courses/queries'
 import { facultySubjectsOptions } from '~/layers/faculties/queries'
 import { testsOptions } from '~/layers/tests/queries'
+import { getCourseById } from '~/core/utils'
 
 useSeoMeta({
   title: 'Каталог тестів',
@@ -99,11 +100,6 @@ const {
 })
 
 const { data: courses } = useQuery(coursesOptions())
-
-const getCourseById = (courseId: number): Course | null => {
-  if (!courseId || !courses.value?.length) return null
-  return courses.value.find((c) => c.id === courseId) || null
-}
 
 const isLoading = computed(() => {
   if (currentStep.value === 0) return isLoadingUniversities.value
@@ -412,7 +408,7 @@ onMounted(() => {
             v-for="test in tests?.data"
             :key="test.id"
             :test
-            :course="getCourseById(test.courseId)"
+            :course="getCourseById(courses!, test.courseId)"
           />
         </div>
       </template>
