@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { motion } from 'motion-v'
+
 interface Props {
   type: 'error' | 'not-found'
   title?: string
@@ -35,7 +37,12 @@ const displayTitle = computed(
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4 w-full max-w-lg">
+  <motion.div
+    :initial="{ opacity: 0, y: 20 }"
+    :while-in-view="{ opacity: 1, y: 0 }"
+    :exit="{ opacity: 0, y: 20 }"
+    class="flex flex-col items-center gap-4 w-full max-w-lg"
+  >
     <div
       :class="[
         'p-6 rounded-xl dark:text-white text-center w-full border transition-all duration-300',
@@ -64,5 +71,5 @@ const displayTitle = computed(
         </Button>
       </div>
     </div>
-  </div>
+  </motion.div>
 </template>

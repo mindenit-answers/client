@@ -20,17 +20,29 @@ export default defineNuxtConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    json: {
+      stringify: true,
+    },
     build: {
       rollupOptions: {
         external: ['jsdom'],
       },
       sourcemap: false,
+      cssMinify: 'lightningcss',
+      ssrManifest: true,
+      minify: 'terser',
     },
     css: {
       devSourcemap: true,
     },
     optimizeDeps: {
       exclude: ['jsdom'],
+    },
+  },
+  nitro: {
+    minify: true,
+    compressPublicAssets: {
+      brotli: true,
     },
   },
   imports: {

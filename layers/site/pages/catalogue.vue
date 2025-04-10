@@ -3,12 +3,13 @@ import {
   universitiesOptions,
   universityFacultiesOptions,
 } from '@/layers/universities/queries'
-import type { Course, SortingOptions } from '@mindenit/answers-kit'
+import type { SortingOptions } from '@mindenit/answers-kit'
 import { useQuery } from '@tanstack/vue-query'
 import { SORT_BY_FIELDS, SORT_ORDERS, AVAILABLE_YEARS } from '~/core/constants'
 import { coursesOptions } from '~/layers/courses/queries'
 import { facultySubjectsOptions } from '~/layers/faculties/queries'
 import { testsOptions } from '~/layers/tests/queries'
+import { getCourseById } from '~/core/utils'
 
 useSeoMeta({
   title: 'Каталог тестів',
@@ -100,11 +101,6 @@ const {
 
 const { data: courses } = useQuery(coursesOptions())
 
-const getCourseById = (courseId: number): Course | null => {
-  if (!courseId || !courses.value?.length) return null
-  return courses.value.find((c) => c.id === courseId) || null
-}
-
 const isLoading = computed(() => {
   if (currentStep.value === 0) return isLoadingUniversities.value
   if (currentStep.value === 1) return isLoadingFaculties.value
@@ -165,11 +161,18 @@ function goBack() {
     } else if (currentStep.value === 2) {
       selectedFaculty.value = 0
     } else if (currentStep.value === 1) {
-      selectedUniversity.value = 0
+      if (universities.value?.length !== 1) {
+        selectedUniversity.value = 0
+      }
     }
     updateQueryParams()
   }
 }
+
+const isFirstStep = computed(() => {
+  const firstStepValue = universities.value?.length === 1 ? 1 : 0
+  return currentStep.value === firstStepValue
+})
 
 watch(
   () => route.query,
@@ -231,7 +234,20 @@ watch(
   }
 )
 
+watch(
+  universities,
+  (newUniversities) => {
+    if (newUniversities?.length === 1 && selectedUniversity.value === 0) {
+      selectUniversity(newUniversities[0]!.id)
+    }
+  },
+  { immediate: true }
+)
+
 onMounted(() => {
+  if (universities.value?.length === 1) {
+    selectUniversity(universities.value[0]!.id)
+  }
   updateQueryParams()
 })
 </script>
@@ -242,190 +258,182 @@ onMounted(() => {
 
     <TheSpinner v-if="isLoading" />
 
-    <template v-else-if="currentStep === 0">
-      <div class="flex items-center gap-2">
-        <Heading size="small">Оберіть університет</Heading>
-      </div>
-      <div
-        class="grid auto-rows-fr gap-4"
-        :class="
-          universities?.length === 1
-            ? 'grid-cols-1'
-            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-        "
-      >
-        <CatalogueCard
-          v-for="university in universities"
-          :key="university.id"
-          v-bind="university"
-          @click="() => selectUniversity(university.id)"
-        />
-      </div>
-    </template>
-
-    <template v-else-if="currentStep === 1">
+    <template v-else>
       <div class="flex items-center gap-2">
         <IconButton
+          v-if="currentStep > 0"
           icon="lucide:arrow-left"
           variant="ghost"
           size="sm"
+          :disabled="isFirstStep"
           @click="goBack"
         />
-        <Heading size="small">Оберіть факультет</Heading>
-      </div>
-      <div
-        class="grid auto-rows-fr gap-4"
-        :class="
-          faculties?.length === 1
-            ? 'grid-cols-1'
-            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-        "
-      >
-        <CatalogueCard
-          v-for="faculty in faculties"
-          :key="faculty.id"
-          v-bind="faculty"
-          @click="() => selectFaculty(faculty.id)"
-        />
-      </div>
-    </template>
-
-    <template v-else-if="currentStep === 2">
-      <div class="flex items-center gap-2">
-        <IconButton
-          icon="lucide:arrow-left"
-          variant="ghost"
-          size="sm"
-          @click="goBack"
-        />
-        <Heading size="small">Оберіть предмет</Heading>
-      </div>
-      <div
-        class="grid auto-rows-fr gap-4"
-        :class="
-          subjects?.length === 1
-            ? 'grid-cols-1'
-            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-        "
-      >
-        <CatalogueCard
-          v-for="subject in subjects"
-          :key="subject.id"
-          v-bind="subject"
-          @click="() => selectSubject(subject.id)"
-        />
-      </div>
-    </template>
-
-    <template v-else-if="currentStep === 3">
-      <div class="flex items-center gap-2">
-        <IconButton
-          icon="lucide:arrow-left"
-          variant="ghost"
-          size="sm"
-          @click="goBack"
-        />
-        <Heading size="small">Оберіть тест</Heading>
+        <Heading v-if="currentStep === 0" size="small"
+          >Оберіть університет</Heading
+        >
+        <Heading v-if="currentStep === 1" size="small"
+          >Оберіть факультет</Heading
+        >
+        <Heading v-if="currentStep === 2" size="small">Оберіть предмет</Heading>
+        <Heading v-if="currentStep === 3" size="small">Оберіть тест</Heading>
       </div>
 
-      <div class="flex flex-col md:flex-row gap-2">
-        <SearchField
-          v-model="searchQuery"
-          class="w-full"
-          placeholder="Пошук за назвою тесту..."
-          autofocus
-        />
-        <SelectRoot v-model="selectedOrder">
-          <SelectTrigger
-            class="min-w-40"
-            placeholder="Виберіть порядок сортування"
+      <template v-if="currentStep === 0">
+        <div
+          class="grid auto-rows-fr gap-4"
+          :class="
+            universities?.length === 1
+              ? 'grid-cols-1'
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+          "
+        >
+          <CatalogueCard
+            v-for="university in universities"
+            :key="university.id"
+            v-bind="university"
+            @click="() => selectUniversity(university.id)"
           />
-          <SelectContent>
-            <SelectItem
-              v-for="(label, value) in SORT_ORDERS"
-              :key="value"
-              :value="value"
-            >
-              {{ label }}
-            </SelectItem>
-          </SelectContent>
-        </SelectRoot>
-        <SelectRoot v-model="selectedSortBy">
-          <SelectTrigger class="min-w-40" placeholder="Сортувати за" />
-          <SelectContent>
-            <SelectItem
-              v-for="(label, value) in SORT_BY_FIELDS"
-              :key="value"
-              :value="value"
-            >
-              {{ label }}
-            </SelectItem>
-          </SelectContent>
-        </SelectRoot>
-        <SelectRoot v-model="selectedYear">
-          <SelectTrigger class="min-w-40" placeholder="Виберіть рік" />
-          <SelectContent>
-            <SelectItem
-              v-for="year in AVAILABLE_YEARS"
-              :key="year"
-              :value="year.toString()"
-            >
-              {{ year }} рік
-            </SelectItem>
-          </SelectContent>
-        </SelectRoot>
-        <SelectRoot v-model="courseId">
-          <SelectTrigger class="min-w-40" placeholder="Виберіть курс" />
-          <SelectContent>
-            <template v-if="courses?.length">
-              <SelectItem
-                v-for="(course, index) in courses"
-                :key="index"
-                :value="course.id!.toString()"
-              >
-                {{ course.number }} курс
-              </SelectItem>
-            </template>
-            <span v-else class="p-3 text-center">
-              <Text
-                v-show="!courses?.length"
-                size="subtitle"
-                class="select-none"
-                >Курси відсутні</Text
-              >
-            </span>
-          </SelectContent>
-        </SelectRoot>
-      </div>
-      <button
-        v-if="areFiltersApplied"
-        class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer"
-        @click="resetFilters"
-      >
-        <Icon class="size-5" name="lucide:circle-x" />
-        Скинути фільтри
-      </button>
+        </div>
+      </template>
 
-      <div class="grid gap-4 grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
-        <TestCard
-          v-for="test in tests?.data"
-          :key="test.id"
-          :test
-          :course="getCourseById(test.courseId)"
-        />
+      <template v-if="currentStep === 1">
+        <div
+          class="grid auto-rows-fr gap-4"
+          :class="
+            faculties?.length === 1
+              ? 'grid-cols-1'
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+          "
+        >
+          <CatalogueCard
+            v-for="faculty in faculties"
+            :key="faculty.id"
+            v-bind="faculty"
+            @click="() => selectFaculty(faculty.id)"
+          />
+        </div>
+      </template>
+
+      <template v-else-if="currentStep === 2">
+        <div
+          class="grid auto-rows-fr gap-4"
+          :class="
+            subjects?.length === 1
+              ? 'grid-cols-1'
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+          "
+        >
+          <CatalogueCard
+            v-for="subject in subjects"
+            :key="subject.id"
+            v-bind="subject"
+            @click="() => selectSubject(subject.id)"
+          />
+        </div>
+      </template>
+
+      <template v-else-if="currentStep === 3">
+        <div class="flex flex-col md:flex-row gap-2">
+          <SearchField
+            v-model="searchQuery"
+            class="w-full"
+            placeholder="Пошук за назвою тесту..."
+            autofocus
+          />
+          <SelectRoot v-model="selectedOrder">
+            <SelectTrigger
+              class="min-w-40"
+              placeholder="Виберіть порядок сортування"
+            />
+            <SelectContent>
+              <SelectItem
+                v-for="(label, value) in SORT_ORDERS"
+                :key="value"
+                :value="value"
+              >
+                {{ label }}
+              </SelectItem>
+            </SelectContent>
+          </SelectRoot>
+          <SelectRoot v-model="selectedSortBy">
+            <SelectTrigger class="min-w-40" placeholder="Сортувати за" />
+            <SelectContent>
+              <SelectItem
+                v-for="(label, value) in SORT_BY_FIELDS"
+                :key="value"
+                :value="value"
+              >
+                {{ label }}
+              </SelectItem>
+            </SelectContent>
+          </SelectRoot>
+          <SelectRoot v-model="selectedYear">
+            <SelectTrigger class="min-w-40" placeholder="Виберіть рік" />
+            <SelectContent>
+              <SelectItem
+                v-for="year in AVAILABLE_YEARS"
+                :key="year"
+                :value="year.toString()"
+              >
+                {{ year }} рік
+              </SelectItem>
+            </SelectContent>
+          </SelectRoot>
+          <SelectRoot v-model="courseId">
+            <SelectTrigger class="min-w-40" placeholder="Виберіть курс" />
+            <SelectContent>
+              <template v-if="courses?.length">
+                <SelectItem
+                  v-for="(course, index) in courses"
+                  :key="index"
+                  :value="course.id!.toString()"
+                >
+                  {{ course.number }} курс
+                </SelectItem>
+              </template>
+              <span v-else class="p-3 text-center">
+                <Text
+                  v-show="!courses?.length"
+                  size="subtitle"
+                  class="select-none"
+                  >Курси відсутні</Text
+                >
+              </span>
+            </SelectContent>
+          </SelectRoot>
+        </div>
+        <button
+          v-if="areFiltersApplied"
+          class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer"
+          @click="resetFilters"
+        >
+          <Icon class="size-5" name="lucide:circle-x" />
+          Скинути фільтри
+        </button>
+
+        <div
+          class="grid gap-4 grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
+        >
+          <TestCard
+            v-for="test in tests?.data"
+            :key="test.id"
+            :test
+            :course="getCourseById(courses!, test.courseId)"
+          />
+        </div>
+      </template>
+
+      <div
+        v-if="!isLoading && dataIsEmpty"
+        class="flex items-center justify-center w-full h-[60vh]"
+      >
+        <StatusCard
+          type="not-found"
+          message="За вказаними параметрами нічого не знайдено"
+        >
+          <Button @click="goBack">Повернутись назад</Button>
+        </StatusCard>
       </div>
     </template>
-
-    <div
-      v-if="!isLoading && dataIsEmpty"
-      class="flex items-center justify-center w-full h-[60vh]"
-    >
-      <StatusCard
-        type="not-found"
-        message="За вказаними параметрами нічого не знайдено"
-      >
-        <Button @click="goBack">Повернутись назад</Button>
-      </StatusCard>
-    </div>
   </div>
 </template>

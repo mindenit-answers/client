@@ -8,3 +8,4 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export * from './pagination'
 export * from './highlight'
+export * from './getCourseById'
