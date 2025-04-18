@@ -97,7 +97,7 @@ const paginatedQuestions = computed(() => {
 
     <AnimatePresence v-else-if="hasError">
       <StatusCard
-        type="not-found"
+        type="error"
         message="Не вдалося завантажити результати пошуку. Спробуйте пізніше або напишіть
       нам про це."
         show-support

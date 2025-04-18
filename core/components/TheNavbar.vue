@@ -2,8 +2,9 @@
   <header
     class="grid grid-cols-[auto_auto] md:grid-cols-[1fr_auto_1fr] w-full items-center relative"
   >
-    <div class="flex items-center">
+    <div class="flex items-center gap-2">
       <TheLogo />
+      <slot />
     </div>
 
     <div
