@@ -58,7 +58,7 @@ const links = [
 
 <template>
   <div class="flex flex-col w-full relative">
-    <motiondiv class="flex h-dvh">
+    <div class="flex h-dvh">
       <motion.aside
         class="flex-col w-64 bg-white dark:bg-fiord-900 border-r border-gray-200 dark:border-fiord-700 h-full overflow-y-auto hidden md:flex z-40 fixed"
         :variants="variants"
@@ -98,22 +98,19 @@ const links = [
         @click="toggleMobileSidebar"
       ></motion.div>
 
-      <div class="flex-1 flex flex-col overflow-hidden">
-        <div class="flex flex-col pt-5 px-4 h-full overflow-y-auto">
-          <TheNavbar>
-            <IconButton
-              variant="ghost"
-              icon="lucide:menu"
-              size="sm"
-              @click="toggleMobileSidebar"
-            />
-          </TheNavbar>
-
-          <div class="flex flex-col md:pb-5 pb-24 gap-5 flex-1">
-            <slot />
-          </div>
+      <div class="flex flex-col pt-5 container mx-auto px-4 h-dvh gap-5">
+        <TheNavbar>
+          <IconButton
+            variant="ghost"
+            icon="lucide:menu"
+            size="sm"
+            @click="toggleMobileSidebar"
+          />
+        </TheNavbar>
+        <div class="flex flex-col md:pb-5 pb-24 gap-5">
+          <slot />
         </div>
       </div>
-    </motiondiv>
+    </div>
   </div>
 </template>
