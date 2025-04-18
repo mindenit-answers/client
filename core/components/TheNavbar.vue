@@ -2,9 +2,8 @@
   <header
     class="grid grid-cols-[auto_auto] md:grid-cols-[1fr_auto_1fr] w-full items-center relative"
   >
-    <div class="flex items-center gap-2">
+    <div class="flex">
       <TheLogo />
-      <slot />
     </div>
 
     <div
@@ -15,8 +14,9 @@
       <NavbarLink to="/catalogue" title="Каталог" icon="lucide:book-copy" />
     </div>
 
-    <div class="flex justify-end items-center">
+    <div class="flex justify-end items-center gap-2">
       <ThemeSwitcher />
+      <slot />
     </div>
   </header>
 </template>
