@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import '@mindenit/ui/index.css';
 
 @theme {
   --font-display: "Afacad", "sans-serif";

@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: ['./core', './layers/site'],
   modules: [
-    '@mindenit/ui/nuxt',
     '@nuxt/icon',
     '@nuxt/image',
     '@vueuse/nuxt',

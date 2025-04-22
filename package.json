@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@mindenit/answers-kit": "^0.1.4",
-    "@mindenit/ui": "^0.2.2",
     "@nuxt/eslint": "1.0.1",
     "@nuxt/fonts": "^0.11.0",
     "@nuxt/icon": "1.10.3",
