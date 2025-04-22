@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'motion-v/nuxt',
     '@nuxt/fonts',
+    'shadcn-nuxt',
   ],
   vite: {
     plugins: [tailwindcss()],
@@ -59,6 +60,9 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   css: ['~/core/assets/css/main.css'],
+  shadcn: {
+    prefix: '',
+  },
   icon: {
     provider: 'iconify',
     serverBundle: {
