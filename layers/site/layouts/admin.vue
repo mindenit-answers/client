@@ -21,53 +21,14 @@ const bgVariants = {
     display: 'none',
   },
 }
-
-const links = [
-  {
-    name: 'Головна',
-    href: '/admin',
-    icon: 'lucide:home',
-  },
-  {
-    name: 'Питання',
-    href: '/admin/questions',
-    icon: 'lucide:file-question',
-  },
-  {
-    name: 'Курси',
-    href: '/admin/courses',
-    icon: 'lucide:book-open',
-  },
-  {
-    name: 'Тести',
-    href: '/admin/tests',
-    icon: 'lucide:layout-list',
-  },
-  {
-    name: 'Предмети',
-    href: '/admin/subjects',
-    icon: 'lucide:book',
-  },
-  {
-    name: 'Факультети',
-    href: '/admin/faculties',
-    icon: 'lucide:graduation-cap',
-  },
-  {
-    name: 'Університети',
-    href: '/admin/universities',
-    icon: 'lucide:university',
-  },
-]
 </script>
 
 <template>
   <div class="flex flex-col w-full relative">
-    <BaseSidebar
+    <AdminSidebar
       variant="mobile"
       class="md:hidden"
       :is-open="isMobileSidebarOpen"
-      :links="links"
       @close="closeMobileSidebar"
     />
 
@@ -86,18 +47,18 @@ const links = [
     <div class="flex h-dvh">
       <div class="flex flex-col pt-5 container mx-auto px-4 h-dvh gap-5">
         <TheNavbar>
-          <IconButton
+          <Button
             variant="ghost"
-            icon="lucide:menu"
             class="md:hidden"
             @click="toggleMobileSidebar"
-          />
+          >
+            <Icon size="18px" name="lucide:menu"></Icon>
+          </Button>
         </TheNavbar>
 
         <div class="flex flex-1 md:pb-5 pb-24">
-          <BaseSidebar
+          <AdminSidebar
             variant="desktop"
-            :links="links"
             :is-open="true"
             class="hidden md:flex"
           />

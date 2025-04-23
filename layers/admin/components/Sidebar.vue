@@ -2,7 +2,6 @@
 import { motion } from 'motion-v'
 
 interface Props {
-  links: Array<{ name: string; href: string; icon: string }>
   variant: 'desktop' | 'mobile'
   isOpen: boolean
 }
@@ -39,6 +38,44 @@ const mobileVariants = {
     display: 'none',
   },
 }
+
+const links = [
+  {
+    name: 'Головна',
+    href: '/admin',
+    icon: 'lucide:home',
+  },
+  {
+    name: 'Питання',
+    href: '/admin/questions',
+    icon: 'lucide:file-question',
+  },
+  {
+    name: 'Курси',
+    href: '/admin/courses',
+    icon: 'lucide:book-open',
+  },
+  {
+    name: 'Тести',
+    href: '/admin/tests',
+    icon: 'lucide:layout-list',
+  },
+  {
+    name: 'Предмети',
+    href: '/admin/subjects',
+    icon: 'lucide:book',
+  },
+  {
+    name: 'Факультети',
+    href: '/admin/faculties',
+    icon: 'lucide:graduation-cap',
+  },
+  {
+    name: 'Університети',
+    href: '/admin/universities',
+    icon: 'lucide:university',
+  },
+]
 </script>
 
 <template>
@@ -60,17 +97,12 @@ const mobileVariants = {
           </slot>
         </div>
         <nav class="flex-1 p-4 space-y-1">
-          <NuxtLink
+          <AdminSidebarLink
             v-for="link in links"
             :key="link.name"
-            :to="link.href"
-            active-class="bg-fiord-200 dark:bg-fiord-800"
-            class="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-50 dark:hover:bg-fiord-800 transition text-black dark:text-white gap-3"
-            @click="handleLinkClick(link)"
-          >
-            <Icon :name="link.icon" size="18px" />
-            {{ link.name }}
-          </NuxtLink>
+            :link="link"
+            @click="handleLinkClick"
+          />
         </nav>
         <slot name="footer"></slot>
       </motion.aside>
@@ -82,17 +114,12 @@ const mobileVariants = {
           <slot name="header"></slot>
         </div>
         <nav class="flex-1 p-4 space-y-1">
-          <NuxtLink
+          <AdminSidebarLink
             v-for="link in links"
             :key="link.name"
-            :to="link.href"
-            active-class="bg-fiord-200 dark:bg-fiord-800"
-            class="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-50 dark:hover:bg-fiord-800 transition text-black dark:text-white gap-3"
-            @click="handleLinkClick(link)"
-          >
-            <Icon :name="link.icon" size="18px" />
-            {{ link.name }}
-          </NuxtLink>
+            :link="link"
+            @click="handleLinkClick"
+          />
         </nav>
         <slot name="footer"></slot>
       </aside>

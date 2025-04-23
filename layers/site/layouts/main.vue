@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import TheBackground from '~/core/components/TheBackground.vue'
 import { useBreakpoints } from '@vueuse/core'
 
 const isDark = computed(() => useColorMode().value == 'dark')
