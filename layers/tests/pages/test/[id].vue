@@ -74,10 +74,21 @@ watch([isError, error], () => {
       >
     </header>
 
-    <SearchField
-      v-model="searchQuery"
-      placeholder="Введіть питання або відповідь..."
-    />
+    <div class="relative w-full items-center">
+      <Input
+        id="search"
+        v-model="searchQuery"
+        type="text"
+        placeholder="Введіть питання або відповідь..."
+        class="pl-10"
+        autofocus
+      />
+      <span
+        class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
+      >
+        <Icon name="lucide:search" class="size-6 text-muted-foreground" />
+      </span>
+    </div>
 
     <div class="flex gap-4 flex-1 w-full relative">
       <TestSidebar

@@ -21,11 +21,7 @@ defineEmits<Emits>()
 <template>
   <div class="flex items-center gap-2 justify-between">
     <div class="inline-flex items-center gap-2">
-      <Badge
-        class="flex items-center text-sm py-1 px-3 rounded-full"
-        variant="solid"
-        color="default"
-      >
+      <Badge variant="secondary">
         ID:
         {{ id }}
       </Badge>
@@ -34,34 +30,31 @@ defineEmits<Emits>()
 
     <div class="inline-flex gap-1">
       <TooltipProvider>
-        <TooltipRoot>
+        <Tooltip>
           <TooltipTrigger as-child>
-            <NuxtLink v-if="showTestInfo" :to="`/test/${testId}`" class="flex">
-              <IconButton
-                icon="lucide:link"
-                size="sm"
-                class="cursor-pointer"
-                as="div"
-              />
-            </NuxtLink>
+            <Button as-child>
+              <NuxtLink
+                v-if="showTestInfo"
+                :to="`/test/${testId}`"
+                class="flex"
+              >
+                <Icon name="lucide:link" size="16px" />
+              </NuxtLink>
+            </Button>
           </TooltipTrigger>
           <TooltipContent>Перейти до тесту</TooltipContent>
-        </TooltipRoot>
+        </Tooltip>
       </TooltipProvider>
 
       <TooltipProvider>
-        <TooltipRoot>
+        <Tooltip>
           <TooltipTrigger as-child>
-            <IconButton
-              icon="lucide:share-2"
-              size="sm"
-              variant="ghost"
-              class="cursor-pointer"
-              @click="$emit('share')"
-            />
+            <Button variant="ghost" @click="$emit('share')">
+              <Icon name="lucide:share-2" size="16px" />
+            </Button>
           </TooltipTrigger>
           <TooltipContent>Поділитись</TooltipContent>
-        </TooltipRoot>
+        </Tooltip>
       </TooltipProvider>
     </div>
   </div>

@@ -260,14 +260,14 @@ onMounted(() => {
 
     <template v-else>
       <div class="flex items-center gap-2">
-        <IconButton
+        <Button
           v-if="currentStep > 0"
-          icon="lucide:arrow-left"
           variant="ghost"
-          size="sm"
           :disabled="isFirstStep"
           @click="goBack"
-        />
+        >
+          <Icon name="lucide:arrow-left" size="16px" />
+        </Button>
         <Heading v-if="currentStep === 0" size="small"
           >Оберіть університет</Heading
         >
@@ -334,17 +334,25 @@ onMounted(() => {
 
       <template v-else-if="currentStep === 3">
         <div class="flex flex-col md:flex-row gap-2">
-          <SearchField
-            v-model="searchQuery"
-            class="w-full"
-            placeholder="Пошук за назвою тесту..."
-            autofocus
-          />
-          <SelectRoot v-model="selectedOrder">
-            <SelectTrigger
-              class="min-w-40"
-              placeholder="Виберіть порядок сортування"
+          <div class="relative w-full items-center">
+            <Input
+              id="search"
+              v-model="searchQuery"
+              type="text"
+              placeholder="Пошук за назвою тесту..."
+              class="pl-10"
+              autofocus
             />
+            <span
+              class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
+            >
+              <Icon name="lucide:search" class="size-6 text-muted-foreground" />
+            </span>
+          </div>
+          <Select v-model="selectedOrder">
+            <SelectTrigger class="min-w-40">
+              <SelectValue placeholder="Виберіть порядок сортування" />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem
                 v-for="(label, value) in SORT_ORDERS"
@@ -354,9 +362,11 @@ onMounted(() => {
                 {{ label }}
               </SelectItem>
             </SelectContent>
-          </SelectRoot>
-          <SelectRoot v-model="selectedSortBy">
-            <SelectTrigger class="min-w-40" placeholder="Сортувати за" />
+          </Select>
+          <Select v-model="selectedSortBy">
+            <SelectTrigger class="min-w-40">
+              <SelectValue placeholder="Сортувати за" />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem
                 v-for="(label, value) in SORT_BY_FIELDS"
@@ -366,9 +376,11 @@ onMounted(() => {
                 {{ label }}
               </SelectItem>
             </SelectContent>
-          </SelectRoot>
-          <SelectRoot v-model="selectedYear">
-            <SelectTrigger class="min-w-40" placeholder="Виберіть рік" />
+          </Select>
+          <Select v-model="selectedYear">
+            <SelectTrigger class="min-w-40">
+              <SelectValue placeholder="Виберіть рік" />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem
                 v-for="year in AVAILABLE_YEARS"
@@ -378,9 +390,11 @@ onMounted(() => {
                 {{ year }} рік
               </SelectItem>
             </SelectContent>
-          </SelectRoot>
-          <SelectRoot v-model="courseId">
-            <SelectTrigger class="min-w-40" placeholder="Виберіть курс" />
+          </Select>
+          <Select v-model="courseId">
+            <SelectTrigger class="min-w-40">
+              <SelectValue placeholder="Виберіть курс" />
+            </SelectTrigger>
             <SelectContent>
               <template v-if="courses?.length">
                 <SelectItem
@@ -400,11 +414,11 @@ onMounted(() => {
                 >
               </span>
             </SelectContent>
-          </SelectRoot>
+          </Select>
         </div>
         <button
           v-if="areFiltersApplied"
-          class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer"
+          class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer transition"
           @click="resetFilters"
         >
           <Icon class="size-5" name="lucide:circle-x" />

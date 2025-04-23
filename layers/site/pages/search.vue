@@ -78,11 +78,22 @@ const paginatedQuestions = computed(() => {
           class="flex flex-col items-center justify-center gap-4 dark:bg-fiord-900 bg-fiord-50 p-8 rounded-lg text-center"
         >
           <Heading size="medium">Яке питання ви шукаєте?</Heading>
-          <SearchField
-            v-model="searchQuery"
-            placeholder="Введіть питання для пошуку..."
-            autofocus
-          />
+
+          <div class="relative w-full items-center">
+            <Input
+              id="search"
+              v-model="searchQuery"
+              type="text"
+              placeholder="Введіть питання для пошуку..."
+              class="pl-10"
+              autofocus
+            />
+            <span
+              class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
+            >
+              <Icon name="lucide:search" class="size-6 text-muted-foreground" />
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -145,10 +156,38 @@ const paginatedQuestions = computed(() => {
       class="inline-flex w-full items-center justify-center"
     >
       <Pagination
-        v-model:page="currentPage"
+        v-slot="{ page }"
         :items-per-page="PAGE_SIZE"
         :total="questions.data.value?.length"
-      />
+        :sibling-count="1"
+        show-edges
+        :default-page="1"
+      >
+        <PaginationList v-slot="{ items }" class="flex items-center gap-1">
+          <PaginationFirst />
+          <PaginationPrev />
+
+          <template v-for="(item, index) in items">
+            <PaginationListItem
+              v-if="item.type === 'page'"
+              :key="index"
+              :value="item.value"
+              as-child
+            >
+              <Button
+                class="w-9 h-9 p-0"
+                :variant="item.value === page ? 'default' : 'outline'"
+              >
+                {{ item.value }}
+              </Button>
+            </PaginationListItem>
+            <PaginationEllipsis v-else :key="item.type" :index="index" />
+          </template>
+
+          <PaginationNext />
+          <PaginationLast />
+        </PaginationList>
+      </Pagination>
     </div>
   </div>
 </template>

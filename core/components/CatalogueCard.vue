@@ -19,8 +19,7 @@ defineProps<Props>()
       </Heading>
       <Badge
         class="flex items-center text-sm py-1 px-3 rounded-full"
-        variant="solid"
-        color="default"
+        variant="secondary"
       >
         ID:
         {{ id }}

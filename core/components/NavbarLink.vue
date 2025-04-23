@@ -18,7 +18,7 @@ defineProps<Props>()
     <div
       class="max-sm:hidden group-[.active-link]:bg-fiord-200 group-[.active-link]:dark:bg-fiord-800 group-[.active-link]:rounded-lg"
     >
-      <Button variant="ghost" class="hover:cursor-pointer">
+      <Button variant="ghost">
         <Icon :name="icon" size="18px" /> {{ title }}
       </Button>
     </div>

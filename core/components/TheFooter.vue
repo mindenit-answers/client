@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { Link } from '@mindenit/ui'
-</script>
-
 <template>
   <footer class="pt-8">
     <div class="w-full dark:bg-fiord-900 bg-fiord-100 py-8 px-4">
@@ -33,15 +29,13 @@ import { Link } from '@mindenit/ui'
             >
               Наші сервіси
             </Text>
-            <Link as-child>
-              <NuxtLink
-                to="https://sh.mindenit.org"
-                target="_blank"
-                class="text-base dark:text-white hover:text-fiord-600 dark:hover:text-fiord-400 transition"
-              >
-                Mindenit Schedule
-              </NuxtLink>
-            </Link>
+            <NuxtLink
+              to="https://sh.mindenit.org"
+              target="_blank"
+              class="text-base dark:text-white hover:text-fiord-600 dark:hover:text-fiord-400 transition"
+            >
+              Mindenit Schedule
+            </NuxtLink>
           </div>
 
           <div class="flex flex-col gap-3 md:items-center">
@@ -51,15 +45,13 @@ import { Link } from '@mindenit/ui'
             >
               Підтримка
             </Text>
-            <Link as-child>
-              <NuxtLink
-                to="https://t.me/mindenit_support"
-                target="_blank"
-                class="text-base dark:text-white hover:text-fiord-600 dark:hover:text-fiord-400 transition"
-              >
-                Зв'язатися з нами
-              </NuxtLink>
-            </Link>
+            <NuxtLink
+              to="https://t.me/mindenit_support"
+              target="_blank"
+              class="text-base dark:text-white hover:text-fiord-600 dark:hover:text-fiord-400 transition"
+            >
+              Зв'язатися з нами
+            </NuxtLink>
             <NuxtLink
               to="https://t.me/mindenit_support"
               target="_blank"

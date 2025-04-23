@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { NuxtLink } from '#components'
 import type { Course, Test } from '@mindenit/answers-kit'
-import { Badge } from '@mindenit/ui'
 
 interface Props {
   test: Test
@@ -30,32 +29,24 @@ defineProps<Props>()
     <div
       class="flex items-center max-sm:justify-center flex-wrap gap-2 mt-auto"
     >
-      <Badge
-        class="flex items-center text-sm py-1 px-3 rounded-full"
-        variant="solid"
-        color="default"
-      >
+      <Badge variant="secondary" size="big">
         ID:
         {{ test.id }}
       </Badge>
-      <Badge
-        v-if="course"
-        class="flex items-center text-sm py-1 px-3 rounded-full"
-        variant="solid"
-        color="primary"
-      >
-        <Icon name="lucide:graduation-cap" class="mr-1" /> Курс:
+      <Badge v-if="course" size="big">
+        <Icon name="lucide:graduation-cap" /> Курс:
         {{ course?.number }}
       </Badge>
-      <Badge
-        class="flex items-center text-sm py-1 px-3 rounded-full"
-        variant="solid"
-        color="primary"
-      >
-        <Icon name="lucide:calendar" class="mr-1" /> Рік:
+      <Badge size="big">
+        <Icon name="lucide:calendar" /> Рік:
         {{ test.year }}
       </Badge>
-      <VerifiedBadge v-if="test.isVerified" type="test" mobile-badge />
+      <VerifiedBadge
+        v-if="test.isVerified"
+        type="test"
+        mobile-badge
+        size="big"
+      />
     </div>
   </TheCard>
 </template>
