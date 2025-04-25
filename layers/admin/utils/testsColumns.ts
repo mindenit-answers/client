@@ -5,6 +5,7 @@ import { ArrowUpDown } from 'lucide-vue-next'
 import Button from '@/core/components/ui/button/Button.vue'
 import AdminDataTableMenu from '../components/DataTableMenu.vue'
 import { AdminTestsForm } from '#components'
+import Badge from '~/core/components/ui/badge/Badge.vue'
 
 export const testsColumns = (
   onDelete?: (id: string) => void,
@@ -62,6 +63,21 @@ export const testsColumns = (
       const year = row.getValue('year') as string
       return h('div', { class: 'truncate max-w-xs', title: year }, year)
     },
+  },
+  {
+    accessorKey: 'isVerified',
+    header: 'Статус',
+    cell: ({ row }) => {
+      const isVerified = row.getValue('isVerified') as boolean
+      return h(
+        Badge,
+        {
+          variant: isVerified ? 'success' : 'outline',
+        },
+        () => (isVerified ? 'Верифіковано' : 'Не верифіковано')
+      )
+    },
+    size: 100,
   },
   {
     accessorKey: 'subjectId',

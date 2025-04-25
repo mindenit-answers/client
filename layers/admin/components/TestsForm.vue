@@ -172,7 +172,7 @@ const buttonText = computed(() => {
         <Select v-bind="componentField">
           <FormControl>
             <SelectTrigger class="w-full">
-              <SelectValue placeholder="Оберіть тест" />
+              <SelectValue placeholder="Оберіть курс" />
             </SelectTrigger>
           </FormControl>
           <SelectContent>
@@ -233,7 +233,7 @@ const buttonText = computed(() => {
           <Checkbox :model-value="value" @update:model-value="handleChange" />
         </FormControl>
         <div class="space-y-1 leading-none">
-          <FormLabel> Чи є питання верифікованим? </FormLabel>
+          <FormLabel> Чи є тест верифікованим? </FormLabel>
           <FormMessage />
         </div>
       </FormItem>
