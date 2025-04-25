@@ -109,7 +109,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 })
 
 const buttonText = computed(() => {
-  return props.mode === 'edit' ? 'Зберегти зміни' : 'Створити питання'
+  return props.mode === 'edit' ? 'Зберегти зміни' : 'Створити курс'
 })
 </script>
 
