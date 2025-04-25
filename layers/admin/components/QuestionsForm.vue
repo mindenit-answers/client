@@ -140,7 +140,7 @@ const buttonText = computed(() => {
       <FormItem>
         <FormLabel>Назва питання</FormLabel>
         <FormControl>
-          <Input
+          <Textarea
             type="text"
             placeholder="Як називається..."
             v-bind="componentField"
