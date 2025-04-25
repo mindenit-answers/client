@@ -33,7 +33,7 @@ const bgVariants = {
     />
 
     <motion.div
-      class="fixed inset-0 z-30 bg-fiord-50/50 dark:bg-fiord-950/50 backdrop-blur-md md:hidden"
+      class="fixed inset-0 z-30 bg-background/50 backdrop-blur-md md:hidden"
       :variants="bgVariants"
       :initial="false"
       :animate="isMobileSidebarOpen ? 'visible' : 'hidden'"

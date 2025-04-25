@@ -32,12 +32,8 @@ defineEmits<Emits>()
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button as-child>
-              <NuxtLink
-                v-if="showTestInfo"
-                :to="`/test/${testId}`"
-                class="flex"
-              >
+            <Button as-child size="icon">
+              <NuxtLink v-if="showTestInfo" :to="`/test/${testId}`">
                 <Icon name="lucide:link" size="16px" />
               </NuxtLink>
             </Button>
@@ -49,7 +45,7 @@ defineEmits<Emits>()
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button variant="ghost" @click="$emit('share')">
+            <Button variant="ghost" size="icon" @click="$emit('share')">
               <Icon name="lucide:share-2" size="16px" />
             </Button>
           </TooltipTrigger>

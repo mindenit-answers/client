@@ -54,7 +54,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
               :class="{ 'dark-text-glow': isDarkMode }"
             >
               <span
-                class="text-3xl max-md:text-xl max-md:inline-block max-md:text-nowrap text-royal-blue-500 dark:text-white"
+                class="text-3xl max-md:text-xl max-md:inline-block max-md:text-nowrap text-primary dark:text-white"
               >
                 Від студентів –
                 <span
@@ -108,7 +108,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
             :key="advantage.title"
             class="p-8 dark:bg-fiord-900 bg-fiord-100 flex flex-col items-center gap-3 rounded-3xl text-center"
           >
-            <Icon :name="advantage.icon" size="32px" class="dark:text-white" />
+            <Icon :name="advantage.icon" size="32px" />
             <Heading size="small" class="text-3xl font-bold">{{
               advantage.title
             }}</Heading>

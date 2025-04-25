@@ -11,7 +11,7 @@ const themeIcon = computed(() =>
 </script>
 
 <template>
-  <Button variant="ghost" @click="handleClick()">
+  <Button variant="ghost" size="icon" @click="handleClick()">
     <Icon :name="themeIcon" size="18px" />
   </Button>
 </template>

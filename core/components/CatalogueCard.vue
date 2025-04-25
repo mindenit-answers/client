@@ -13,7 +13,7 @@ defineProps<Props>()
     <div class="inline-flex justify-between w-full items-center">
       <Heading
         size="small"
-        class="group-hover:text-royal-blue-600 dark:group-hover:text-royal-blue-400 transition-colors duration-300"
+        class="group-hover:text-primary dark:group-hover:text-primary transition-colors duration-300"
       >
         {{ brief }}
       </Heading>

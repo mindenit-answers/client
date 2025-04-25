@@ -21,7 +21,7 @@ defineEmits<{
   <Dialog>
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
-        <Button variant="ghost" class="w-8 h-8 p-0">
+        <Button variant="ghost" class="w-8 h-8 p-0" size="icon">
           <Icon name="lucide:menu" size="16px" />
         </Button>
       </DropdownMenuTrigger>

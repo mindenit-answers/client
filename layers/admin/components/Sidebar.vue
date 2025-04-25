@@ -17,11 +17,11 @@ const handleLinkClick = (link: unknown) => {
   }
 }
 
-const baseClasses = 'flex-col w-64 overflow-y-auto p-4 gap-4'
+const baseClasses = 'flex-col w-64 overflow-y-auto gap-4'
 
 const variantClasses = computed(() => {
   return props.variant === 'mobile'
-    ? 'fixed inset-y-0 left-0 z-40 border-r h-full bg-fiord-50 dark:bg-fiord-900 border border-border'
+    ? 'fixed inset-y-0 left-0 z-40 border-r h-full bg-fiord-50 dark:bg-fiord-900 border border-border p-4'
     : 'flex rounded-xl shrink-0 sticky top-5 h-[calc(100vh-1.5rem)]'
 })
 

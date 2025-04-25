@@ -263,6 +263,7 @@ onMounted(() => {
         <Button
           v-if="currentStep > 0"
           variant="ghost"
+          size="icon"
           :disabled="isFirstStep"
           @click="goBack"
         >
@@ -418,7 +419,7 @@ onMounted(() => {
         </div>
         <button
           v-if="areFiltersApplied"
-          class="inline-flex w-fit text-fiord-400 items-center justify-start hover:text-royal-blue-500 gap-1 text-sm cursor-pointer transition"
+          class="inline-flex w-fit text-muted-foregroud items-center justify-start hover:text-primary gap-1 text-sm cursor-pointer transition"
           @click="resetFilters"
         >
           <Icon class="size-5" name="lucide:circle-x" />

@@ -14,13 +14,13 @@ defineProps<Props>()
   <TheCard :as="NuxtLink" :to="`/test/${test.id}`" draggable="false">
     <div class="flex items-center gap-4">
       <div
-        class="flex-shrink-0 flex items-center justify-center size-12 rounded-lg transition-transform duration-300 group-hover:rotate-3 dark:text-white"
+        class="flex-shrink-0 flex items-center justify-center size-12 rounded-lg transition-transform duration-300 group-hover:rotate-3"
       >
         <Icon name="lucide:bookmark" size="28px" />
       </div>
       <Heading
         size="tiny"
-        class="mb-1 group-hover:text-royal-blue-600 dark:group-hover:text-royal-blue-400 transition-colors duration-300"
+        class="mb-1 group-hover:text-primary dark:group-hover:text-primary transition-colors duration-300"
       >
         {{ test.name }}
       </Heading>
