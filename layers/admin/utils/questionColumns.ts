@@ -8,7 +8,8 @@ import AdminDataTableMenu from '../components/DataTableMenu.vue'
 import AdminQuestionsForm from '../components/QuestionsForm.vue'
 
 export const questionColumns = (
-  onDelete?: (id: string) => void
+  onDelete?: (id: string) => void,
+  getTestName?: (testId: number | string) => string | number
 ): ColumnDef<Question>[] => [
   {
     accessorKey: 'id',
@@ -77,9 +78,22 @@ export const questionColumns = (
   },
   {
     accessorKey: 'testId',
-    header: 'Тест ID',
-    cell: ({ row }) =>
-      h('div', { class: 'text-center' }, row.getValue('testId')),
+    header: 'Тест',
+    cell: ({ row }) => {
+      const testId = row.getValue('testId')
+      const testName = getTestName
+        ? getTestName(testId as string | number)
+        : testId
+
+      return h(
+        'div',
+        {
+          class: 'truncate max-w-xs',
+          title: String(testName),
+        },
+        String(testName)
+      )
+    },
     size: 80,
   },
   {

@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/vue-query'
 import { toast } from 'vue-sonner'
 import { testsOptions } from '~/layers/tests/queries'
 import { testsColumns } from '#imports'
+import { subjectsOptions } from '~/layers/subjects/queries'
+import { coursesOptions } from '~/layers/courses/queries'
 
 definePageMeta({
   layout: 'admin',
@@ -14,6 +16,10 @@ const dataTableActions = inject<{ closeDialog?: () => void }>(
 )
 
 const { data: tests, isLoading } = useQuery(testsOptions())
+const { data: subjects, isLoading: subjectsLoading } = useQuery(
+  subjectsOptions()
+)
+const { data: courses, isLoading: coursesLoading } = useQuery(coursesOptions())
 const testDelete = useDeleteTest()
 
 const handleDelete = (id: string) => {
@@ -39,14 +45,20 @@ const handleDelete = (id: string) => {
     }
   )
 }
+
+const getSubjectName = (subjectId: number | string) =>
+  getEntityName(subjects.value, subjectId, 'name')
+
+const getCourseName = (courseId: number | string) =>
+  getEntityName(courses.value, courseId, 'number')
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
-    <TheSpinner v-if="isLoading" />
+    <TheSpinner v-if="isLoading || coursesLoading || subjectsLoading" />
     <AdminDataTable
       v-if="tests"
-      :columns="testsColumns(handleDelete)"
+      :columns="testsColumns(handleDelete, getSubjectName, getCourseName)"
       :data="tests!.data"
       filter-by="name"
       filter-placeholder="Введіть назву тесту..."

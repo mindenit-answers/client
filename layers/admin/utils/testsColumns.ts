@@ -7,7 +7,9 @@ import AdminDataTableMenu from '../components/DataTableMenu.vue'
 import { AdminTestsForm } from '#components'
 
 export const testsColumns = (
-  onDelete?: (id: string) => void
+  onDelete?: (id: string) => void,
+  getSubjectName?: (testId: number | string) => string | number,
+  getCourseName?: (testId: number | string) => string | number
 ): ColumnDef<Test>[] => [
   {
     accessorKey: 'id',
@@ -66,11 +68,11 @@ export const testsColumns = (
     header: 'Предмет',
     cell: ({ row }) => {
       const subjectId = row.getValue('subjectId') as string
-      return h(
-        'div',
-        { class: 'truncate max-w-xs', title: subjectId },
-        subjectId
-      )
+      const name = getSubjectName
+        ? getSubjectName(subjectId as string | number)
+        : subjectId
+
+      return h('div', { class: 'truncate max-w-xs', title: name }, name)
     },
   },
   {
@@ -78,7 +80,10 @@ export const testsColumns = (
     header: 'Курс',
     cell: ({ row }) => {
       const courseId = row.getValue('courseId') as string
-      return h('div', { class: 'truncate max-w-xs', title: courseId }, courseId)
+      const name = getCourseName
+        ? getCourseName(courseId as string | number)
+        : courseId
+      return h('div', { class: 'truncate max-w-xs', title: name }, name)
     },
   },
   {

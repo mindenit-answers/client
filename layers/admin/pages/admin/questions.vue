@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/vue-query'
 import { questionsOptions } from '~/layers/questions/queries'
 import { questionColumns } from '#imports'
 import { toast } from 'vue-sonner'
+import { testsOptions } from '~/layers/tests/queries'
 
 definePageMeta({
   layout: 'admin',
@@ -13,6 +14,7 @@ const dataTableActions = inject<{ closeDialog?: () => void }>(
   { closeDialog: undefined }
 )
 const { data: questions, isLoading } = useQuery(questionsOptions())
+const { data: tests, isLoading: testsLoading } = useQuery(testsOptions())
 const questionDelete = useDeleteQuestion()
 
 const handleDelete = (id: string) => {
@@ -38,14 +40,17 @@ const handleDelete = (id: string) => {
     }
   )
 }
+
+const getTestName = (testId: number | string) =>
+  getEntityName(tests.value?.data, testId, 'name')
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
-    <TheSpinner v-if="isLoading" />
+    <TheSpinner v-if="isLoading || testsLoading" />
     <AdminDataTable
       v-if="questions"
-      :columns="questionColumns(handleDelete)"
+      :columns="questionColumns(handleDelete, getTestName)"
       :data="questions!"
       filter-by="name"
       filter-placeholder="Введіть назву питання..."
