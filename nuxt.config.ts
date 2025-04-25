@@ -96,9 +96,11 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
+    exclude: ['/admin/**'],
   },
   robots: {
     sitemap: '/sitemap.xml',
     host: process.env.BASE_URL,
+    disallow: ['/admin', '/admin/**'],
   },
 })

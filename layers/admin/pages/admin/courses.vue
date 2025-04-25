@@ -8,6 +8,12 @@ definePageMeta({
   layout: 'admin',
 })
 
+useSeoMeta({
+  title: 'Курси',
+})
+
+defineOgImageComponent('Mindenit')
+
 const dataTableActions = inject<{ closeDialog?: () => void }>(
   'dataTableActions',
   { closeDialog: undefined }

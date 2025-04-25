@@ -6,6 +6,12 @@ definePageMeta({
   layout: 'admin',
 })
 
+useSeoMeta({
+  title: 'Адмін панель',
+})
+
+defineOgImageComponent('Mindenit')
+
 const { data: stats, isLoading, error } = useQuery(statisticsOptions())
 </script>
 
