@@ -12,24 +12,24 @@ import {
 } from '@/core/components/ui/form'
 import { useQuery } from '@tanstack/vue-query'
 import { testsOptions } from '~/layers/tests/queries'
+import { toast } from 'vue-sonner'
 
 const dataTableActions = inject<{ closeDialog?: () => void }>(
   'dataTableActions',
   { closeDialog: undefined }
 )
-const inputContent = ref('')
-const textareaRef = shallowRef(null)
 const showValidation = ref(false)
 
 const { data: tests, isLoading: testsLoading } = useQuery(testsOptions())
+const createQuestionsMutation = useCreateTestQuestions()
 
-const formSyntaxSchema = toTypedSchema(
+const formSchema = toTypedSchema(
   z.object({
     field: z
       .string({
         required_error: 'Введіть відповідь',
       })
-      .min(2, 'Відповідь на повинна містити принаймні 2 символи'),
+      .trim(),
     testId: z
       .number({
         required_error: 'Виберіть тест',
@@ -38,11 +38,11 @@ const formSyntaxSchema = toTypedSchema(
   })
 )
 
-const formSyntax = useForm({
-  validationSchema: formSyntaxSchema,
+const form = useForm({
+  validationSchema: formSchema,
 })
 
-const onSyntaxSubmit = formSyntax.handleSubmit(async (values) => {
+const onSubmit = form.handleSubmit(async (values) => {
   if (!validation.value.isValid) {
     showValidation.value = true
     return
@@ -58,26 +58,36 @@ const onSyntaxSubmit = formSyntax.handleSubmit(async (values) => {
     testId,
   }))
 
-  console.log('Syntax submitted!', questionsToCreate)
-
-  if (dataTableActions?.closeDialog) {
-    dataTableActions.closeDialog()
-  }
+  createQuestionsMutation.mutate(
+    {
+      data: {
+        id: testId,
+        questions: questionsToCreate,
+      },
+      headers: {
+        authorization: `TOKEN WILL BE HERE`,
+      },
+    },
+    {
+      onSuccess: () => {
+        if (dataTableActions?.closeDialog) {
+          dataTableActions.closeDialog()
+        }
+        toast.success('Питання успішно створені')
+      },
+      onError: (error) => {
+        toast.error('Помилка при створенні питання', {
+          description: error.message,
+        })
+      },
+    }
+  )
 })
-
+const fieldValue = computed(() => form.values.field || '')
 const { blocks, validation, addQuestion, addVerifiedQuestion, addAnswer } =
   useEditor({
-    inputValue: inputContent,
-    inputRef: textareaRef,
+    inputValue: fieldValue,
   })
-
-const updateFieldValue = () => {
-  formSyntax.setFieldValue('field', inputContent.value)
-}
-
-watch(inputContent, () => {
-  updateFieldValue()
-})
 
 const allErrors = computed(() => {
   if (validation.value && validation.value.errors) {
@@ -96,7 +106,7 @@ watch([alt_1, alt_2], () => {
 </script>
 
 <template>
-  <form class="flex flex-col gap-4" @submit="onSyntaxSubmit">
+  <form class="flex flex-col gap-4" @submit="onSubmit">
     <FormField v-slot="{ componentField }" name="testId">
       <FormItem>
         <FormLabel>Оберіть тест</FormLabel>
@@ -132,8 +142,6 @@ watch([alt_1, alt_2], () => {
         <FormLabel>Питання та відповіді</FormLabel>
         <FormControl>
           <Textarea
-            ref="textareaRef"
-            v-model="inputContent"
             class="min-h-[200px]"
             type="text"
             placeholder="# Питання 
@@ -143,7 +151,6 @@ watch([alt_1, alt_2], () => {
 +# Верифіковане питання
 [Відповідь]"
             v-bind="componentField"
-            @input="updateFieldValue"
           />
         </FormControl>
         <div class="flex items-center justify-between">
