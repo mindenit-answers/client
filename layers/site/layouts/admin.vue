@@ -56,7 +56,7 @@ const bgVariants = {
           </Button>
         </TheNavbar>
 
-        <div class="flex flex-1 md:pb-5 pb-24">
+        <div class="flex flex-1 md:pb-5 pb-24 gap-4">
           <AdminSidebar
             variant="desktop"
             :is-open="true"
