@@ -4,6 +4,7 @@ import { statisticsOptions } from '~/core/queries'
 
 definePageMeta({
   layout: 'admin',
+  middleware: ['admin'],
 })
 
 useSeoMeta({

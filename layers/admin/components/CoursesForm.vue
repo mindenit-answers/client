@@ -21,7 +21,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
+const { getAuthToken } = useAuth()
 const dataTableActions = inject<{ closeDialog?: () => void }>(
   'dataTableActions',
   { closeDialog: undefined }
@@ -56,7 +56,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             number: values.number,
           },
           headers: {
-            authorization: `TOKEN WILL BE HERE`,
+            authorization: getAuthToken(),
           },
         },
         {
@@ -86,7 +86,7 @@ const onSubmit = form.handleSubmit(async (values) => {
           number: values.number,
         },
         headers: {
-          authorization: `TOKEN WILL BE HERE`,
+          authorization: getAuthToken(),
         },
       },
       {

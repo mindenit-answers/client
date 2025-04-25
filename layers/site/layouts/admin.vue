@@ -24,7 +24,7 @@ const bgVariants = {
 </script>
 
 <template>
-  <div class="flex flex-col w-full relative">
+  <div class="flex flex-col max-h-dvh w-full relative">
     <AdminSidebar
       variant="mobile"
       class="md:hidden"
@@ -44,30 +44,22 @@ const bgVariants = {
       @click="closeMobileSidebar"
     ></motion.div>
 
-    <div class="flex h-dvh">
-      <div class="flex flex-col pt-5 container mx-auto px-4 h-dvh gap-5">
-        <TheNavbar>
-          <Button
-            variant="ghost"
-            class="md:hidden"
-            @click="toggleMobileSidebar"
-          >
-            <Icon size="18px" name="lucide:menu"></Icon>
-          </Button>
-        </TheNavbar>
+    <div class="flex flex-col pt-5 container mx-auto px-4 gap-5">
+      <TheNavbar>
+        <Button variant="ghost" class="md:hidden" @click="toggleMobileSidebar">
+          <Icon size="18px" name="lucide:menu"></Icon>
+        </Button>
+      </TheNavbar>
 
-        <div class="flex flex-1 md:pb-5 pb-24 gap-4">
-          <AdminSidebar
-            variant="desktop"
-            :is-open="true"
-            class="hidden md:flex"
-          />
+      <div class="flex md:pb-5 pb-24 gap-4">
+        <AdminSidebar
+          variant="desktop"
+          :is-open="true"
+          class="hidden md:flex"
+        />
 
-          <div class="flex-1 overflow-auto">
-            <div class="flex flex-col gap-5">
-              <slot />
-            </div>
-          </div>
+        <div class="flex w-full flex-col gap-5">
+          <slot />
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ const dataTableActions = inject<{ closeDialog?: () => void }>(
   { closeDialog: undefined }
 )
 const showValidation = ref(false)
-
+const { getAuthToken } = useAuth()
 const { data: tests, isLoading: testsLoading } = useQuery(testsOptions())
 const createQuestionsMutation = useCreateTestQuestions()
 
@@ -65,7 +65,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         questions: questionsToCreate,
       },
       headers: {
-        authorization: `TOKEN WILL BE HERE`,
+        authorization: getAuthToken(),
       },
     },
     {

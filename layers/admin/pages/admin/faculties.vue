@@ -7,6 +7,7 @@ import { facultiesColumns } from '#imports'
 
 definePageMeta({
   layout: 'admin',
+  middleware: ['admin'],
 })
 
 useSeoMeta({
@@ -15,6 +16,7 @@ useSeoMeta({
 
 defineOgImageComponent('Mindenit')
 
+const { getAuthToken } = useAuth()
 const dataTableActions = inject<{ closeDialog?: () => void }>(
   'dataTableActions',
   { closeDialog: undefined }
@@ -32,7 +34,7 @@ const handleDelete = (id: string) => {
     {
       id: Number(id),
       headers: {
-        authorization: `TOKEN WILL BE HERE`,
+        authorization: getAuthToken(),
       },
     },
     {

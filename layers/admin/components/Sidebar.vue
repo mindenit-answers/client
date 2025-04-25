@@ -7,8 +7,9 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
 const emit = defineEmits(['close', 'linkClick'])
+
+const { logout } = useAuth()
 
 const handleLinkClick = (link: unknown) => {
   emit('linkClick', link)
@@ -22,7 +23,7 @@ const baseClasses = 'flex-col w-64 overflow-y-auto gap-4'
 const variantClasses = computed(() => {
   return props.variant === 'mobile'
     ? 'fixed inset-y-0 left-0 z-40 border-r h-full bg-fiord-50 dark:bg-fiord-900 border border-border p-4'
-    : 'flex rounded-xl shrink-0 sticky top-5 h-[calc(100vh-1.5rem)]'
+    : 'flex rounded-xl shrink-0 sticky top-5 h-fit'
 })
 
 const mobileVariants = {
@@ -102,7 +103,7 @@ const links = [
           />
         </nav>
         <slot name="footer">
-          <Button class="w-full"> Вийти </Button>
+          <Button class="w-full" @click="logout"> Вийти </Button>
         </slot>
       </motion.aside>
     </template>
@@ -120,7 +121,7 @@ const links = [
             @click="handleLinkClick"
           />
           <slot name="footer">
-            <Button class="mt-8 w-full"> Вийти </Button>
+            <Button class="mt-8 w-full" @click="logout"> Вийти </Button>
           </slot>
         </nav>
       </aside>

@@ -22,7 +22,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
+const { getAuthToken } = useAuth()
 const { data: universities, isLoading: universitiesLoading } = useQuery(
   universitiesOptions()
 )
@@ -69,7 +69,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             ...values,
           },
           headers: {
-            authorization: `TOKEN WILL BE HERE`,
+            authorization: getAuthToken(),
           },
         },
         {
@@ -99,7 +99,7 @@ const onSubmit = form.handleSubmit(async (values) => {
           ...values,
         },
         headers: {
-          authorization: `TOKEN WILL BE HERE`,
+          authorization: getAuthToken(),
         },
       },
       {

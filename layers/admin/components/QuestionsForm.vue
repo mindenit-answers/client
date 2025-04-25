@@ -31,6 +31,7 @@ const dataTableActions = inject<{ closeDialog?: () => void }>(
   'dataTableActions',
   { closeDialog: undefined }
 )
+const { getAuthToken } = useAuth()
 const { data: tests, isLoading: testsLoading } = useQuery(testsOptions())
 const createQuestionMutation = useCreateQuestion()
 const updateQuestionMutation = useUpdateQuestion()
@@ -74,7 +75,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             testId: values.testId,
           },
           headers: {
-            authorization: `TOKEN WILL BE HERE`,
+            authorization: getAuthToken(),
           },
         },
         {
@@ -107,7 +108,7 @@ const onSubmit = form.handleSubmit(async (values) => {
           testId: values.testId,
         },
         headers: {
-          authorization: `TOKEN WILL BE HERE`,
+          authorization: getAuthToken(),
         },
       },
       {

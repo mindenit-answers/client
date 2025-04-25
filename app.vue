@@ -7,4 +7,6 @@ import { Toaster } from '@/core/components/ui/sonner'
     <NuxtPage />
   </NuxtLayout>
   <Toaster richColors position="top-right" />
+  <NuxtLoadingIndicator color="#6368f2" />
+  <NuxtRouteAnnouncer />
 </template>
