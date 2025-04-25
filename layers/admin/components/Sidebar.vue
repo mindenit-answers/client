@@ -17,13 +17,12 @@ const handleLinkClick = (link: unknown) => {
   }
 }
 
-const baseClasses =
-  'flex-col w-64 bg-white dark:bg-fiord-900 border border-gray-200 dark:border-fiord-700 h-full overflow-y-auto'
+const baseClasses = 'flex-col w-64 overflow-y-auto p-4 gap-4'
 
 const variantClasses = computed(() => {
   return props.variant === 'mobile'
-    ? 'fixed inset-y-0 left-0 z-40 border-r'
-    : 'rounded-xl shrink-0'
+    ? 'fixed inset-y-0 left-0 z-40 border-r h-full bg-fiord-50 dark:bg-fiord-900 border border-border'
+    : 'flex rounded-xl shrink-0 sticky top-5 h-[calc(100vh-1.5rem)]'
 })
 
 const mobileVariants = {
@@ -91,12 +90,10 @@ const links = [
           ease: 'easeOut',
         }"
       >
-        <div class="p-4">
-          <slot name="header">
-            <Heading size="tiny" class="text-center">Адмін-панель</Heading>
-          </slot>
-        </div>
-        <nav class="flex-1 p-4 space-y-1">
+        <slot name="header">
+          <Heading size="tiny" class="text-center">Адмін-панель</Heading>
+        </slot>
+        <nav class="flex-1 space-y-1">
           <AdminSidebarLink
             v-for="link in links"
             :key="link.name"
@@ -104,24 +101,28 @@ const links = [
             @click="handleLinkClick"
           />
         </nav>
-        <slot name="footer"></slot>
+        <slot name="footer">
+          <Button class="w-full"> Вийти </Button>
+        </slot>
       </motion.aside>
     </template>
 
     <template v-else>
       <aside :class="[baseClasses, variantClasses]">
-        <div v-if="$slots.header" class="p-4">
+        <div v-if="$slots.header">
           <slot name="header"></slot>
         </div>
-        <nav class="flex-1 p-4 space-y-1">
+        <nav class="flex-1 space-y-1">
           <AdminSidebarLink
             v-for="link in links"
             :key="link.name"
             :link="link"
             @click="handleLinkClick"
           />
+          <slot name="footer">
+            <Button class="mt-8 w-full"> Вийти </Button>
+          </slot>
         </nav>
-        <slot name="footer"></slot>
       </aside>
     </template>
   </div>
