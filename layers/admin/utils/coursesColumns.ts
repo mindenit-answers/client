@@ -48,14 +48,14 @@ export const coursesColumns = (
     id: 'actions',
     header: 'Дії',
     cell: ({ row }) => {
-      const question = row.original
+      const data = row.original
 
       const handleDelete = onDelete || (() => {})
 
       return h(
         AdminDataTableMenu,
         {
-          item: { ...question, id: String(question.id) },
+          item: { ...data, id: String(data.id) },
           onDelete: (id) => handleDelete(id),
         },
         {
