@@ -26,7 +26,10 @@ export const useAuth = () => {
   const error = ref<string | null>(null)
   const queryClient = useQueryClient()
 
+  const isClient = import.meta.client
+
   const initAuth = () => {
+    if (!isClient) return
     try {
       const storedToken = localStorage.getItem('auth_token')
       if (storedToken) token.value = storedToken
@@ -94,7 +97,9 @@ export const useAuth = () => {
     },
     onSuccess: (data) => {
       token.value = data.access_token
-      localStorage.setItem('auth_token', data.access_token)
+      if (isClient) {
+        localStorage.setItem('auth_token', data.access_token)
+      }
 
       queryClient.invalidateQueries({ queryKey: ['user'] })
     },
@@ -134,7 +139,9 @@ export const useAuth = () => {
 
   const logout = () => {
     token.value = null
-    localStorage.removeItem('auth_token')
+    if (isClient) {
+      localStorage.removeItem('auth_token')
+    }
     queryClient.invalidateQueries({ queryKey: ['user'] })
   }
 

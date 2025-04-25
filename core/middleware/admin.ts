@@ -5,20 +5,27 @@ export default defineNuxtRouteMiddleware(async () => {
     return navigateTo('/login')
   }
 
-  if (auth.isLoading.value) {
-    await new Promise<void>((resolve) => {
-      const unwatch = watch(auth.isLoading, (loading) => {
-        if (!loading) {
-          unwatch()
-          resolve()
-        }
-      })
+  const user = auth.user.value
 
-      setTimeout(() => {
-        unwatch()
-        resolve()
-      }, 3000)
-    })
+  if (!user && import.meta.client && auth.isLoading.value) {
+    await Promise.race([
+      new Promise<void>((resolve) => {
+        const unwatch = watch(auth.user, (newUser) => {
+          if (newUser) {
+            unwatch()
+            resolve()
+          }
+        })
+      }),
+      new Promise<void>((resolve) => setTimeout(resolve, 1000)),
+    ])
+  }
+
+  if (!auth.user.value) {
+    if (import.meta.client) {
+      auth.logout()
+    }
+    return navigateTo('/login')
   }
 
   if (!auth.isAdmin.value) {
