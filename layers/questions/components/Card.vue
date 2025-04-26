@@ -37,15 +37,13 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
 </script>
 
 <template>
-  <div
-    v-memo="[questionData.id]"
-    class="flex flex-col dark:bg-fiord-900 bg-fiord-50 h-fit p-3 rounded-xl border border-fiord-300 dark:border-fiord-700 gap-2 w-full"
-  >
+  <TheCard v-memo="[questionData.id]" :interactive="false">
     <QuestionHeader
       v-if="questionData.id"
       :id="props.question.id"
       :is-verified="questionData.isVerified"
       :test-id="questionData.testId"
+      :question-title="questionData.name"
       :show-test-info
       @share="copyQuestionLink"
     />
@@ -55,5 +53,5 @@ const copyQuestionLink = () => shareUrl(questionLink.value)
       :answer="answerParsed"
       :search-query="props.searchQuery"
     />
-  </div>
+  </TheCard>
 </template>

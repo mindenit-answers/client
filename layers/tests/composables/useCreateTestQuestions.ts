@@ -18,7 +18,7 @@ export const useCreateTestQuestions = () => {
 
   return useMutation({
     mutationFn: (data: Args) => $answersKit.tests.createOneQuestions(data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tests'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['questions'] }),
     mutationKey: ['createTestQuestions'],
   })
 }

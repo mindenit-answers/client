@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 interface Props {
   type: 'question' | 'test'
+  size?: 'default' | 'big'
   mobileBadge?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   mobileBadge: false,
+  size: 'default',
 })
 
 const badgeText = computed(() => {
@@ -14,42 +16,25 @@ const badgeText = computed(() => {
     : 'Цей тест був верифікован адміністрацією'
 })
 </script>
-<template>
-  <template v-if="props.mobileBadge === false">
-    <div class="hidden md:block">
-      <TooltipProvider>
-        <TooltipRoot>
-          <TooltipTrigger class="cursor-default">
-            <Badge
-              color="success"
-              class="!border-christi-500 !text-christi-800 bg-christi-200 dark:bg-christi-900 dark:!text-christi-200 dark:!border-christi-700"
-              >Верифіковано</Badge
-            >
-          </TooltipTrigger>
-          <TooltipContent>{{ badgeText }}</TooltipContent>
-        </TooltipRoot>
-      </TooltipProvider>
-    </div>
-    <div class="md:hidden flex items-center justify-center">
-      <Icon
-        class="dark:text-christi-400 text-christi-700"
-        name="lucide:badge-check"
-      />
-    </div>
-  </template>
 
-  <template v-else>
-    <TooltipProvider>
-      <TooltipRoot>
-        <TooltipTrigger class="cursor-default">
-          <Badge
-            color="success"
-            class="!border-christi-500 !text-christi-800 bg-christi-200 dark:bg-christi-900 dark:!text-christi-200 dark:!border-christi-700"
-            >Верифіковано</Badge
-          >
-        </TooltipTrigger>
-        <TooltipContent>{{ badgeText }}</TooltipContent>
-      </TooltipRoot>
-    </TooltipProvider>
-  </template>
+<template>
+  <Icon
+    v-if="!mobileBadge"
+    class="md:hidden flex dark:text-christi-400 text-christi-700"
+    name="lucide:badge-check"
+  />
+
+  <TooltipProvider
+    v-if="mobileBadge || !mobileBadge"
+    :class="{ 'hidden md:block': !mobileBadge }"
+  >
+    <Tooltip>
+      <TooltipTrigger>
+        <Badge variant="success" :size="size">Верифіковано</Badge>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{{ badgeText }}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 </template>

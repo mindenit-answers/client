@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: ['./core', './layers/site'],
   modules: [
-    '@mindenit/ui/nuxt',
     '@nuxt/icon',
     '@nuxt/image',
     '@vueuse/nuxt',
@@ -17,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'motion-v/nuxt',
     '@nuxt/fonts',
+    'shadcn-nuxt',
   ],
   vite: {
     plugins: [tailwindcss()],
@@ -54,12 +54,16 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL,
       supportUrl: 'https://t.me/mindenit_support',
       jarUrl: 'https://send.monobank.ua/jar/2GW9aAQNXE',
+      webhook: process.env.DISCORD_WEBHOOK_URL,
     },
   },
   future: {
     compatibilityVersion: 4,
   },
   css: ['~/core/assets/css/main.css'],
+  shadcn: {
+    prefix: '',
+  },
   icon: {
     provider: 'iconify',
     serverBundle: {
@@ -93,9 +97,11 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
+    exclude: ['/admin/**'],
   },
   robots: {
     sitemap: '/sitemap.xml',
     host: process.env.BASE_URL,
+    disallow: ['/admin', '/admin/**'],
   },
 })

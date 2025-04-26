@@ -18,13 +18,13 @@ const typeConfig = {
   error: {
     emoji: '⚠️',
     bgClass: 'bg-amaranth-100 dark:bg-amaranth-950',
-    borderClass: 'border-amaranth-300 dark:border-amaranth-700',
+    borderClass: 'border-destructive',
     defaultTitle: 'Сталася помилка',
   },
   'not-found': {
     emoji: '🔍',
     bgClass: 'bg-fiord-100 dark:bg-fiord-900',
-    borderClass: 'border-fiord-300 dark:border-fiord-700',
+    borderClass: 'border-border',
     defaultTitle: 'Нічого не знайдено',
   },
 }
@@ -45,7 +45,7 @@ const displayTitle = computed(
   >
     <div
       :class="[
-        'p-6 rounded-xl dark:text-white text-center w-full border transition-all duration-300',
+        'p-6 rounded-xl text-center w-full border transition-all duration-300',
         currentConfig.bgClass,
         currentConfig.borderClass,
       ]"

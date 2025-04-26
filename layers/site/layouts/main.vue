@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import TheBackground from '~/core/components/TheBackground.vue'
 import { useBreakpoints } from '@vueuse/core'
 
 const isDark = computed(() => useColorMode().value == 'dark')
@@ -16,7 +15,7 @@ const dotsQuantity = computed(() => (isMobile.value ? 100 : 300))
 <template>
   <div class="flex flex-col w-full relative">
     <div class="flex flex-col pt-5 min-h-dvh gap-5 px-4">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-4">
         <TheNavbar />
       </div>
       <slot />

@@ -26,33 +26,33 @@ interface TestsSearchOptionsArgs {
   sorting?: TestsOptionsArgs
 }
 
-const testsOptions = (args: TestsSearchOptionsArgs) => {
+const testsOptions = (args?: TestsSearchOptionsArgs) => {
   const { $answersKit } = useNuxtApp()
 
   return queryOptions({
     queryKey: [
       'tests',
-      args.options?.subjectId?.value,
-      args.options?.name?.value,
-      args.options?.year?.value,
-      args.options?.courseId?.value,
-      args.sorting?.sortBy.value,
-      args.sorting?.order.value,
+      args?.options?.subjectId?.value,
+      args?.options?.name?.value,
+      args?.options?.year?.value,
+      args?.options?.courseId?.value,
+      args?.sorting?.sortBy.value,
+      args?.sorting?.order.value,
     ],
     queryFn: () =>
       $answersKit.tests.findMany({
         options: {
-          offset: args.options?.offset?.value,
-          limit: args.options?.limit?.value,
-          name: args.options?.name?.value,
-          isVerified: args.options?.isVerified?.value,
-          subjectId: args.options?.subjectId?.value,
-          courseId: args.options?.courseId?.value,
-          year: args.options?.year?.value,
+          offset: args?.options?.offset?.value,
+          limit: args?.options?.limit?.value,
+          name: args?.options?.name?.value,
+          isVerified: args?.options?.isVerified?.value,
+          subjectId: args?.options?.subjectId?.value,
+          courseId: args?.options?.courseId?.value,
+          year: args?.options?.year?.value,
         },
         sorting: {
-          sortBy: args.sorting?.sortBy.value,
-          order: args.sorting?.order.value,
+          sortBy: args?.sorting?.sortBy.value,
+          order: args?.sorting?.order.value,
         },
       }),
   })

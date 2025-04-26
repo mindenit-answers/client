@@ -1,8 +1,12 @@
+<script setup lang="ts">
+const { isAuthenticated, isAdmin } = useAuth()
+</script>
+
 <template>
   <header
     class="grid grid-cols-[auto_auto] md:grid-cols-[1fr_auto_1fr] w-full items-center relative"
   >
-    <div class="flex items-center">
+    <div class="flex">
       <TheLogo />
     </div>
 
@@ -11,11 +15,18 @@
     >
       <NavbarLink to="/" title="Головна" icon="lucide:house" />
       <NavbarLink to="/search" title="Пошук" icon="lucide:search" />
-      <NavbarLink to="/catalogue" title="Каталог" icon="lucide:book-copy" />
+      <NavbarLink to="/catalogue" title="Каталог" icon="lucide:library" />
+      <NavbarLink
+        v-if="isAuthenticated && isAdmin"
+        to="/admin"
+        title="Адмінка"
+        icon="lucide:user-lock"
+      />
     </div>
 
-    <div class="flex justify-end items-center">
+    <div class="flex justify-end items-center gap-2">
       <ThemeSwitcher />
+      <slot />
     </div>
   </header>
 </template>
