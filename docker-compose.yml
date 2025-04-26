@@ -10,5 +10,6 @@ services:
       - PORT=${PORT:-3000}
       - BASE_URL=${BASE_URL:-http://localhost:3000}
       - API_BASE_URL=${API_BASE_URL:-https://answers.mindenit.org/api}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
     ports:
       - '${PORT:-3000}:${PORT:-3000}'
