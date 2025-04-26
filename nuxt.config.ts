@@ -54,6 +54,7 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL,
       supportUrl: 'https://t.me/mindenit_support',
       jarUrl: 'https://send.monobank.ua/jar/2GW9aAQNXE',
+      webhook: process.env.DISCORD_WEBHOOK_URL,
     },
   },
   future: {
