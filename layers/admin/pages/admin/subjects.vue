@@ -17,11 +17,6 @@ useSeoMeta({
 defineOgImageComponent('Mindenit')
 
 const { getAuthToken } = useAuth()
-const dataTableActions = inject<{ closeDialog?: () => void }>(
-  'dataTableActions',
-  { closeDialog: undefined }
-)
-
 const { data: subjects, isLoading } = useQuery(subjectsOptions())
 const { data: faculties, isLoading: facultiesLoading } = useQuery(
   facultiesOptions()
@@ -40,9 +35,6 @@ const handleDelete = (id: string) => {
     {
       onSuccess: () => {
         toast.success('Предмет успішно видалено!')
-        if (dataTableActions?.closeDialog) {
-          dataTableActions.closeDialog()
-        }
       },
       onError: (error) => {
         toast.error('Помилка при видаленні предмета', {

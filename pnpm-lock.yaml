@@ -77,9 +77,6 @@ importers:
       katex:
         specifier: ^0.16.21
         version: 0.16.21
-      lucide-vue-next:
-        specifier: ^0.503.0
-        version: 0.503.0(vue@3.5.13(typescript@5.7.3))
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
@@ -3495,11 +3492,6 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
-
-  lucide-vue-next@0.503.0:
-    resolution: {integrity: sha512-3MrtHIBdh4dPCUZDLxQnvmQ17UzUnBYgezUSIo87Laais8hOz6qIPllp0iG/uS/UIzk7bJxyZRzoZTW/gLSr4A==}
-    peerDependencies:
-      vue: '>=3.0.1'
 
   magic-regexp@0.8.0:
     resolution: {integrity: sha512-lOSLWdE156csDYwCTIGiAymOLN7Epu/TU5e/oAnISZfU6qP+pgjkE+xbVjVn3yLPKN8n1G2yIAYTAM5KRk6/ow==}
@@ -9365,10 +9357,6 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
-
-  lucide-vue-next@0.503.0(vue@3.5.13(typescript@5.7.3)):
-    dependencies:
-      vue: 3.5.13(typescript@5.7.3)
 
   magic-regexp@0.8.0:
     dependencies:

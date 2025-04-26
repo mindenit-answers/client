@@ -17,10 +17,6 @@ useSeoMeta({
 defineOgImageComponent('Mindenit')
 
 const { getAuthToken } = useAuth()
-const dataTableActions = inject<{ closeDialog?: () => void }>(
-  'dataTableActions',
-  { closeDialog: undefined }
-)
 const { data: questions, isLoading } = useQuery(questionsOptions())
 const { data: tests, isLoading: testsLoading } = useQuery(testsOptions())
 const questionDelete = useDeleteQuestion()
@@ -36,9 +32,6 @@ const handleDelete = (id: string) => {
     {
       onSuccess: () => {
         toast.success('Питання успішно видалено!')
-        if (dataTableActions?.closeDialog) {
-          dataTableActions.closeDialog()
-        }
       },
       onError: (error) => {
         toast.error('Помилка при видаленні питання', {

@@ -59,7 +59,6 @@ export const useAuth = () => {
     },
     enabled: computed(() => !!token.value),
     retry: false,
-    staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: true,
   })
 

@@ -7,7 +7,6 @@ import {
   type ButtonVariants,
 } from '@/core/components/ui/button'
 import { reactiveOmit } from '@vueuse/core'
-import { ChevronRightIcon } from 'lucide-vue-next'
 import { PaginationNext, useForwardProps } from 'reka-ui'
 
 const props = withDefaults(
@@ -39,7 +38,7 @@ const forwarded = useForwardProps(delegatedProps)
     v-bind="forwarded"
   >
     <slot>
-      <ChevronRightIcon />
+      <Icon name="lucide:chevron-right" />
     </slot>
   </PaginationNext>
 </template>

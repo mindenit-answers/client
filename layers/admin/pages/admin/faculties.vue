@@ -17,11 +17,6 @@ useSeoMeta({
 defineOgImageComponent('Mindenit')
 
 const { getAuthToken } = useAuth()
-const dataTableActions = inject<{ closeDialog?: () => void }>(
-  'dataTableActions',
-  { closeDialog: undefined }
-)
-
 const { data: faculties, isLoading } = useQuery(facultiesOptions())
 const { data: universities, isLoading: universitiesLoading } = useQuery(
   universitiesOptions()
@@ -40,9 +35,6 @@ const handleDelete = (id: string) => {
     {
       onSuccess: () => {
         toast.success('Факультет успішно видалено!')
-        if (dataTableActions?.closeDialog) {
-          dataTableActions.closeDialog()
-        }
       },
       onError: (error) => {
         toast.error('Помилка при видаленні факультета', {

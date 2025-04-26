@@ -16,11 +16,6 @@ useSeoMeta({
 defineOgImageComponent('Mindenit')
 
 const { getAuthToken } = useAuth()
-const dataTableActions = inject<{ closeDialog?: () => void }>(
-  'dataTableActions',
-  { closeDialog: undefined }
-)
-
 const { data: courses, isLoading } = useQuery(coursesOptions())
 const courseDelete = useDeleteCourse()
 
@@ -35,9 +30,6 @@ const handleDelete = (id: string) => {
     {
       onSuccess: () => {
         toast.success('Курс успішно видалено!')
-        if (dataTableActions?.closeDialog) {
-          dataTableActions.closeDialog()
-        }
       },
       onError: (error) => {
         toast.error('Помилка при видаленні курса', {

@@ -1,10 +1,9 @@
 import type { Test } from '@mindenit/answers-kit'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
-import { ArrowUpDown } from 'lucide-vue-next'
 import Button from '@/core/components/ui/button/Button.vue'
 import AdminDataTableMenu from '../components/DataTableMenu.vue'
-import { AdminTestsForm } from '#components'
+import { AdminTestsForm, Icon } from '#components'
 import Badge from '~/core/components/ui/badge/Badge.vue'
 
 export const testsColumns = (
@@ -21,7 +20,7 @@ export const testsColumns = (
           variant: 'ghost',
           onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
         },
-        () => ['ID', h(ArrowUpDown, { class: 'w-4 h-4' })]
+        () => ['ID', h(Icon, { name: 'lucide:arrow-down-up', class: 'size-4' })]
       )
     },
     cell: ({ row }) => {
@@ -39,7 +38,10 @@ export const testsColumns = (
           variant: 'ghost',
           onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
         },
-        () => ['Назва', h(ArrowUpDown, { class: 'w-4 h-4' })]
+        () => [
+          'Назва',
+          h(Icon, { name: 'lucide:arrow-down-up', class: 'size-4' }),
+        ]
       )
     },
     cell: ({ row }) => {
@@ -56,7 +58,10 @@ export const testsColumns = (
           variant: 'ghost',
           onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
         },
-        () => ['Рік', h(ArrowUpDown, { class: 'w-4 h-4' })]
+        () => [
+          'Рік',
+          h(Icon, { name: 'lucide:arrow-down-up', class: 'size-4' }),
+        ]
       )
     },
     cell: ({ row }) => {

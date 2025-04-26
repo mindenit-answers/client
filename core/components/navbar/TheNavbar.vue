@@ -15,7 +15,7 @@ const { isAuthenticated, isAdmin } = useAuth()
     >
       <NavbarLink to="/" title="Головна" icon="lucide:house" />
       <NavbarLink to="/search" title="Пошук" icon="lucide:search" />
-      <NavbarLink to="/catalogue" title="Каталог" icon="lucide:book-copy" />
+      <NavbarLink to="/catalogue" title="Каталог" icon="lucide:library" />
       <NavbarLink
         v-if="isAuthenticated && isAdmin"
         to="/admin"

@@ -34,7 +34,6 @@
     "eslint-config-prettier": "^10.0.1",
     "jsdom": "^26.0.0",
     "katex": "^0.16.21",
-    "lucide-vue-next": "^0.503.0",
     "markdown-it": "^14.1.0",
     "markdown-it-texmath": "^1.0.0",
     "motion-v": "^0.13.1",
