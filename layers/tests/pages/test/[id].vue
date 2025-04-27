@@ -4,18 +4,20 @@ import { testOptions } from '../../queries'
 import { useRouteParams } from '@vueuse/router'
 import { showError } from '#app'
 
+const { enableSidebar } = useSidebar()
+enableSidebar()
 const testId = useRouteParams('id')
 const { data, isLoading, isError, error } = useQuery(
   testOptions(+testId!.value!)
 )
 
 const pageTitle = computed(() => {
-  return data.value ? `Тест ${data.value.name}` : 'Тест'
+  return data.value ? `Тест ${data.value.name} – відповіді ХНУРЕ` : 'Тест'
 })
 
 const pageDescription = computed(() => {
   return data.value
-    ? `Тест ${data.value.name} - відповіді на питання`
+    ? `Правильні відповіді на тест ${data.value.name}, ${data.value.subject.name}`
     : 'Тест - відповіді на питання'
 })
 
@@ -67,7 +69,7 @@ watch([isError, error], () => {
       <Heading size="medium">
         {{ data!.name }}
       </Heading>
-      <VerifiedBadge v-if="data?.isVerified" type="test" mobile-badge />
+      <VerifiedBadge v-if="data?.isVerified" mobile-badge />
       <Text size="subtitle">
         {{ verifiedQuestions }} / {{ data?.questions.length }} верифікованих
         питань</Text
@@ -81,7 +83,6 @@ watch([isError, error], () => {
         type="text"
         placeholder="Введіть питання або відповідь..."
         class="pl-10"
-        autofocus
       />
       <span
         class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
@@ -91,11 +92,21 @@ watch([isError, error], () => {
     </div>
 
     <div class="flex gap-4 flex-1 w-full relative">
-      <TestSidebar
-        :questions="filteredQuestions"
-        :active-question-id="activeQuestionId"
-        @question-click="scrollToQuestion"
-      />
+      <TheSidebar>
+        <template #content>
+          <SidebarLink
+            v-for="(question, index) in filteredQuestions"
+            :key="question.id"
+            :index
+            :is-question="true"
+            :question-id="question.id"
+            :active="activeQuestionId === question.id"
+            @click="scrollToQuestion"
+          >
+            {{ question.name }}
+          </SidebarLink>
+        </template>
+      </TheSidebar>
 
       <main class="flex-1 min-w-0">
         <div class="flex flex-col gap-4">

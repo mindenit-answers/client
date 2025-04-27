@@ -8,9 +8,9 @@ import { testsOptions } from '~/layers/tests/queries'
 import { coursesOptions } from '~/layers/courses/queries'
 
 useSeoMeta({
-  title: 'Пошук',
+  title: 'Пошук відповідей на тести',
   description:
-    'Пошук питань на платформі Mindenit Answers. На цій сторінці ви можете знайти питання, які вас цікавлять, та отримати на них відповіді.',
+    'Знаходьте питання і відповіді до тестів ХНУРЕ та інших університетів України на платформі Mindenit Answers. Швидкий пошук потрібної інформації за ключовими словами та предметами.',
 })
 
 const searchQuery = ref('')
@@ -86,7 +86,6 @@ const paginatedQuestions = computed(() => {
               type="text"
               placeholder="Введіть питання для пошуку..."
               class="pl-10"
-              autofocus
             />
             <span
               class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
@@ -117,7 +116,7 @@ const paginatedQuestions = computed(() => {
 
     <AnimatePresence v-else-if="!hasResults && !hasError && !showNoResults">
       <motion.div
-        class="flex flex-col gap-4 w-full items-center mt-[13vh]"
+        class="flex flex-col gap-4 w-full items-center mt-[13vh] max-sm:mt-[8vh]"
         :initial="{ opacity: 0, y: 20 }"
         :while-in-view="{ opacity: 1, y: 0 }"
         :exit="{ opacity: 0, y: 20 }"

@@ -16,7 +16,7 @@ defineProps<Props>()
       <div
         class="flex-shrink-0 flex items-center justify-center size-12 rounded-lg transition-transform duration-300 group-hover:rotate-3"
       >
-        <Icon name="lucide:bookmark" size="28px" />
+        <Icon name="lucide:bookmark" class="!size-7" />
       </div>
       <Heading
         size="tiny"
@@ -41,12 +41,7 @@ defineProps<Props>()
         <Icon name="lucide:calendar" /> Рік:
         {{ test.year }}
       </Badge>
-      <VerifiedBadge
-        v-if="test.isVerified"
-        type="test"
-        mobile-badge
-        size="big"
-      />
+      <VerifiedBadge v-if="test.isVerified" mobile-badge size="big" />
     </div>
   </TheCard>
 </template>

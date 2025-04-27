@@ -85,7 +85,6 @@ provide('dataTableActions', {
         type="text"
         :placeholder="filterPlaceholder"
         class="pl-10"
-        autofocus
         :model-value="table.getColumn(filterBy as string)?.getFilterValue() as string"
         @update:model-value="
           table.getColumn(filterBy as string)?.setFilterValue($event)

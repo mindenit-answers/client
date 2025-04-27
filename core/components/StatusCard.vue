@@ -66,8 +66,7 @@ const displayTitle = computed(
       >
         <slot />
         <Button v-if="showSupport" as="a" :href="config.public.supportUrl">
-          <Icon name="ph:telegram-logo" size="16px" class="mr-1" /> Чат
-          підтримки
+          <Icon name="ph:telegram-logo" class="mr-1 !size-4" /> Чат підтримки
         </Button>
       </div>
     </div>
