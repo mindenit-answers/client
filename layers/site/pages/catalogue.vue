@@ -351,7 +351,7 @@ onMounted(() => {
             </span>
           </div>
           <Select v-model="selectedOrder">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть порядок сортування" />
             </SelectTrigger>
             <SelectContent>
@@ -365,7 +365,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="selectedSortBy">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Сортувати за" />
             </SelectTrigger>
             <SelectContent>
@@ -379,7 +379,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="selectedYear">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть рік" />
             </SelectTrigger>
             <SelectContent>
@@ -393,7 +393,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="courseId">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть курс" />
             </SelectTrigger>
             <SelectContent>
