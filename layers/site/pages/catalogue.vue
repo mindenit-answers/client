@@ -342,7 +342,6 @@ onMounted(() => {
               type="text"
               placeholder="Пошук за назвою тесту..."
               class="pl-10"
-              autofocus
             />
             <span
               class="absolute start-0 inset-y-0 flex items-center justify-center px-2"

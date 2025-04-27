@@ -81,7 +81,6 @@ watch([isError, error], () => {
         type="text"
         placeholder="Введіть питання або відповідь..."
         class="pl-10"
-        autofocus
       />
       <span
         class="absolute start-0 inset-y-0 flex items-center justify-center px-2"

@@ -86,7 +86,6 @@ const paginatedQuestions = computed(() => {
               type="text"
               placeholder="Введіть питання для пошуку..."
               class="pl-10"
-              autofocus
             />
             <span
               class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
