@@ -446,6 +446,9 @@ onMounted(() => {
           message="За вказаними параметрами нічого не знайдено"
         >
           <Button @click="goBack">Повернутись назад</Button>
+          <Button v-if="areFiltersApplied" @click="resetFilters"
+            >Скинути фільтри</Button
+          >
         </StatusCard>
       </div>
     </template>
