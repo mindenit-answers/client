@@ -69,7 +69,7 @@ watch([isError, error], () => {
       <Heading size="medium">
         {{ data!.name }}
       </Heading>
-      <VerifiedBadge v-if="data?.isVerified" type="test" mobile-badge />
+      <VerifiedBadge v-if="data?.isVerified" mobile-badge />
       <Text size="subtitle">
         {{ verifiedQuestions }} / {{ data?.questions.length }} верифікованих
         питань</Text

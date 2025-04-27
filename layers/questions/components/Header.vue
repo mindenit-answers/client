@@ -69,7 +69,7 @@ const onSubmit = form.handleSubmit((values) => {
         ID:
         {{ id }}
       </Badge>
-      <VerifiedBadge v-if="isVerified" type="question" mobile-badge />
+      <VerifiedBadge v-if="isVerified" mobile-badge />
     </div>
 
     <div class="inline-flex gap-1">

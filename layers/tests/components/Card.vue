@@ -41,12 +41,7 @@ defineProps<Props>()
         <Icon name="lucide:calendar" /> Рік:
         {{ test.year }}
       </Badge>
-      <VerifiedBadge
-        v-if="test.isVerified"
-        type="test"
-        mobile-badge
-        size="big"
-      />
+      <VerifiedBadge v-if="test.isVerified" mobile-badge size="big" />
     </div>
   </TheCard>
 </template>
