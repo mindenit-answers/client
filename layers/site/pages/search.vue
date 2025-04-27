@@ -8,9 +8,9 @@ import { testsOptions } from '~/layers/tests/queries'
 import { coursesOptions } from '~/layers/courses/queries'
 
 useSeoMeta({
-  title: 'Пошук',
+  title: 'Пошук відповідей на тести',
   description:
-    'Пошук питань на платформі Mindenit Answers. На цій сторінці ви можете знайти питання, які вас цікавлять, та отримати на них відповіді.',
+    'Знаходьте питання і відповіді до тестів ХНУРЕ та інших університетів України на платформі Mindenit Answers. Швидкий пошук потрібної інформації за ключовими словами та предметами.',
 })
 
 const searchQuery = ref('')

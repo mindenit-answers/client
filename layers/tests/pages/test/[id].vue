@@ -12,12 +12,12 @@ const { data, isLoading, isError, error } = useQuery(
 )
 
 const pageTitle = computed(() => {
-  return data.value ? `Тест ${data.value.name}` : 'Тест'
+  return data.value ? `Тест ${data.value.name} – відповіді ХНУРЕ` : 'Тест'
 })
 
 const pageDescription = computed(() => {
   return data.value
-    ? `Тест ${data.value.name} - відповіді на питання`
+    ? `Правильні відповіді на тест ${data.value.name}, ${data.value.subject.name}`
     : 'Тест - відповіді на питання'
 })
 
