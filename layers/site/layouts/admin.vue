@@ -62,7 +62,7 @@ const adminLinks = [
               :active="route.path === link.href"
               :to="link.href"
             >
-              <Icon v-if="link.icon" :name="link.icon" size="18px" />
+              <Icon v-if="link.icon" :name="link.icon" class="!size-4" />
               {{ link.name }}
             </SidebarLink>
           </template>

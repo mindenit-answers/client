@@ -68,8 +68,7 @@ const stateClasses = computed(() => {
     <Icon
       v-if="icon"
       :name="icon"
-      size="18px"
-      class="transition-transform duration-200"
+      class="transition-transform duration-200 !size-4"
     />
     <span v-if="isQuestion && index >= 0" class="mr-2 text-muted-foreground">
       {{ index + 1 }}.
@@ -81,8 +80,7 @@ const stateClasses = computed(() => {
     <Icon
       v-if="icon"
       :name="icon"
-      size="18px"
-      class="transition-transform duration-200"
+      class="transition-transform duration-200 !size-4"
     />
     <span v-if="isQuestion && index >= 0" class="mr-2 text-muted-foreground">
       {{ index + 1 }}.

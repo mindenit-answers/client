@@ -78,7 +78,7 @@ const onSubmit = form.handleSubmit((values) => {
           <TooltipTrigger as-child>
             <Button as-child size="icon">
               <NuxtLink v-if="showTestInfo" :to="`/test/${testId}`">
-                <Icon name="lucide:link" size="16px" />
+                <Icon name="lucide:link" class="!size-4" />
               </NuxtLink>
             </Button>
           </TooltipTrigger>
@@ -90,7 +90,7 @@ const onSubmit = form.handleSubmit((values) => {
         <Tooltip>
           <TooltipTrigger as-child>
             <Button variant="ghost" size="icon" @click="$emit('share')">
-              <Icon name="lucide:share-2" size="16px" />
+              <Icon name="lucide:share-2" class="!size-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Поділитись</TooltipContent>
@@ -107,7 +107,7 @@ const onSubmit = form.handleSubmit((values) => {
                   size="icon"
                   @click="isDialogOpen = true"
                 >
-                  <Icon name="lucide:flag" size="16px" />
+                  <Icon name="lucide:flag" class="!size-4" />
                 </Button>
                 <DialogContent>
                   <DialogHeader>

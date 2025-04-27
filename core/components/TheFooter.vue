@@ -59,15 +59,15 @@
 
             <div class="flex gap-4 mt-2">
               <NuxtLink to="https://t.me/mindenit" target="_blank">
-                <Icon name="ic:baseline-telegram" size="26px" />
+                <Icon name="ic:baseline-telegram" class="!size-7" />
               </NuxtLink>
 
               <NuxtLink to="https://discord.gg/ahKR75hU9h" target="_blank">
-                <Icon name="ic:baseline-discord" size="26px" />
+                <Icon name="ic:baseline-discord" class="!size-7" />
               </NuxtLink>
 
               <NuxtLink to="https://github.com/mindenit" target="_blank">
-                <Icon name="mdi:github" size="26px" />
+                <Icon name="mdi:github" class="!size-7" />
               </NuxtLink>
             </div>
           </div>

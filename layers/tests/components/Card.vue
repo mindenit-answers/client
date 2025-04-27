@@ -16,7 +16,7 @@ defineProps<Props>()
       <div
         class="flex-shrink-0 flex items-center justify-center size-12 rounded-lg transition-transform duration-300 group-hover:rotate-3"
       >
-        <Icon name="lucide:bookmark" size="28px" />
+        <Icon name="lucide:bookmark" class="1size-7" />
       </div>
       <Heading
         size="tiny"
