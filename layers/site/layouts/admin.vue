@@ -1,62 +1,78 @@
 <script lang="ts" setup>
-import { motion } from 'motion-v'
+const { enableSidebar } = useSidebar()
+const { logout } = useAuth()
+const route = useRoute()
 
-const isMobileSidebarOpen = ref(false)
+enableSidebar()
 
-function toggleMobileSidebar() {
-  isMobileSidebarOpen.value = !isMobileSidebarOpen.value
-}
-
-function closeMobileSidebar() {
-  isMobileSidebarOpen.value = false
-}
-
-const bgVariants = {
-  visible: {
-    opacity: 1,
-    display: 'flex',
+const adminLinks = [
+  {
+    name: 'Головна',
+    href: '/admin',
+    icon: 'lucide:home',
   },
-  hidden: {
-    opacity: 0,
-    display: 'none',
+  {
+    name: 'Питання',
+    href: '/admin/questions',
+    icon: 'lucide:message-circle-question',
   },
-}
+  {
+    name: 'Курси',
+    href: '/admin/courses',
+    icon: 'lucide:shapes',
+  },
+  {
+    name: 'Тести',
+    href: '/admin/tests',
+    icon: 'lucide:list-todo',
+  },
+  {
+    name: 'Предмети',
+    href: '/admin/subjects',
+    icon: 'lucide:book-open',
+  },
+  {
+    name: 'Факультети',
+    href: '/admin/faculties',
+    icon: 'lucide:graduation-cap',
+  },
+  {
+    name: 'Університети',
+    href: '/admin/universities',
+    icon: 'lucide:university',
+  },
+]
 </script>
 
 <template>
   <div class="flex flex-col max-h-dvh w-full relative">
-    <AdminSidebar
-      variant="mobile"
-      class="md:hidden"
-      :is-open="isMobileSidebarOpen"
-      @close="closeMobileSidebar"
-    />
-
-    <motion.div
-      class="fixed inset-0 z-30 bg-background/50 backdrop-blur-md md:hidden"
-      :variants="bgVariants"
-      :initial="false"
-      :animate="isMobileSidebarOpen ? 'visible' : 'hidden'"
-      :transition="{
-        duration: 0.3,
-        ease: 'easeOut',
-      }"
-      @click="closeMobileSidebar"
-    ></motion.div>
-
     <div class="flex flex-col pt-5 container mx-auto px-4 gap-5">
-      <TheNavbar>
-        <Button variant="ghost" class="md:hidden" @click="toggleMobileSidebar">
-          <Icon size="18px" name="lucide:menu"></Icon>
-        </Button>
-      </TheNavbar>
+      <TheNavbar />
 
       <div class="flex md:pb-5 pb-24 gap-4">
-        <AdminSidebar
-          variant="desktop"
-          :is-open="true"
-          class="hidden md:flex"
-        />
+        <TheSidebar>
+          <template #header>
+            <Heading size="tiny" class="text-center">Адмін-панель</Heading>
+          </template>
+
+          <template #content>
+            <SidebarLink
+              v-for="link in adminLinks"
+              :key="link.name"
+              :active="route.path === link.href"
+              :to="link.href"
+            >
+              <Icon v-if="link.icon" :name="link.icon" size="18px" />
+              {{ link.name }}
+            </SidebarLink>
+          </template>
+
+          <template #footer>
+            <SidebarLink variant="subtle" icon="lucide:log-out" @click="logout">
+              Вийти
+            </SidebarLink>
+          </template>
+        </TheSidebar>
 
         <div class="flex w-full flex-col gap-5">
           <slot />

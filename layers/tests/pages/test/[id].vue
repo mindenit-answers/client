@@ -4,6 +4,8 @@ import { testOptions } from '../../queries'
 import { useRouteParams } from '@vueuse/router'
 import { showError } from '#app'
 
+const { enableSidebar } = useSidebar()
+enableSidebar()
 const testId = useRouteParams('id')
 const { data, isLoading, isError, error } = useQuery(
   testOptions(+testId!.value!)
@@ -90,11 +92,21 @@ watch([isError, error], () => {
     </div>
 
     <div class="flex gap-4 flex-1 w-full relative">
-      <TestSidebar
-        :questions="filteredQuestions"
-        :active-question-id="activeQuestionId"
-        @question-click="scrollToQuestion"
-      />
+      <TheSidebar>
+        <template #content>
+          <SidebarLink
+            v-for="(question, index) in filteredQuestions"
+            :key="question.id"
+            :index
+            :is-question="true"
+            :question-id="question.id"
+            :active="activeQuestionId === question.id"
+            @click="scrollToQuestion"
+          >
+            {{ question.name }}
+          </SidebarLink>
+        </template>
+      </TheSidebar>
 
       <main class="flex-1 min-w-0">
         <div class="flex flex-col gap-4">
