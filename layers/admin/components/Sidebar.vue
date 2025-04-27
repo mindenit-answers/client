@@ -48,22 +48,22 @@ const links = [
   {
     name: 'Питання',
     href: '/admin/questions',
-    icon: 'lucide:file-question',
+    icon: 'lucide:message-circle-question',
   },
   {
     name: 'Курси',
     href: '/admin/courses',
-    icon: 'lucide:book-open',
+    icon: 'lucide:shapes',
   },
   {
     name: 'Тести',
     href: '/admin/tests',
-    icon: 'lucide:layout-list',
+    icon: 'lucide:list-todo',
   },
   {
     name: 'Предмети',
     href: '/admin/subjects',
-    icon: 'lucide:book',
+    icon: 'lucide:book-open',
   },
   {
     name: 'Факультети',
