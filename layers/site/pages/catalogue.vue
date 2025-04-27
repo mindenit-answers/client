@@ -117,6 +117,25 @@ const dataIsEmpty = computed(() => {
   return false
 })
 
+function handlePopState(event: PopStateEvent) {
+  const state = event.state
+
+  if (state && typeof state.step === 'number') {
+    if (state.step === 0) {
+      selectedUniversity.value = 0
+      selectedFaculty.value = 0
+      selectedSubject.value = 0
+    } else if (state.step === 1) {
+      selectedFaculty.value = 0
+      selectedSubject.value = 0
+    } else if (state.step === 2) {
+      selectedSubject.value = 0
+    }
+
+    event.preventDefault()
+  }
+}
+
 function updateQueryParams() {
   const query: Record<string, string | number> = {}
 
@@ -140,32 +159,37 @@ function selectUniversity(id: number) {
   selectedFaculty.value = 0
   selectedSubject.value = 0
   updateQueryParams()
+  window.history.pushState(
+    { step: 1, university: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function selectFaculty(id: number) {
   selectedFaculty.value = id
   selectedSubject.value = 0
   updateQueryParams()
+  window.history.pushState(
+    { step: 2, faculty: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function selectSubject(id: number) {
   selectedSubject.value = id
   updateQueryParams()
+  window.history.pushState(
+    { step: 3, subject: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function goBack() {
   if (currentStep.value > 0) {
-    if (currentStep.value === 3) {
-      selectedSubject.value = 0
-      resetFilters()
-    } else if (currentStep.value === 2) {
-      selectedFaculty.value = 0
-    } else if (currentStep.value === 1) {
-      if (universities.value?.length !== 1) {
-        selectedUniversity.value = 0
-      }
-    }
-    updateQueryParams()
+    window.history.back()
   }
 }
 
@@ -249,6 +273,23 @@ onMounted(() => {
     selectUniversity(universities.value[0]!.id)
   }
   updateQueryParams()
+
+  window.history.replaceState(
+    {
+      step: currentStep.value,
+      university: selectedUniversity.value,
+      faculty: selectedFaculty.value,
+      subject: selectedSubject.value,
+    },
+    '',
+    router.currentRoute.value.fullPath
+  )
+
+  window.addEventListener('popstate', handlePopState)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('popstate', handlePopState)
 })
 </script>
 
