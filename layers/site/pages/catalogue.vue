@@ -14,7 +14,7 @@ import { getCourseById } from '~/core/utils'
 useSeoMeta({
   title: 'Каталог тестів',
   description:
-    'Каталог тестів - знайдіть тест, який вам потрібен, за університетом, факультетом, предметом та роком. Пошук тестів за назвою. Сортування тестів за роком, назвою та курсом.',
+    'Переглядайте каталог тестів ХНУРЕ та інших університетів України. Вибирайте університет, факультет, предмет і знаходьте актуальні тести та відповіді за роками навчання. Зручний пошук і сортування.',
 })
 
 const route = useRoute()
@@ -117,6 +117,25 @@ const dataIsEmpty = computed(() => {
   return false
 })
 
+function handlePopState(event: PopStateEvent) {
+  const state = event.state
+
+  if (state && typeof state.step === 'number') {
+    if (state.step === 0) {
+      selectedUniversity.value = 0
+      selectedFaculty.value = 0
+      selectedSubject.value = 0
+    } else if (state.step === 1) {
+      selectedFaculty.value = 0
+      selectedSubject.value = 0
+    } else if (state.step === 2) {
+      selectedSubject.value = 0
+    }
+
+    event.preventDefault()
+  }
+}
+
 function updateQueryParams() {
   const query: Record<string, string | number> = {}
 
@@ -140,32 +159,37 @@ function selectUniversity(id: number) {
   selectedFaculty.value = 0
   selectedSubject.value = 0
   updateQueryParams()
+  window.history.pushState(
+    { step: 1, university: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function selectFaculty(id: number) {
   selectedFaculty.value = id
   selectedSubject.value = 0
   updateQueryParams()
+  window.history.pushState(
+    { step: 2, faculty: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function selectSubject(id: number) {
   selectedSubject.value = id
   updateQueryParams()
+  window.history.pushState(
+    { step: 3, subject: id },
+    '',
+    router.currentRoute.value.fullPath
+  )
 }
 
 function goBack() {
   if (currentStep.value > 0) {
-    if (currentStep.value === 3) {
-      selectedSubject.value = 0
-      resetFilters()
-    } else if (currentStep.value === 2) {
-      selectedFaculty.value = 0
-    } else if (currentStep.value === 1) {
-      if (universities.value?.length !== 1) {
-        selectedUniversity.value = 0
-      }
-    }
-    updateQueryParams()
+    window.history.back()
   }
 }
 
@@ -249,6 +273,23 @@ onMounted(() => {
     selectUniversity(universities.value[0]!.id)
   }
   updateQueryParams()
+
+  window.history.replaceState(
+    {
+      step: currentStep.value,
+      university: selectedUniversity.value,
+      faculty: selectedFaculty.value,
+      subject: selectedSubject.value,
+    },
+    '',
+    router.currentRoute.value.fullPath
+  )
+
+  window.addEventListener('popstate', handlePopState)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('popstate', handlePopState)
 })
 </script>
 
@@ -342,7 +383,6 @@ onMounted(() => {
               type="text"
               placeholder="Пошук за назвою тесту..."
               class="pl-10"
-              autofocus
             />
             <span
               class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
@@ -351,7 +391,7 @@ onMounted(() => {
             </span>
           </div>
           <Select v-model="selectedOrder">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть порядок сортування" />
             </SelectTrigger>
             <SelectContent>
@@ -365,7 +405,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="selectedSortBy">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Сортувати за" />
             </SelectTrigger>
             <SelectContent>
@@ -379,7 +419,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="selectedYear">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть рік" />
             </SelectTrigger>
             <SelectContent>
@@ -393,7 +433,7 @@ onMounted(() => {
             </SelectContent>
           </Select>
           <Select v-model="courseId">
-            <SelectTrigger class="min-w-40">
+            <SelectTrigger class="min-w-40 max-md:w-full">
               <SelectValue placeholder="Виберіть курс" />
             </SelectTrigger>
             <SelectContent>
@@ -447,6 +487,9 @@ onMounted(() => {
           message="За вказаними параметрами нічого не знайдено"
         >
           <Button @click="goBack">Повернутись назад</Button>
+          <Button v-if="areFiltersApplied" @click="resetFilters"
+            >Скинути фільтри</Button
+          >
         </StatusCard>
       </div>
     </template>

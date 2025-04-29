@@ -76,8 +76,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
                 До тестів
                 <Icon
                   name="lucide:arrow-right"
-                  size="18px"
-                  class="transform transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+                  class="transform transition-transform duration-300 ease-in-out group-hover:translate-x-1 !size-4"
                 />
               </NuxtLink>
             </Button>
@@ -90,8 +89,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
         <Text size="subtitle">Гортай вниз!</Text>
         <Icon
           name="lucide:arrow-down"
-          size="22px"
-          class="dark:text-white animate-bounce"
+          class="dark:text-white animate-bounce !size-6"
         />
       </div>
     </div>
@@ -108,7 +106,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
             :key="advantage.title"
             class="p-8 dark:bg-fiord-900 bg-fiord-100 flex flex-col items-center gap-3 rounded-3xl text-center"
           >
-            <Icon :name="advantage.icon" size="32px" />
+            <Icon :name="advantage.icon" class="!size-8" />
             <Heading size="small" class="text-3xl font-bold">{{
               advantage.title
             }}</Heading>
@@ -131,7 +129,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
         </Text>
         <div class="flex max-sm:flex-col gap-2">
           <Button as="a" href="https://t.me/ketronix_dev" target="_blank">
-            <Icon name="lucide:message-circle-heart" size="16px" /> Чат
+            <Icon name="lucide:message-circle-heart" class="!size-4" /> Чат
             підтримки
           </Button>
 
@@ -140,7 +138,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
             href="https://send.monobank.ua/jar/2GW9aAQNXE"
             target="_blank"
           >
-            <Icon name="lucide:piggy-bank" size="16px" /> Банка на розробку
+            <Icon name="lucide:piggy-bank" class="!size-4" /> Банка на розробку
           </Button>
         </div>
       </div>

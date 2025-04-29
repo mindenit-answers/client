@@ -83,16 +83,29 @@ export default defineNuxtConfig({
     enabled: true,
   },
   site: {
-    name: 'Mindenit Answers',
+    name: 'Відповіді на тести ХНУРЕ та інших університетів – Mindenit',
     description:
-      'Платформа запитань та відповідей, керована спільнотою. Сайт створений для студентів ХНУРЕ, щоб полегшити доступ до навчальних матеріалів і обміну знаннями.',
+      'Шукайте відповіді на тести ХНУРЕ та інших університетів. Предмети, факультети, зручний пошук на Mindenit Answers.',
     defaultLocale: 'uk',
     indexable: true,
+    trailingSlash: false,
   },
   seo: {
+    canonicalLowercase: true,
+    redirectToCanonicalSiteUrl: true,
     meta: {
       keywords:
-        'відповіді,тести,відповідь,тест,спільнота,платформа,запитання,відповідь на запитання,онлайн тести,навчання,хнуре,харків',
+        'відповіді,тести,відповідь,тест,спільнота,платформа,запитання,відповідь на запитання,онлайн тести,навчання,хнуре,харків,тести ХНУРЕ, відповіді на тести ХНУРЕ, ХНУРЕ тести, університет радіоелектроніки тести, допомога з тестами ХНУРЕ, база тестів ХНУРЕ, питання і відповіді ХНУРЕ, ХНУРЕ студентам',
+
+      ogType: 'website',
+      ogTitle: '%s | Mindenit Answers',
+      ogDescription: 'Платформа запитань та відповідей для студентів ХНУРЕ',
+      author: 'Mindenit Team',
+      themeColor: [
+        { content: '#ffffff', media: '(prefers-color-scheme: light)' },
+        { content: '#090f1f', media: '(prefers-color-scheme: dark)' },
+      ],
+      fallbackTitle: 'Mindenit Answers',
     },
   },
   sitemap: {

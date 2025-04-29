@@ -22,7 +22,7 @@ defineEmits<{
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
         <Button variant="ghost" class="w-8 h-8 p-0" size="icon">
-          <Icon name="lucide:menu" size="16px" />
+          <Icon name="lucide:menu" class="!size-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

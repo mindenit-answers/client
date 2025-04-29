@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { isAuthenticated, isAdmin } = useAuth()
+const { sidebarEnabled, toggleMobileSidebar } = useSidebar()
 </script>
 
 <template>
@@ -26,7 +27,14 @@ const { isAuthenticated, isAdmin } = useAuth()
 
     <div class="flex justify-end items-center gap-2">
       <ThemeSwitcher />
-      <slot />
+      <Button
+        v-if="sidebarEnabled"
+        variant="ghost"
+        class="md:hidden mr-2"
+        @click="toggleMobileSidebar"
+      >
+        <Icon class="!size-5" name="lucide:menu" />
+      </Button>
     </div>
   </header>
 </template>

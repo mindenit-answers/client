@@ -19,14 +19,14 @@ defineProps<Props>()
       class="max-sm:hidden group-[.active-link]:bg-secondary group-[.active-link]:rounded-lg"
     >
       <Button variant="ghost">
-        <Icon :name="icon" size="18px" /> {{ title }}
+        <Icon :name="icon" class="!size-4" /> {{ title }}
       </Button>
     </div>
     <div
       class="sm:hidden flex flex-col items-center justify-center p-2 text-sm group-[.active-link]:bg-secondary group-[.active-link]:rounded-lg"
     >
       <div class="w-full mb-1 inline-flex items-center justify-center px-2">
-        <Icon :name="icon" size="20px" />
+        <Icon :name="icon" class="!size-4" />
       </div>
       <span>{{ title }}</span>
     </div>
