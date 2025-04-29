@@ -135,7 +135,7 @@ const paginatedQuestions = computed(() => {
 
     <AnimatePresence v-else-if="hasResults">
       <motion.div
-        class="flex flex-col gap-2 md:w-1/2 w-fit"
+        class="flex flex-col gap-2 md:w-1/2 w-full"
         :initial="{ opacity: 0, y: 20 }"
         :while-in-view="{ opacity: 1, y: 0 }"
         :exit="{ opacity: 0, y: 20 }"
@@ -156,18 +156,19 @@ const paginatedQuestions = computed(() => {
     >
       <Pagination
         v-slot="{ page }"
+        v-model:page="currentPage"
         :items-per-page="PAGE_SIZE"
         :total="questions.data.value?.length"
         :sibling-count="1"
         show-edges
         :default-page="1"
       >
-        <PaginationList v-slot="{ items }" class="flex items-center gap-1">
+        <PaginationContent v-slot="{ items }" class="flex items-center gap-1">
           <PaginationFirst />
-          <PaginationPrev />
+          <PaginationPrevious />
 
           <template v-for="(item, index) in items">
-            <PaginationListItem
+            <PaginationItem
               v-if="item.type === 'page'"
               :key="index"
               :value="item.value"
@@ -179,13 +180,13 @@ const paginatedQuestions = computed(() => {
               >
                 {{ item.value }}
               </Button>
-            </PaginationListItem>
+            </PaginationItem>
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
           <PaginationNext />
           <PaginationLast />
-        </PaginationList>
+        </PaginationContent>
       </Pagination>
     </div>
   </div>
