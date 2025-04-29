@@ -135,7 +135,7 @@ const paginatedQuestions = computed(() => {
 
     <AnimatePresence v-else-if="hasResults">
       <motion.div
-        class="flex flex-col gap-2 md:w-1/2 w-fit"
+        class="flex flex-col gap-2 md:w-1/2 w-full"
         :initial="{ opacity: 0, y: 20 }"
         :while-in-view="{ opacity: 1, y: 0 }"
         :exit="{ opacity: 0, y: 20 }"
