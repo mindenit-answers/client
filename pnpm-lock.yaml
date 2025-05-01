@@ -64,12 +64,6 @@ importers:
       dompurify:
         specifier: ^3.2.4
         version: 3.2.4
-      eslint:
-        specifier: ^9.0.0
-        version: 9.20.0(jiti@2.4.2)
-      eslint-config-prettier:
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@9.20.0(jiti@2.4.2))
       jsdom:
         specifier: ^26.0.0
         version: 26.0.0
@@ -137,9 +131,6 @@ importers:
       '@shikijs/markdown-it':
         specifier: ^2.3.2
         version: 2.3.2
-      '@types/dompurify':
-        specifier: ^3.2.0
-        version: 3.2.0
       '@types/jsdom':
         specifier: ^21.1.7
         version: 21.1.7
@@ -149,6 +140,12 @@ importers:
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
+      eslint:
+        specifier: ^9.0.0
+        version: 9.20.0(jiti@2.4.2)
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.0(jiti@2.4.2))
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -2476,13 +2473,6 @@ packages:
       {
         integrity: sha512-eOIHzCUSH7SMfonMG1LsC2f8vxBFtho6NGBznK41R84YzPuvSBzrhEps33IsQiOW9+VL6NQ9DbjQJznk/S4uRA==,
       }
-
-  '@types/dompurify@3.2.0':
-    resolution:
-      {
-        integrity: sha512-Fgg31wv9QbLDA0SpTOXO3MaxySc4DKGLi8sna4/Utjo4r3ZRPdCt4UQee8BWr+Q5z21yifghREPJGYaEOEIACg==,
-      }
-    deprecated: This is a stub types definition. dompurify provides its own type definitions, so you do not need this installed.
 
   '@types/estree@1.0.6':
     resolution:
@@ -11282,10 +11272,6 @@ snapshots:
       '@types/node': 22.13.1
 
   '@types/doctrine@0.0.9': {}
-
-  '@types/dompurify@3.2.0':
-    dependencies:
-      dompurify: 3.2.4
 
   '@types/estree@1.0.6': {}
 

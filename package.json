@@ -1,7 +1,20 @@
 {
-  "name": "nuxt-app",
+  "name": "mindenit-answers-client",
+  "version": "1.0.0",
+  "description": "Frontend application for Mindenit Answers platform",
   "private": true,
   "type": "module",
+  "author": "Mindenit Answers Team",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindenit-answers/client.git"
+  },
+  "homepage": "https://answers.mindenit.org",
+  "engines": {
+    "node": ">=22.11.0",
+    "pnpm": ">=9.0.0"
+  },
   "scripts": {
     "start": "node .output/server/index.mjs",
     "build": "nuxt build",
@@ -39,8 +52,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dompurify": "^3.2.4",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^10.0.1",
     "jsdom": "^26.0.0",
     "katex": "^0.16.21",
     "markdown-it": "^14.1.0",
@@ -66,7 +77,6 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@iconify-json/lucide": "^1.2.26",
     "@shikijs/markdown-it": "^2.3.2",
-    "@types/dompurify": "^3.2.0",
     "@types/jsdom": "^21.1.7",
     "@types/katex": "^0.16.7",
     "@types/markdown-it": "^14.1.2",
@@ -75,6 +85,8 @@
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
     "shiki": "^2.3.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.1"
   }
 }
