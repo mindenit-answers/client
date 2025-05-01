@@ -12,7 +12,7 @@ Mindenit Answers aims to simplify the learning process by collecting test answer
 
 ## 🔰 Getting Started
 
-1. App requires Node.js 20 or larger. First of all make sure that your Node.js version is compatible with requirements.
+1. App requires Node.js 22 or larger. First of all make sure that your Node.js version is compatible with requirements.
 
 2. Clone the repository:
 ```bash
@@ -51,7 +51,7 @@ docker-compose up -d
 The project follows a layered architecture:
 
 - `core/` - Contains reusable code that's shared across the application
-- Additional layers for different parts of the application
+- `layers/` - Additional layers for different parts of the application
 
 ## 🔌 API Integration
 
