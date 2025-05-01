@@ -1,75 +1,66 @@
-# Nuxt Minimal Starter
+# Mindenit Answers - Frontend
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This repository contains the frontend code for Mindenit Answers platform - a free resource for university students to access test answers across the country.
 
-## Setup
+## 🌟 Overview
 
-Make sure to install dependencies:
+Mindenit Answers aims to simplify the learning process by collecting test answers in one place, allowing students to spend less time searching and more time learning. As our homepage states: "Learning is easy! On Mindenit Answers, all tests are collected in one place to search less and learn more. Visit and level up your knowledge!"
 
+## 🚀 Technology Stack
+
+- **Framework**: [Nuxt 3](https://nuxt.com/) - A powerful Vue.js framework
+
+## 🔰 Getting Started
+
+1. App requires Node.js 20 or larger. First of all make sure that your Node.js version is compatible with requirements.
+
+2. Clone the repository:
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+git clone https://github.com/mindenit-answers/client.git
+cd client
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+3. Install dependencies using `pnpm`:
 ```bash
-# npm
-npm run dev
+pnpm i
+```
 
-# pnpm
+4. Copy `.env.example` to new `.env` file and configure the variables:
+```
+PORT=3000                                      # Port on which the application will run
+BASE_URL=http://localhost:3000                 # Base URL of the site, used for SEO optimization and some functions
+API_BASE_URL=http://localhost:3000/api         # Backend API URL
+DISCORD_WEBHOOK_URL=your_discord_webhook_url   # Discord webhook URL for sending notifications
+```
+
+5. Run the application:
+```bash
+# Start development server
 pnpm dev
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
+# or for production
 pnpm build
+pnpm start
 
-# yarn
-yarn build
-
-# bun
-bun run build
+# or for production with Docker
+docker-compose up -d
 ```
 
-Locally preview production build:
+## 📁 Project Structure
 
-```bash
-# npm
-npm run preview
+The project follows a layered architecture:
 
-# pnpm
-pnpm preview
+- `core/` - Contains reusable code that's shared across the application
+- Additional layers for different parts of the application
 
-# yarn
-yarn preview
+## 🔌 API Integration
 
-# bun
-bun run preview
-```
+This frontend connects to a separate API repository for data operations. API documentation can be found in the backend repository.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 📜 License
+
+This project is licensed under the [GNU GPL v3.0 license](https://github.com/mindenit-answers/client/blob/main/LICENSE).
+
+## 👥 Team
+
+Developed and maintained by the [Mindenit Answers team](https://github.com/orgs/mindenit-answers/people).
