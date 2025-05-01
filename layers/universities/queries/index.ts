@@ -36,6 +36,7 @@ const universityFacultiesOptions = (id: Ref<number>) => {
   return queryOptions({
     queryKey: ['universityFaculties', id.value],
     queryFn: () => $answersKit.universities.findOneFaculties({ id: id.value }),
+    enabled: !!id.value && id.value > 0,
   })
 }
 
