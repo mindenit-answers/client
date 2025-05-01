@@ -23,6 +23,7 @@ const router = useRouter()
 const params = useUrlSearchParams('history')
 
 const searchQuery = ref('')
+const debouncedSearchQuery = refDebounced(searchQuery, 500)
 const selectedSortBy = ref<SortingOptions<'year'>['sortBy']>('id')
 const selectedOrder = ref<SortingOptions['order']>('desc')
 const selectedYear = ref<number | null>(null)
@@ -31,6 +32,10 @@ const courseId = ref<number | null>(null)
 const selectedUniversity = ref(Number(params.university) || 0)
 const selectedFaculty = ref(Number(params.faculty) || 0)
 const selectedSubject = ref(Number(params.subject) || 0)
+
+const prevUniversity = ref(selectedUniversity.value)
+const prevFaculty = ref(selectedFaculty.value)
+const prevSubject = ref(selectedSubject.value)
 
 const areFiltersApplied = computed(() => {
   return (
@@ -65,19 +70,13 @@ const {
   data: faculties,
   isLoading: isLoadingFaculties,
   refetch: refetchFaculties,
-} = useQuery({
-  ...universityFacultiesOptions(selectedUniversity),
-  enabled: selectedUniversity.value > 0,
-})
+} = useQuery(universityFacultiesOptions(selectedUniversity))
 
 const {
   data: subjects,
   isLoading: isLoadingSubjects,
   refetch: refetchSubjects,
-} = useQuery({
-  ...facultySubjectsOptions(selectedFaculty),
-  enabled: selectedFaculty.value > 0,
-})
+} = useQuery(facultySubjectsOptions(selectedFaculty))
 
 const {
   data: tests,
@@ -221,8 +220,9 @@ watch(
 watch(
   selectedUniversity,
   (newValue) => {
-    if (newValue > 0) {
+    if (newValue > 0 && newValue !== prevUniversity.value) {
       refetchFaculties()
+      prevUniversity.value = newValue
     }
   },
   { immediate: true }
@@ -231,8 +231,9 @@ watch(
 watch(
   selectedFaculty,
   (newValue) => {
-    if (newValue > 0) {
+    if (newValue > 0 && newValue !== prevFaculty.value) {
       refetchSubjects()
+      prevFaculty.value = newValue
     }
   },
   { immediate: true }
@@ -241,15 +242,16 @@ watch(
 watch(
   selectedSubject,
   (newValue) => {
-    if (newValue > 0) {
+    if (newValue > 0 && newValue !== prevSubject.value) {
       refetchTests()
+      prevSubject.value = newValue
     }
   },
   { immediate: true }
 )
 
 watch(
-  [searchQuery, selectedOrder, selectedSortBy, selectedYear, courseId],
+  [debouncedSearchQuery, selectedOrder, selectedSortBy, selectedYear, courseId],
   () => {
     if (selectedSubject.value > 0) {
       updateQueryParams()
