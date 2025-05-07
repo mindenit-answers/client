@@ -63,7 +63,7 @@ const currentStep = computed(() => {
 })
 
 const { data: universities, isLoading: isLoadingUniversities } = useQuery(
-  universitiesOptions()
+  universitiesOptions(),
 )
 
 const {
@@ -161,7 +161,7 @@ function selectUniversity(id: number) {
   window.history.pushState(
     { step: 1, university: id },
     '',
-    router.currentRoute.value.fullPath
+    router.currentRoute.value.fullPath,
   )
 }
 
@@ -172,7 +172,7 @@ function selectFaculty(id: number) {
   window.history.pushState(
     { step: 2, faculty: id },
     '',
-    router.currentRoute.value.fullPath
+    router.currentRoute.value.fullPath,
   )
 }
 
@@ -182,7 +182,7 @@ function selectSubject(id: number) {
   window.history.pushState(
     { step: 3, subject: id },
     '',
-    router.currentRoute.value.fullPath
+    router.currentRoute.value.fullPath,
   )
 }
 
@@ -214,7 +214,7 @@ watch(
       selectedSubject.value = newSubject
     }
   },
-  { deep: true }
+  { deep: true },
 )
 
 watch(
@@ -225,7 +225,7 @@ watch(
       prevUniversity.value = newValue
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 watch(
@@ -236,7 +236,7 @@ watch(
       prevFaculty.value = newValue
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 watch(
@@ -247,7 +247,7 @@ watch(
       prevSubject.value = newValue
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 watch(
@@ -257,7 +257,7 @@ watch(
       updateQueryParams()
       refetchTests()
     }
-  }
+  },
 )
 
 watch(
@@ -267,7 +267,7 @@ watch(
       selectUniversity(newUniversities[0]!.id)
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 onMounted(() => {
@@ -284,7 +284,7 @@ onMounted(() => {
       subject: selectedSubject.value,
     },
     '',
-    router.currentRoute.value.fullPath
+    router.currentRoute.value.fullPath,
   )
 
   window.addEventListener('popstate', handlePopState)
@@ -377,8 +377,8 @@ onUnmounted(() => {
       </template>
 
       <template v-else-if="currentStep === 3">
-        <div class="flex flex-col md:flex-row gap-2">
-          <div class="relative w-full items-center">
+        <div class="flex flex-col lg:flex-row gap-2">
+          <div class="relative w-full lg:w-auto lg:flex-grow items-center">
             <Input
               id="search"
               v-model="searchQuery"
@@ -392,72 +392,78 @@ onUnmounted(() => {
               <Icon name="lucide:search" class="size-6 text-muted-foreground" />
             </span>
           </div>
-          <Select v-model="selectedOrder">
-            <SelectTrigger class="min-w-40 max-md:w-full">
-              <SelectValue placeholder="Виберіть порядок сортування" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                v-for="(label, value) in SORT_ORDERS"
-                :key="value"
-                :value="value"
-              >
-                {{ label }}
-              </SelectItem>
-            </SelectContent>
-          </Select>
-          <Select v-model="selectedSortBy">
-            <SelectTrigger class="min-w-40 max-md:w-full">
-              <SelectValue placeholder="Сортувати за" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                v-for="(label, value) in SORT_BY_FIELDS"
-                :key="value"
-                :value="value"
-              >
-                {{ label }}
-              </SelectItem>
-            </SelectContent>
-          </Select>
-          <Select v-model="selectedYear">
-            <SelectTrigger class="min-w-40 max-md:w-full">
-              <SelectValue placeholder="Виберіть рік" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                v-for="year in AVAILABLE_YEARS"
-                :key="year"
-                :value="year.toString()"
-              >
-                {{ year }} рік
-              </SelectItem>
-            </SelectContent>
-          </Select>
-          <Select v-model="courseId">
-            <SelectTrigger class="min-w-40 max-md:w-full">
-              <SelectValue placeholder="Виберіть курс" />
-            </SelectTrigger>
-            <SelectContent>
-              <template v-if="courses?.length">
+
+          <div class="grid grid-cols-1 md:grid-cols-4 lg:flex lg:gap-2 gap-2">
+            <Select v-model="selectedOrder">
+              <SelectTrigger class="w-full lg:w-40">
+                <SelectValue placeholder="Виберіть порядок сортування" />
+              </SelectTrigger>
+              <SelectContent>
                 <SelectItem
-                  v-for="(course, index) in courses"
-                  :key="index"
-                  :value="course.id!.toString()"
+                  v-for="(label, value) in SORT_ORDERS"
+                  :key="value"
+                  :value="value"
                 >
-                  {{ course.number }} курс
+                  {{ label }}
                 </SelectItem>
-              </template>
-              <span v-else class="p-3 text-center">
-                <Text
-                  v-show="!courses?.length"
-                  size="subtitle"
-                  class="select-none"
-                  >Курси відсутні</Text
+              </SelectContent>
+            </Select>
+
+            <Select v-model="selectedSortBy">
+              <SelectTrigger class="w-full lg:w-40">
+                <SelectValue placeholder="Сортувати за" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem
+                  v-for="(label, value) in SORT_BY_FIELDS"
+                  :key="value"
+                  :value="value"
                 >
-              </span>
-            </SelectContent>
-          </Select>
+                  {{ label }}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select v-model="selectedYear">
+              <SelectTrigger class="w-full lg:w-40">
+                <SelectValue placeholder="Виберіть рік" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem
+                  v-for="year in AVAILABLE_YEARS"
+                  :key="year"
+                  :value="year.toString()"
+                >
+                  {{ year }} рік
+                </SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select v-model="courseId">
+              <SelectTrigger class="w-full lg:w-40">
+                <SelectValue placeholder="Виберіть курс" />
+              </SelectTrigger>
+              <SelectContent>
+                <template v-if="courses?.length">
+                  <SelectItem
+                    v-for="(course, index) in courses"
+                    :key="index"
+                    :value="course.id!.toString()"
+                  >
+                    {{ course.number }} курс
+                  </SelectItem>
+                </template>
+                <span v-else class="p-3 text-center">
+                  <Text
+                    v-show="!courses?.length"
+                    size="subtitle"
+                    class="select-none"
+                    >Курси відсутні</Text
+                  >
+                </span>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <button
           v-if="areFiltersApplied"
@@ -469,7 +475,7 @@ onUnmounted(() => {
         </button>
 
         <div
-          class="grid gap-4 grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
+          class="grid gap-4 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1"
         >
           <TestCard
             v-for="test in tests?.data"
