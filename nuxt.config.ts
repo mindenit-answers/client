@@ -117,4 +117,15 @@ export default defineNuxtConfig({
     host: process.env.BASE_URL,
     disallow: ['/admin', '/admin/**'],
   },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://analytics.mindenit.org/api/script.js',
+          'data-site-id': '2',
+          defer: true,
+        },
+      ],
+    },
+  },
 })
