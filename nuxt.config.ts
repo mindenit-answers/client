@@ -110,12 +110,12 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/admin/**'],
+    exclude: ['/admin/**', '/faggots'],
   },
   robots: {
     sitemap: '/sitemap.xml',
     host: process.env.BASE_URL,
-    disallow: ['/admin', '/admin/**'],
+    disallow: ['/admin', '/admin/**', '/faggots'],
   },
   app: {
     head: {
