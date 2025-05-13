@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useAnalytics } from '~/core/composables/useAnalytics'
+
 const config = useRuntimeConfig()
-const { $rybbit } = useNuxtApp()
+const analytics = useAnalytics()
 
 const handleClick = () => {
-  $rybbit.event('qr_code_clicked')
+  analytics.trackQrCodeClicked()
 }
 </script>
 
