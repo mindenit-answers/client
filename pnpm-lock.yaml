@@ -31,6 +31,9 @@ importers:
       '@pinia/nuxt':
         specifier: 0.9.0
         version: 0.9.0(magicast@0.3.5)(pinia@2.3.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))
+      '@rybbit/js':
+        specifier: ^0.1.0
+        version: 0.1.0
       '@tailwindcss/vite':
         specifier: ^4.0.5
         version: 4.0.5(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.3)(terser@5.38.1)(yaml@2.7.0))
@@ -2183,6 +2186,12 @@ packages:
       }
     cpu: [x64]
     os: [win32]
+
+  '@rybbit/js@0.1.0':
+    resolution:
+      {
+        integrity: sha512-loUH34g0ntDgwANNLms3ce4k/GWPDqvOgfxy+SFcdYH8PPcOjDHn6zl3gRdnFM7eS4Ae77p8wfUSsfh7FYFvlg==,
+      }
 
   '@sec-ant/readable-stream@0.4.1':
     resolution:
@@ -11108,6 +11117,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.34.6':
     optional: true
+
+  '@rybbit/js@0.1.0': {}
 
   '@sec-ant/readable-stream@0.4.1': {}
 
