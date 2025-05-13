@@ -41,6 +41,7 @@
     "@nuxtjs/color-mode": "3.5.2",
     "@nuxtjs/seo": "2.1.1",
     "@pinia/nuxt": "0.9.0",
+    "@rybbit/js": "^0.1.0",
     "@tailwindcss/vite": "^4.0.5",
     "@tanstack/vue-query": "^5.66.0",
     "@tanstack/vue-table": "^8.21.3",
@@ -80,13 +81,13 @@
     "@types/jsdom": "^21.1.7",
     "@types/katex": "^0.16.7",
     "@types/markdown-it": "^14.1.2",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.1",
     "husky": "^9.1.7",
     "lightningcss": "^1.29.3",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
     "shiki": "^2.3.2",
-    "typescript": "^5.7.3",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^10.0.1"
+    "typescript": "^5.7.3"
   }
 }

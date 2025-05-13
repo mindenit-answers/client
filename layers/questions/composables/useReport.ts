@@ -1,17 +1,11 @@
 import { useMutation } from '@tanstack/vue-query'
 import { toast } from 'vue-sonner'
 import { useLocalStorage, useIntervalFn } from '@vueuse/core'
-
-type ReportData = {
-  id: number
-  testId: number
-  questionTitle: string
-  description: string
-  contact?: string
-}
+import type { ReportData } from '../types'
 
 export const useReport = () => {
   const config = useRuntimeConfig()
+  const analytics = useAnalytics()
   const REPORT_COOLDOWN_MS = 10000
 
   const lastReportTime = useLocalStorage('last_report_time', 0)
@@ -34,7 +28,7 @@ export const useReport = () => {
     const now = Date.now()
     const timePassedSinceLastReport = now - lastReportTime.value
     const remaining = Math.ceil(
-      (REPORT_COOLDOWN_MS - timePassedSinceLastReport) / 1000
+      (REPORT_COOLDOWN_MS - timePassedSinceLastReport) / 1000,
     )
     remainingCooldownSeconds.value = Math.max(0, remaining)
 
@@ -56,7 +50,7 @@ export const useReport = () => {
         resume()
       }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   const sendMutation = useMutation({
@@ -107,6 +101,7 @@ export const useReport = () => {
         resume()
 
         toast.success('Репорт успішно надіслано! Дякуємо за вашу допомогу!')
+        analytics.trackQuestionReported(data)
       } catch (error) {
         toast.error('Сталася помилка при надсиланні репорту. Спробуйте ще раз.')
         console.error('Report error:', error)
@@ -125,7 +120,7 @@ export const useReport = () => {
         toast.error('Репорт вже відправляється, зачекайте')
       } else {
         toast.error(
-          `Зачекайте ${remainingCooldownSeconds.value} секунд перед відправкою нового репорту`
+          `Зачекайте ${remainingCooldownSeconds.value} секунд перед відправкою нового репорту`,
         )
       }
       return

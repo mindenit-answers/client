@@ -9,6 +9,8 @@ definePageMeta({
   layout: 'main',
 })
 
+const analytics = useAnalytics()
+
 const advanteges = ref([
   {
     icon: 'lucide:handshake',
@@ -128,7 +130,12 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
           функцій і кращого досвіду для студентів.
         </Text>
         <div class="flex max-sm:flex-col gap-2">
-          <Button as="a" href="https://t.me/ketronix_dev" target="_blank">
+          <Button
+            as="a"
+            href="https://t.me/ketronix_dev"
+            target="_blank"
+            @click="analytics.trackSupportButtonClicked()"
+          >
             <Icon name="lucide:message-circle-heart" class="!size-4" /> Чат
             підтримки
           </Button>
@@ -137,6 +144,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
             as="a"
             href="https://send.monobank.ua/jar/2GW9aAQNXE"
             target="_blank"
+            @click="analytics.trackJarButtonClicked()"
           >
             <Icon name="lucide:piggy-bank" class="!size-4" /> Банка на розробку
           </Button>
@@ -153,7 +161,9 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
 }
 
 .dark-text-glow {
-  text-shadow: 0 0 24px rgba(65, 105, 225), 0 0 12px rgba(65, 105, 225);
+  text-shadow:
+    0 0 24px rgba(65, 105, 225),
+    0 0 12px rgba(65, 105, 225);
 }
 
 .dark-underline-glow::after {
