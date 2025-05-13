@@ -2,6 +2,7 @@ import { toast } from 'vue-sonner'
 
 export const useShareQuestion = () => {
   const { copy } = useClipboard()
+  const analytics = useAnalytics()
 
   const handleError = (error: unknown) => {
     console.error('Operation error:', error)
@@ -13,6 +14,7 @@ export const useShareQuestion = () => {
   const shareUrl = async (url: string) => {
     try {
       await copy(url)
+      analytics.trackQuestionShared(url)
       toast.success('Посилання скопійовано!', {
         description: 'Тепер ви можете поділитися ним з іншими.',
       })
