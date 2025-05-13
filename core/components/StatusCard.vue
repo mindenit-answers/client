@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const config = useRuntimeConfig()
+const analytics = useAnalytics()
 
 const typeConfig = {
   error: {
@@ -32,7 +33,7 @@ const typeConfig = {
 const currentConfig = computed(() => typeConfig[props.type])
 
 const displayTitle = computed(
-  () => props.title ?? currentConfig.value.defaultTitle
+  () => props.title ?? currentConfig.value.defaultTitle,
 )
 </script>
 
@@ -65,7 +66,12 @@ const displayTitle = computed(
         class="mt-4 flex flex-wrap gap-2 justify-center"
       >
         <slot />
-        <Button v-if="showSupport" as="a" :href="config.public.supportUrl">
+        <Button
+          v-if="showSupport"
+          as="a"
+          :href="config.public.supportUrl"
+          @click="analytics.trackSupportButtonClicked()"
+        >
           <Icon name="ph:telegram-logo" class="mr-1 !size-4" /> Чат підтримки
         </Button>
       </div>

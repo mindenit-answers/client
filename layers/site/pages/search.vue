@@ -6,12 +6,15 @@ import { PAGE_SIZE } from '~/core/constants'
 import { motion } from 'motion-v'
 import { testsOptions } from '~/layers/tests/queries'
 import { coursesOptions } from '~/layers/courses/queries'
+import type { Test } from '@mindenit/answers-kit'
 
 useSeoMeta({
   title: 'Пошук відповідей на тести',
   description:
     'Знаходьте питання і відповіді до тестів ХНУРЕ та інших університетів України на платформі Mindenit Answers. Швидкий пошук потрібної інформації за ключовими словами та предметами.',
 })
+
+const analytics = useAnalytics()
 
 const searchQuery = ref('')
 const debouncedQuery = useDebounce(searchQuery, 500)
@@ -23,24 +26,27 @@ const { data: tests } = useQuery(
     options: {
       limit: ref(3),
     },
-  })
+  }),
 )
 const { data: courses } = useQuery(coursesOptions())
 
 watch(
   debouncedQuery,
-  () => {
-    questions.refetch()
-    currentPage.value = 1
+  (newValue, oldValue) => {
+    if (newValue && newValue.length > 0 && newValue !== oldValue) {
+      analytics.trackSearchStarted(newValue)
+      questions.refetch()
+      currentPage.value = 1
+    }
   },
-  { immediate: false }
+  { immediate: false },
 )
 
 const hasResults = computed(
   () =>
     debouncedQuery.value.length > 0 &&
     questions.data.value &&
-    questions.data.value.length > 0
+    questions.data.value.length > 0,
 )
 
 const hasError = computed(() => questions.error.value)
@@ -49,11 +55,11 @@ const showNoResults = computed(
   () =>
     debouncedQuery.value.length > 0 &&
     questions.data.value?.length === 0 &&
-    !questions.isFetching.value
+    !questions.isFetching.value,
 )
 
 const totalPages = computed(() =>
-  questions.data.value ? getPagesCount(questions.data.value.length) : 0
+  questions.data.value ? getPagesCount(questions.data.value.length) : 0,
 )
 
 const paginatedQuestions = computed(() => {
@@ -63,6 +69,10 @@ const paginatedQuestions = computed(() => {
   const endIndex = startIndex + PAGE_SIZE
   return questions.data.value.slice(startIndex, endIndex)
 })
+
+const handleTestClick = (test: Test) => {
+  analytics.trackFeaturedTestClicked(test.id, test.name)
+}
 </script>
 
 <template>
@@ -128,6 +138,7 @@ const paginatedQuestions = computed(() => {
             :key="test.id"
             :test
             :course="getCourseById(courses!, test.courseId)"
+            @click="handleTestClick(test)"
           />
         </div>
       </motion.div>
