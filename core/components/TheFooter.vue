@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const analytics = useAnalytics()
+</script>
+
 <template>
   <footer class="pt-8">
     <div class="w-full dark:bg-fiord-900 bg-fiord-100 py-8 px-4">
@@ -46,6 +50,7 @@
               to="https://t.me/mindenit_support"
               target="_blank"
               class="text-base hover:text-muted-foreground transition"
+              @click="analytics.trackSupportButtonClicked()"
             >
               Зв'язатися з нами
             </NuxtLink>
@@ -53,6 +58,7 @@
               to="https://t.me/mindenit_support"
               target="_blank"
               class="text-base hover:text-muted-foreground transition"
+              @click="analytics.trackSupportButtonClicked()"
             >
               Технічна підтримка
             </NuxtLink>
