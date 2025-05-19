@@ -35,6 +35,9 @@ const {
   updateActiveQuestion,
 } = useActiveQuestion()
 
+const { markdown } = useMarkdown()
+const { $sanitizeHTML } = useNuxtApp()
+
 const { searchQuery, filteredQuestions } = useQuestionsSearch(
   computed(() => data.value?.questions),
 )
@@ -51,6 +54,10 @@ const handleScrollToAnchor = async () => {
       scrollToQuestion(questionIdFromHash)
     }
   }
+}
+
+const formatQuestionForSidebar = (questionName: string) => {
+  return $sanitizeHTML(markdown.render(questionName))
 }
 
 watch(isLoading, (newIsLoading, oldIsLoading) => {
@@ -125,10 +132,9 @@ watch([isError, error], () => {
             :is-question="true"
             :question-id="question.id"
             :active="activeQuestionId === question.id"
+            :html="formatQuestionForSidebar(question.name)"
             @click="scrollToQuestion"
-          >
-            {{ question.name }}
-          </SidebarLink>
+          />
         </template>
       </TheSidebar>
 
