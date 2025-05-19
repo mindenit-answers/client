@@ -7,5 +7,6 @@
       </div>
     </div>
     <QrCode />
+    <WelcomeDialog />
   </div>
 </template>
