@@ -7,8 +7,10 @@ import { showError } from '#app'
 const { enableSidebar } = useSidebar()
 enableSidebar()
 const testId = useRouteParams('id')
+const route = useRoute()
+
 const { data, isLoading, isError, error } = useQuery(
-  testOptions(+testId!.value!)
+  testOptions(+testId!.value!),
 )
 
 const pageTitle = computed(() => {
@@ -33,17 +35,46 @@ const {
   updateActiveQuestion,
 } = useActiveQuestion()
 
+const { markdown } = useMarkdown()
+const { $sanitizeHTML } = useNuxtApp()
+
 const { searchQuery, filteredQuestions } = useQuestionsSearch(
-  computed(() => data.value?.questions)
+  computed(() => data.value?.questions),
 )
 
 const verifiedQuestions = computed(
-  () => data.value?.questions.filter((q) => q.isVerified).length || 0
+  () => data.value?.questions.filter((q) => q.isVerified).length || 0,
 )
+
+const handleScrollToAnchor = async () => {
+  if (route.hash && data.value && !isLoading.value) {
+    const questionIdFromHash = parseInt(route.hash.substring(1), 10)
+    if (!isNaN(questionIdFromHash)) {
+      await nextTick()
+      scrollToQuestion(questionIdFromHash)
+    }
+  }
+}
+
+const formatQuestionForSidebar = (questionName: string) => {
+  return $sanitizeHTML(markdown.render(questionName))
+}
+
+watch(isLoading, (newIsLoading, oldIsLoading) => {
+  if (oldIsLoading === true && newIsLoading === false) {
+    handleScrollToAnchor()
+  }
+})
+
+onMounted(() => {
+  if (!isLoading.value && route.hash) {
+    handleScrollToAnchor()
+  }
+})
 
 watch(
   useWindowScroll().y,
-  () => data.value?.questions && updateActiveQuestion(data.value.questions)
+  () => data.value?.questions && updateActiveQuestion(data.value.questions),
 )
 
 watch([isError, error], () => {
@@ -101,10 +132,9 @@ watch([isError, error], () => {
             :is-question="true"
             :question-id="question.id"
             :active="activeQuestionId === question.id"
+            :html="formatQuestionForSidebar(question.name)"
             @click="scrollToQuestion"
-          >
-            {{ question.name }}
-          </SidebarLink>
+          />
         </template>
       </TheSidebar>
 
@@ -117,7 +147,7 @@ watch([isError, error], () => {
               (el) =>
                 registerQuestionRef(
                   question.id,
-                  el && '$el' in el ? el.$el : el
+                  el && '$el' in el ? el.$el : el,
                 )
             "
             :question="question"

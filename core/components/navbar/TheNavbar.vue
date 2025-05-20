@@ -25,7 +25,8 @@ const { sidebarEnabled, toggleMobileSidebar } = useSidebar()
       />
     </div>
 
-    <div class="flex justify-end items-center gap-2">
+    <div class="flex justify-end items-center gap-4">
+      <ScheduleButton />
       <ThemeSwitcher />
       <Button
         v-if="sidebarEnabled"

@@ -69,6 +69,12 @@ export default defineNuxtConfig({
     serverBundle: {
       collections: ['lucide'],
     },
+    customCollections: [
+      {
+        prefix: 'mindenit',
+        dir: './core/assets/icons',
+      },
+    ],
   },
   colorMode: {
     preference: 'system',

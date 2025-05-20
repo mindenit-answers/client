@@ -19,18 +19,16 @@ const props = withDefaults(defineProps<Props>(), {
 const questionData = shallowRef(props.question)
 
 const titleParsed = computed(() => {
-  const title = props.question.name.replace(/\n/g, '<br>')
-  return markdown.render(title)
+  return markdown.render(props.question.name)
 })
 
 const answerParsed = computed(() => {
-  const answer = props.question.answer.replace(/\n/g, '<br>')
-  return markdown.render(answer)
+  return markdown.render(props.question.answer)
 })
 
 const questionLink = computed(
   () =>
-    `${config.public.baseUrl}/test/${questionData.value.testId}#${questionData.value.id}`
+    `${config.public.baseUrl}/test/${questionData.value.testId}#${questionData.value.id}`,
 )
 
 const copyQuestionLink = () => shareUrl(questionLink.value)
