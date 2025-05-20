@@ -23,21 +23,7 @@ const analytics = useAnalytics()
 
           <div class="hidden md:block"></div>
 
-          <div class="flex flex-col gap-3 md:items-center">
-            <Text
-              size="small"
-              class="text-base font-medium text-muted-foreground"
-            >
-              Наші сервіси
-            </Text>
-            <NuxtLink
-              to="https://sh.mindenit.org"
-              target="_blank"
-              class="text-base hover:text-muted-foreground transition"
-            >
-              Mindenit Schedule
-            </NuxtLink>
-          </div>
+          <div class="hidden md:block"></div>
 
           <div class="flex flex-col gap-3 md:items-center">
             <Text
@@ -81,7 +67,10 @@ const analytics = useAnalytics()
       </div>
     </div>
 
-    <Text size="subtitle" class="text-center text-sm leading-5 pt-5">
+    <Text
+      size="subtitle"
+      class="text-center text-sm leading-5 pt-5 max-sm: px-2"
+    >
       © 2025 Mindenit Answers. Створено студентами для студентів. Mindenit
       Answers не є офіційним ресурсом університету
     </Text>

@@ -7,6 +7,7 @@ interface Props {
   index?: number
   variant?: 'default' | 'subtle'
   questionId?: number
+  html?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -17,10 +18,12 @@ const props = withDefaults(defineProps<Props>(), {
   index: -1,
   variant: 'default',
   questionId: undefined,
+  html: undefined,
 })
 
 const emit = defineEmits(['click'])
 const { closeMobileSidebar } = useSidebar()
+const { $sanitizeHTML } = useNuxtApp()
 
 const handleClick = () => {
   if (props.isQuestion && props.questionId !== undefined) {
@@ -36,7 +39,7 @@ const isLink = computed(() => {
 })
 
 const baseClasses = computed(() => [
-  'flex items-center px-4 py-2 rounded-lg text-sm focus:outline-none truncate gap-2 group hover:translate-x-0.5',
+  'flex items-center px-4 py-2 max-h-14 rounded-lg text-sm focus:outline-none truncate gap-2 group hover:translate-x-0.5',
   'transition-all duration-200 ease-in-out',
   isLink.value ? '' : 'w-full text-left cursor-pointer relative',
 ])
@@ -56,6 +59,14 @@ const stateClasses = computed(() => {
     ' before:transition-opacity before:duration-200 before:rounded-lg before:-z-10'
   )
 })
+
+const sanitizedHtml = computed(() => {
+  if (!props.html) {
+    return
+  }
+  const sanitizeHTML = $sanitizeHTML(props.html)
+  return sanitizeHTML.replace(/<br\s*\/?>/gi, ' ')
+})
 </script>
 
 <template>
@@ -73,7 +84,8 @@ const stateClasses = computed(() => {
     <span v-if="isQuestion && index >= 0" class="mr-2 text-muted-foreground">
       {{ index + 1 }}.
     </span>
-    <slot />
+    <span v-if="html" v-html="sanitizedHtml"></span>
+    <slot v-else></slot>
   </NuxtLink>
 
   <button v-else :class="[...baseClasses, stateClasses]" @click="handleClick">
@@ -85,6 +97,11 @@ const stateClasses = computed(() => {
     <span v-if="isQuestion && index >= 0" class="mr-2 text-muted-foreground">
       {{ index + 1 }}.
     </span>
-    <slot />
+    <span
+      v-if="html"
+      class="flex items-center overflow-hidden text-ellipsis whitespace-nowrap gap-2"
+      v-html="sanitizedHtml"
+    ></span>
+    <slot v-else></slot>
   </button>
 </template>
