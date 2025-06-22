@@ -20,16 +20,6 @@
           </p>
         </div>
       </div>
-      <div class="bg-muted/50 p-3 rounded-lg">
-        <div class="space-y-2 text-sm">
-          <div class="flex items-center gap-2">
-            <span
-              ><strong>Перевага:</strong> Проекти у співпраці з університетом з
-              додатковими балами рейтингу</span
-            >
-          </div>
-        </div>
-      </div>
       <div class="grid grid-cols-1 gap-2 w-full">
         <Button
           as="a"
