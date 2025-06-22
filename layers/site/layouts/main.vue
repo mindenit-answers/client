@@ -29,6 +29,6 @@ const dotsQuantity = computed(() => (isMobile.value ? 100 : 300))
       :staticity="10"
       refresh
     />
-    <WelcomeDialog />
+    <DialogManager />
   </div>
 </template>
