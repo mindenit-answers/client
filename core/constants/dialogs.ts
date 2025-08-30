@@ -6,11 +6,4 @@ export const dialogsConfig: DialogConfig[] = [
     enabled: true,
     component: 'ExtensionDialog',
   },
-  {
-    id: 'recruitment',
-    version: 1,
-    priority: 1,
-    enabled: true,
-    component: 'RecruitmentDialog',
-  },
 ]

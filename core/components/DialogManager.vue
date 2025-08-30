@@ -17,8 +17,5 @@ onMounted(() => {
     "
   >
     <ExtensionDialog v-if="currentDialog?.component === 'ExtensionDialog'" />
-    <RecruitmentDialog
-      v-else-if="currentDialog?.component === 'RecruitmentDialog'"
-    />
   </Dialog>
 </template>

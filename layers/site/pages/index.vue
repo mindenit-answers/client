@@ -10,6 +10,7 @@ definePageMeta({
 })
 
 const analytics = useAnalytics()
+const config = useRuntimeConfig()
 
 const advanteges = ref([
   {
@@ -48,7 +49,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
               size="large"
               class="max-md:text-4xl font-display font-bold text-6xl"
             >
-              Mindenit Answers
+              Nure Answers
             </Heading>
             <Heading
               size="medium"
@@ -69,8 +70,8 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
           </div>
 
           <Text size="paragraph" class="w-3/4 mx-auto font-medium">
-            Вчитися – легко! На Mindenit Answers усі тести зібрані в одному
-            місці, аби менше шукати та більше вчитися. Заходь і прокачуй знання!
+            Вчитися – легко! На Nure Answers усі тести зібрані в одному місці,
+            аби менше шукати та більше вчитися. Заходь і прокачуй знання!
           </Text>
           <div class="inline-flex gap-2 items-center">
             <Button as-child>
@@ -132,7 +133,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
         <div class="flex max-sm:flex-col gap-2">
           <Button
             as="a"
-            href="https://t.me/ketronix_dev"
+            :href="config.public.telegramUrl"
             target="_blank"
             @click="analytics.trackSupportButtonClicked()"
           >
@@ -142,7 +143,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
 
           <Button
             as="a"
-            href="https://send.monobank.ua/jar/2GW9aAQNXE"
+            :href="config.public.jarUrl"
             target="_blank"
             @click="analytics.trackJarButtonClicked()"
           >

@@ -3,6 +3,6 @@ export interface DialogConfig {
   version: number
   priority: number // Lower number means higher priority
   enabled: boolean
-  component: 'ExtensionDialog' | 'RecruitmentDialog'
+  component: 'ExtensionDialog'
   minShowInterval?: number
 }

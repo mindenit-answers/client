@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const config = useRuntimeConfig()
+</script>
+
 <template>
   <DialogContent>
     <DialogHeader>
@@ -21,12 +25,7 @@
         </div>
       </div>
       <div class="grid grid-cols-1 gap-2 w-full">
-        <Button
-          as="a"
-          target="_blank"
-          href="https://mindenit.org/hiring"
-          class="w-full"
-        >
+        <Button target="_blank" class="w-full">
           <Icon name="lucide:briefcase" class="mr-2" />
           Переглянути вакансії
         </Button>
@@ -45,7 +44,7 @@
             target="_blank"
             variant="outline"
             size="sm"
-            href="https://t.me/ketronix_dev"
+            :href="config.public.telegramUrl"
           >
             <Icon name="lucide:mail" class="mr-2 size-3" />
             Написати HR

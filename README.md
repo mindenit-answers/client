@@ -1,10 +1,10 @@
-# Mindenit Answers - Frontend
+# Nure Answers - Frontend
 
-This repository contains the frontend code for Mindenit Answers platform - a free resource for university students to access test answers across the country.
+This repository contains the frontend code for Nure Answers platform - a free resource for university students to access test answers across the country.
 
 ## 🌟 Overview
 
-Mindenit Answers aims to simplify the learning process by collecting test answers in one place, allowing students to spend less time searching and more time learning. As our homepage states: "Learning is easy! On Mindenit Answers, all tests are collected in one place to search less and learn more. Visit and level up your knowledge!"
+Nure Answers aims to simplify the learning process by collecting test answers in one place, allowing students to spend less time searching and more time learning. As our homepage states: "Learning is easy! On Nure Answers, all tests are collected in one place to search less and learn more. Visit and level up your knowledge!"
 
 ## 🚀 Technology Stack
 
@@ -60,7 +60,3 @@ This frontend connects to a separate API repository for data operations. API doc
 ## 📜 License
 
 This project is licensed under the [GNU GPL v3.0 license](https://github.com/mindenit-answers/client/blob/main/LICENSE).
-
-## 👥 Team
-
-Developed and maintained by the [Mindenit Answers team](https://github.com/orgs/mindenit-answers/people).

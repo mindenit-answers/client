@@ -52,7 +52,8 @@ export default defineNuxtConfig({
     public: {
       baseUrl: process.env.BASE_URL,
       apiBaseUrl: process.env.API_BASE_URL,
-      supportUrl: 'https://t.me/mindenit_support',
+      supportUrl: 'https://t.me/kedrik_main',
+      telegramUrl: 'https://t.me/answers_nure',
       jarUrl: 'https://send.monobank.ua/jar/2GW9aAQNXE',
       webhook: process.env.DISCORD_WEBHOOK_URL,
     },
@@ -89,9 +90,9 @@ export default defineNuxtConfig({
     enabled: true,
   },
   site: {
-    name: 'Відповіді на тести ХНУРЕ та інших університетів – Mindenit',
+    name: 'Відповіді на тести ХНУРЕ та інших університетів – Nure Answers',
     description:
-      'Шукайте відповіді на тести ХНУРЕ та інших університетів. Предмети, факультети, зручний пошук на Mindenit Answers.',
+      'Шукайте відповіді на тести ХНУРЕ та інших університетів. Предмети, факультети, зручний пошук на Nure Answers.',
     defaultLocale: 'uk',
     indexable: true,
     trailingSlash: false,
@@ -104,14 +105,14 @@ export default defineNuxtConfig({
         'відповіді,тести,відповідь,тест,спільнота,платформа,запитання,відповідь на запитання,онлайн тести,навчання,хнуре,харків,тести ХНУРЕ, відповіді на тести ХНУРЕ, ХНУРЕ тести, університет радіоелектроніки тести, допомога з тестами ХНУРЕ, база тестів ХНУРЕ, питання і відповіді ХНУРЕ, ХНУРЕ студентам',
 
       ogType: 'website',
-      ogTitle: '%s | Mindenit Answers',
+      ogTitle: '%s | Nure Answers',
       ogDescription: 'Платформа запитань та відповідей для студентів ХНУРЕ',
-      author: 'Mindenit Team',
+      author: 'Nure Answers Team',
       themeColor: [
         { content: '#ffffff', media: '(prefers-color-scheme: light)' },
         { content: '#090f1f', media: '(prefers-color-scheme: dark)' },
       ],
-      fallbackTitle: 'Mindenit Answers',
+      fallbackTitle: 'Nure Answers',
     },
   },
   sitemap: {

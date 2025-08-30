@@ -10,7 +10,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   title: 'title',
   description: 'description',
-  headline: 'Mindenit Answers',
+  headline: 'Nure Answers',
 })
 
 const title = computed(() => props.title.slice(0, 60))
@@ -78,11 +78,5 @@ const title = computed(() => props.title.slice(0, 60))
         {{ description.slice(0, 200) }}
       </p>
     </div>
-
-    <NuxtImg
-      src="/mindenit-white.svg"
-      alt=""
-      class="size-[300px] rounded-3xl drop-shadow-2xl invert"
-    />
   </div>
 </template>

@@ -14,7 +14,7 @@ import { toast } from 'vue-sonner'
 useSeoMeta({
   title: 'Вхід в систему',
   description:
-    'Вхід в систему Mindenit Answers. На цій сторінці ви можете увійти в систему, щоб отримати доступ до всіх функцій платформи.',
+    'Вхід в систему Nure Answers. На цій сторінці ви можете увійти в систему, щоб отримати доступ до всіх функцій платформи.',
 })
 
 defineOgImageComponent('Mindenit')
@@ -36,7 +36,7 @@ const formSchema = toTypedSchema(
       })
       .min(4, 'Пароль повинен містити принаймні 4 символи')
       .trim(),
-  })
+  }),
 )
 
 const form = useForm({

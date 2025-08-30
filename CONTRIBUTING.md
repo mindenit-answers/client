@@ -1,8 +1,8 @@
-# Contributing to Mindenit Answers
+# Contributing to Nure Answers
 
 First off, thanks for taking the time to contribute! ♥
 
-The following is a set of guidelines for contributing to Mindenit Answers. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to Nure Answers. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Table of Contents
 
@@ -26,13 +26,13 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for Mindenit Answers. Following these guidelines helps maintainers understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for Nure Answers. Following these guidelines helps maintainers understand your report, reproduce the behavior, and find related reports.
 
-Before creating bug reports, please check if the same issue already exists in the [list of issues](https://github.com/mindenit-answers/client/issues). If you don't find the issue there, create a new one including a description of the problem.
+Before creating bug reports, please check if the same issue already exists in the [list of issues](https://github.com/nure-answers/client/issues). If you don't find the issue there, create a new one including a description of the problem.
 
 #### How Do I Submit A (Good) Bug Report?
 
-Bugs are tracked as [GitHub issues](https://github.com/mindenit-answers/client/issues). When you create an issue, please provide the following information:
+Bugs are tracked as [GitHub issues](https://github.com/nure-answers/client/issues). When you create an issue, please provide the following information:
 
 * **Use a clear and descriptive title** for the issue
 * **Describe the exact steps to reproduce the problem** with as much detail as possible
@@ -43,11 +43,11 @@ Bugs are tracked as [GitHub issues](https://github.com/mindenit-answers/client/i
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Mindenit Answers, including completely new features and minor improvements to existing functionality.
+This section guides you through submitting an enhancement suggestion for Nure Answers, including completely new features and minor improvements to existing functionality.
 
 #### How Do I Submit A (Good) Enhancement Suggestion?
 
-Enhancement suggestions are also tracked as [GitHub issues](https://github.com/mindenit-answers/client/issues). When creating an enhancement suggestion, please provide the following information:
+Enhancement suggestions are also tracked as [GitHub issues](https://github.com/nure-answers/client/issues). When creating an enhancement suggestion, please provide the following information:
 
 * **Use a clear and descriptive title** for the issue
 * **Provide a detailed description of the suggested enhancement**
@@ -56,10 +56,10 @@ Enhancement suggestions are also tracked as [GitHub issues](https://github.com/m
 
 ### Your First Code Contribution
 
-Unsure where to begin contributing to Mindenit Answers? You can start by looking through `beginner-friendly` and `help-wanted` issues:
+Unsure where to begin contributing to Nure Answers? You can start by looking through `beginner-friendly` and `help-wanted` issues:
 
-* [Beginner-friendly issues](https://github.com/mindenit-answers/client/labels/beginner-friendly) - issues which should only require a few lines of code and a basic understanding of the project
-* [Help wanted issues](https://github.com/mindenit-answers/client/labels/help-wanted) - issues that might require a bit more involvement
+* [Beginner-friendly issues](https://github.com/nure-answers/client/labels/beginner-friendly) - issues which should only require a few lines of code and a basic understanding of the project
+* [Help wanted issues](https://github.com/nure-answers/client/labels/help-wanted) - issues that might require a bit more involvement
 
 ### Pull Requests
 
@@ -112,4 +112,4 @@ All JavaScript/TypeScript code is linted with ESLint and formatted with Prettier
 
 ---
 
-Thank you for contributing to Mindenit Answers!
+Thank you for contributing to Nure Answers!
