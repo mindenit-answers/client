@@ -1,8 +1,8 @@
-# Contributing to Nure Answers
+# Contributing to NURE Answers
 
 First off, thanks for taking the time to contribute! ♥
 
-The following is a set of guidelines for contributing to Nure Answers. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to NURE Answers. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for Nure Answers. Following these guidelines helps maintainers understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for NURE Answers. Following these guidelines helps maintainers understand your report, reproduce the behavior, and find related reports.
 
 Before creating bug reports, please check if the same issue already exists in the [list of issues](https://github.com/nure-answers/client/issues). If you don't find the issue there, create a new one including a description of the problem.
 
@@ -43,7 +43,7 @@ Bugs are tracked as [GitHub issues](https://github.com/nure-answers/client/issue
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Nure Answers, including completely new features and minor improvements to existing functionality.
+This section guides you through submitting an enhancement suggestion for NURE Answers, including completely new features and minor improvements to existing functionality.
 
 #### How Do I Submit A (Good) Enhancement Suggestion?
 

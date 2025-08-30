@@ -10,7 +10,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   title: 'title',
   description: 'description',
-  headline: 'Nure Answers',
+  headline: 'NURE Answers',
 })
 
 const title = computed(() => props.title.slice(0, 60))

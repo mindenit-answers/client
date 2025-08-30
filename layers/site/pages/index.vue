@@ -49,7 +49,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
               size="large"
               class="max-md:text-4xl font-display font-bold text-6xl"
             >
-              Nure Answers
+              NURE Answers
             </Heading>
             <Heading
               size="medium"
@@ -70,7 +70,7 @@ const isDarkMode = computed(() => useColorMode().value === 'dark')
           </div>
 
           <Text size="paragraph" class="w-3/4 mx-auto font-medium">
-            Вчитися – легко! На Nure Answers усі тести зібрані в одному місці,
+            Вчитися – легко! На NURE Answers усі тести зібрані в одному місці,
             аби менше шукати та більше вчитися. Заходь і прокачуй знання!
           </Text>
           <div class="inline-flex gap-2 items-center">

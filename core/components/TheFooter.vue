@@ -38,7 +38,7 @@ const config = useRuntimeConfig()
       size="subtitle"
       class="text-center text-sm leading-5 pt-5 max-sm: px-2"
     >
-      © 2025 Nure Answers. Не є офіційним ресурсом університету
+      © 2025 NURE Answers. Не є офіційним ресурсом університету
     </Text>
   </footer>
 </template>

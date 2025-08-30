@@ -90,9 +90,9 @@ export default defineNuxtConfig({
     enabled: true,
   },
   site: {
-    name: 'Відповіді на тести ХНУРЕ та інших університетів – Nure Answers',
+    name: 'Відповіді на тести ХНУРЕ та інших університетів – NURE Answers',
     description:
-      'Шукайте відповіді на тести ХНУРЕ та інших університетів. Предмети, факультети, зручний пошук на Nure Answers.',
+      'Шукайте відповіді на тести ХНУРЕ та інших університетів. Предмети, факультети, зручний пошук на NURE Answers.',
     defaultLocale: 'uk',
     indexable: true,
     trailingSlash: false,
@@ -105,14 +105,14 @@ export default defineNuxtConfig({
         'відповіді,тести,відповідь,тест,спільнота,платформа,запитання,відповідь на запитання,онлайн тести,навчання,хнуре,харків,тести ХНУРЕ, відповіді на тести ХНУРЕ, ХНУРЕ тести, університет радіоелектроніки тести, допомога з тестами ХНУРЕ, база тестів ХНУРЕ, питання і відповіді ХНУРЕ, ХНУРЕ студентам',
 
       ogType: 'website',
-      ogTitle: '%s | Nure Answers',
+      ogTitle: '%s | NURE Answers',
       ogDescription: 'Платформа запитань та відповідей для студентів ХНУРЕ',
-      author: 'Nure Answers Team',
+      author: 'NURE Answers Team',
       themeColor: [
         { content: '#ffffff', media: '(prefers-color-scheme: light)' },
         { content: '#090f1f', media: '(prefers-color-scheme: dark)' },
       ],
-      fallbackTitle: 'Nure Answers',
+      fallbackTitle: 'NURE Answers',
     },
   },
   sitemap: {

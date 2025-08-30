@@ -1,10 +1,10 @@
-# Nure Answers - Frontend
+# NURE Answers - Frontend
 
-This repository contains the frontend code for Nure Answers platform - a free resource for university students to access test answers across the country.
+This repository contains the frontend code for NURE Answers platform - a free resource for university students to access test answers across the country.
 
 ## 🌟 Overview
 
-Nure Answers aims to simplify the learning process by collecting test answers in one place, allowing students to spend less time searching and more time learning. As our homepage states: "Learning is easy! On Nure Answers, all tests are collected in one place to search less and learn more. Visit and level up your knowledge!"
+NURE Answers aims to simplify the learning process by collecting test answers in one place, allowing students to spend less time searching and more time learning. As our homepage states: "Learning is easy! On NURE Answers, all tests are collected in one place to search less and learn more. Visit and level up your knowledge!"
 
 ## 🚀 Technology Stack
 
